@@ -1,0 +1,148 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!-- Darker variant for the status bar and contextual app bars -->
+        <item name="colorPrimaryDark">#1976D2</item>
+        <!-- App branding color for the app bar -->
+        <item name="colorPrimary">#2196F3</item>
+        <!-- The UI controls like checkboxes and text fields -->
+        <item name="colorAccent">#CFD8DC</item>
+        <!-- App color to navigation bar -->
+        <item name="android:navigationBarColor">#2196F3</item>
+    </style>
+
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="colorPrimaryDark">#1976D2</item>
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorAccent">#CFD8DC</item>
+
+        <item name="android:navigationBarColor">#2196F3</item>
+
+    </style>
+
+    <!-- Style for HomeImage
+    <style name="HomeImage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:src">@drawable/medicamentos</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>-->
+
+    <!-- Style for HomeHeader
+    <style name="HomeHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:text">@string/home_header</item>
+    </style>-->
+
+    <!-- Style for HomeBody
+    <style name="HomeBody">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginBottom">22dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:text">@string/home_body</item>
+    </style>-->
+
+    <!-- Style for HomeLnlButtons -->
+    <style name="HomeLnlButtons">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Style for BtnHome -->
+    <style name="BtnHome">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@color/colorButtons</item>
+    </style>
+
+    <!-- Style for BtnMenu -->
+    <style name="BtnMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@android:drawable/ic_input_add</item>
+    </style>
+
+    <!-- Style for LnlFiltro -->
+    <style name="LnlFiltro">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- Style for Input Filtro -->
+    <style name="EdtFiltro">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:ems">10</item>
+        <item name="android:hint">@string/hint_filtro</item>
+        <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <!-- Style for ListView -->
+    <style name="LstView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">11dp</item>
+    </style>
+
+    <!-- Style for LnlCampoForm -->
+    <style name="LnlCampoForm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Style for TxtForm -->
+    <style name="TxtForm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- Style for EdtForm -->
+    <style name="EdtForm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">textPersonName|textCapCharacters</item>
+    </style>
+
+    <!-- Style for LnlItemLista -->
+    <style name="LnlItemLista">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">4dp</item>
+    </style>
+
+    <!-- Style for IconItemLista -->
+    <style name="IconItemLista">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <!-- Style for ItemLista -->
+    <style name="ItemLista">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+</resources>

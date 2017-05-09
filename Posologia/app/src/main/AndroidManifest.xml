@@ -1,0 +1,38 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="br.com.android.posologia">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".view.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/MyTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".view.PosologiaNewActivity"
+            android:label="@string/app_title_posologia_new" />
+
+        <activity
+            android:name=".view.CadastroActivity"
+            android:label="@string/app_title_pessoa_new" />
+
+        <activity
+            android:name=".view.MedicamentoNewActivity"
+            android:label="@string/app_title_medicamento_new" />
+    </application>
+
+
+</manifest>

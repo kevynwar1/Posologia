@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:text="@string/lbl_nome"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp" />
+
+    <Spinner
+        android:id="@+id/spNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtNome" />
+
+    <TextView
+        android:id="@+id/txtMedicamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtNome"
+        android:layout_below="@+id/spNome"
+        android:layout_marginTop="22dp"
+        android:text="@string/lbl_medicamento" />
+
+    <Spinner
+        android:id="@+id/spMedicamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtMedicamento" />
+
+    <TextView
+        android:id="@+id/txtHorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtMedicamento"
+        android:layout_below="@+id/spMedicamento"
+        android:layout_marginTop="27dp"
+        android:text="@string/lbl_horario" />
+
+    <Spinner
+        android:id="@+id/spHorario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtHorario" />
+
+    <TextView
+        android:id="@+id/txtObservacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtHorario"
+        android:layout_below="@+id/spHorario"
+        android:layout_marginTop="28dp"
+        android:text="@string/lbl_Observacao" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtObservacoes"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

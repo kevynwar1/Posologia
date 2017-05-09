@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/txtCor"
+        style="@style/IconItemLista" />
+
+    <LinearLayout
+        android:id="@+id/lnlItemLista"
+        style="@style/LnlItemLista">
+
+        <TextView
+            android:id="@+id/txtNome"
+            style="@style/ItemLista" />
+
+        <TextView
+            android:id="@+id/txtDescricao"
+            style="@style/ItemLista" />
+
+    </LinearLayout>
+</LinearLayout>
