@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.dominio.entidades.Medicamento;
-import br.com.android.posologia.dominio.entidades.Medicamento;
 
 /**
  * Created by Kevyn on 03/05/2017.
@@ -54,7 +53,7 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
 
         viewHolder.txtCor.setBackgroundColor(context.getResources().getColor(R.color.txtCor));
         viewHolder.txtNome.setText(medicamento.getNome());
-        viewHolder.txtDescricao.setText(medicamento.getDescricao());
+        viewHolder.txtDescricao.setText(medicamento.getDosagem());
 
         return view;
     }

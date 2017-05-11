@@ -1,7 +1,6 @@
 package br.com.android.posologia.dominio.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by Kevyn on 03/05/2017.
@@ -13,17 +12,38 @@ public class Medicamento implements Serializable {
 
     public static String ID = "_id";
     public static String NOME = "Nome";
-    public static String DESCRICAO = "Descricao";
-    public static String DATAREGISTRO = "DataRegistro";
+    public static String DOSAGEM = "Dosagem";
+    public static String OBSERVACAO = "Observacao";
+    public static String TIPO = "Tipo";
 
     private long Id;
     private String Nome;
-    private String Descricao;
-    private Date DataRegistro;
+    private String Dosagem;
+    private String Observacao;
+    private String Tipo;
 
     public Medicamento() {
-        this.DataRegistro = new Date();
+
     }
+
+    public String getDosagem() {
+        return Dosagem;
+    }
+
+    public void setDosagem(String dosagem) {
+        Dosagem = dosagem;
+    }
+
+    public String getObservacao() {
+        return Observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        Observacao = observacao;
+    }
+
+
+
 
     public long getId() {
         return Id;
@@ -41,24 +61,17 @@ public class Medicamento implements Serializable {
         Nome = nome;
     }
 
-    public String getDescricao() {
-        return Descricao;
+    public String getTipo() {
+        return Tipo;
     }
 
-    public void setDescricao(String descricao) {
-        Descricao = descricao;
+    public void setTipo(String tipo) {
+        Tipo = tipo;
     }
 
-    public Date getDataRegistro() {
-        return DataRegistro;
-    }
 
-    public void setDataRegistro(Date dataRegistro) {
-        DataRegistro = dataRegistro;
-    }
-
-    @Override
+    /*@Override
     public String toString() {
-        return this.Nome + " " + this.Descricao;
-    }
+        return this.Nome + " " + this.Dosagem ;
+    }*/
 }

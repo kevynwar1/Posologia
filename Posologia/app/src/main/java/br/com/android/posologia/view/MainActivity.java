@@ -1,8 +1,6 @@
 package br.com.android.posologia.view;
 
 import android.content.Intent;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -11,18 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.adapter.ViewPagerAdapter;
-import br.com.android.posologia.app.MessageBox;
-import br.com.android.posologia.database.DataBase;
-import br.com.android.posologia.dominio.RepMedicamento;
-import br.com.android.posologia.dominio.RepPosologia;
 import br.com.android.posologia.fragment.MedicamentoFragment;
 import br.com.android.posologia.fragment.PosologiaFragment;
-import br.com.android.posologia.util.FiltraDados;
 
 public class MainActivity extends AppCompatActivity {
 

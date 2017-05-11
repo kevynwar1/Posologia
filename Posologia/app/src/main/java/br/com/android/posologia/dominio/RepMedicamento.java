@@ -5,11 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.Date;
-
+import br.com.android.posologia.R;
 import br.com.android.posologia.dominio.entidades.Medicamento;
 import br.com.android.posologia.adapter.ArrayAdapterMedicamento;
-import br.com.android.posologia.R;
+import br.com.android.posologia.dominio.entidades.Medicamento;
 
 /**
  * Created by Kevyn on 03/05/2017.
@@ -27,8 +26,9 @@ public class RepMedicamento {
         ContentValues values = new ContentValues();
 
         values.put(Medicamento.NOME, medicamento.getNome());
-        values.put(Medicamento.DESCRICAO, medicamento.getDescricao());
-        values.put(Medicamento.DATAREGISTRO, medicamento.getDataRegistro().getTime());
+        values.put(Medicamento.DOSAGEM, medicamento.getDosagem());
+        values.put(Medicamento.OBSERVACAO, medicamento.getObservacao());
+        values.put(Medicamento.TIPO, medicamento.getTipo());
 
         return values;
     }
@@ -61,8 +61,9 @@ public class RepMedicamento {
 
                 medicamento.setId(cursor.getLong(cursor.getColumnIndex(Medicamento.ID)));
                 medicamento.setNome(cursor.getString(cursor.getColumnIndex(Medicamento.NOME)));
-                medicamento.setDescricao(cursor.getString(cursor.getColumnIndex(Medicamento.DESCRICAO)));
-                medicamento.setDataRegistro(new Date(cursor.getLong(cursor.getColumnIndex(Medicamento.DATAREGISTRO))));
+                medicamento.setDosagem(cursor.getString(cursor.getColumnIndex(Medicamento.DOSAGEM)));
+                medicamento.setObservacao(cursor.getString(cursor.getColumnIndex(Medicamento.OBSERVACAO)));
+                medicamento.setTipo(cursor.getString(cursor.getColumnIndex(Medicamento.TIPO)));
 
                 adpMedicamentos.add(medicamento);
             } while (cursor.moveToNext());
@@ -70,4 +71,5 @@ public class RepMedicamento {
 
         return adpMedicamentos;
     }
+
 }

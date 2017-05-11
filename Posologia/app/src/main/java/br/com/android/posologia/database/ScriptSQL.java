@@ -6,27 +6,6 @@ package br.com.android.posologia.database;
 
 public class ScriptSQL {
 
-    // Table: Pessoa (DropTable)
-    public static String getDropTablePessoa() {
-        StringBuilder sqlBuilder = new StringBuilder();
-
-        sqlBuilder.append("DROP TABLE IF EXISTS Pessoa;");
-
-        return sqlBuilder.toString();
-    }
-
-    // Table: Pessoa (CreateTable)
-    public static String getCreateTablePessoa() {
-        StringBuilder sqlBuilder = new StringBuilder();
-
-        sqlBuilder.append("CREATE TABLE IF NOT EXISTS Pessoa ( ");
-        sqlBuilder.append("_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
-        sqlBuilder.append("Nome VARCHAR(150) NOT NULL UNIQUE, ");
-        sqlBuilder.append("DataRegistro DATETIME NOT NULL DEFAULT(getDate()) ");
-        sqlBuilder.append(");");
-
-        return sqlBuilder.toString();
-    }
 
     // Table: Medicamento (DropTable)
     public static String getDropTableMedicamento() {
@@ -44,8 +23,9 @@ public class ScriptSQL {
         sqlBuilder.append("CREATE TABLE Medicamento ( ");
         sqlBuilder.append("_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
         sqlBuilder.append("Nome VARCHAR(150) NOT NULL UNIQUE, ");
-        sqlBuilder.append("Descricao VARCHAR(255), ");
-        sqlBuilder.append("DataRegistro DATETIME NOT NULL DEFAULT(getDate()) ");
+        sqlBuilder.append("Dosagem VARCHAR(150) NOT NULL, ");
+        sqlBuilder.append("Observacao VARCHAR(255), ");
+        sqlBuilder.append("Tipo VARCHAR (1) NOT NULL");
         sqlBuilder.append(");");
 
         return sqlBuilder.toString();

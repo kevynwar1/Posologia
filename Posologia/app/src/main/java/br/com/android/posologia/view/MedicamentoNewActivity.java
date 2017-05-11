@@ -2,12 +2,14 @@ package br.com.android.posologia.view;
 
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.app.MessageBox;
@@ -19,20 +21,36 @@ import br.com.android.posologia.fragment.MedicamentoFragment;
 public class MedicamentoNewActivity extends AppCompatActivity {
 
     private EditText edtNome;
-    private EditText edtDescricao;
+    private EditText edtDosagem;
+    private EditText edtObservacoes;
+    private Spinner spMedicamento;
 
     private DataBase dataBase;
     private SQLiteDatabase conn;
     private RepMedicamento repMedicamento;
     private Medicamento medicamento;
+    ArrayAdapter<String> adapter;
+
+    // private String[] Tipos = new String[]{"Antibióticos, AntiInflamatorio, Analgésico, Outros"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicamento_new);
 
-        edtNome = (EditText) findViewById(R.id.edtNome);
-        edtDescricao = (EditText) findViewById(R.id.edtDescricao);
+        edtNome = (EditText) findViewById(R.id.edtNomeMedicamento);
+        edtDosagem = (EditText) findViewById(R.id.edtDosagem);
+        edtObservacoes = (EditText) findViewById(R.id.edtObservacoes);
+        spMedicamento = (Spinner) findViewById(R.id.spTipo);
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spMedicamento.setAdapter(adapter);
+        adapter.add("Antibioticos");
+        adapter.add("AntiInflamatorio");
+        adapter.add("Analgésico");
+        adapter.add("Outros");
+
 
         Bundle bundle = getIntent().getExtras();
 
@@ -97,13 +115,18 @@ public class MedicamentoNewActivity extends AppCompatActivity {
 
     private void preencheDados() {
         edtNome.setText(medicamento.getNome());
-        edtDescricao.setText(medicamento.getDescricao());
+        edtDosagem.setText(medicamento.getDosagem());
+        edtObservacoes.setText(medicamento.getObservacao());
+        ArrayAdapter adapter2 = (ArrayAdapter) spMedicamento.getAdapter();
+        spMedicamento.setSelection(adapter2.getPosition(medicamento.getTipo()));
     }
 
     private boolean salvar() {
         try {
             medicamento.setNome(edtNome.getText().toString());
-            medicamento.setDescricao(edtDescricao.getText().toString());
+            medicamento.setDosagem(edtDosagem.getText().toString());
+            medicamento.setObservacao(edtObservacoes.getText().toString());
+            medicamento.setTipo(spMedicamento.getSelectedItem().toString());
 
             if (medicamento.getNome().isEmpty()) {
                 MessageBox.showInfo(this, getResources().getString(R.string.lbl_atencao), getResources().getString(R.string.lbl_nome_requerido));
@@ -132,4 +155,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
             return false;
         }
     }
+
+
 }
+

@@ -16,7 +16,6 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(ScriptSQL.getCreateTablePessoa());
         db.execSQL(ScriptSQL.getCreateTableMedicamento());
         db.execSQL(ScriptSQL.getCreateTablePessoaMedicamento());
     }

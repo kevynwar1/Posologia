@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -52,6 +53,7 @@ public class MedicamentoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_medicamento, container, false);
         lvMedicamento = (ListView) view.findViewById(R.id.lstMedicamentos);
         edtFiltro = (EditText) view.findViewById(R.id.edtFiltro);
+
         try {
             dataBase = new DataBase(getActivity());
             conn = dataBase.getReadableDatabase();
@@ -83,12 +85,13 @@ public class MedicamentoFragment extends Fragment {
         });
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            adapter = repMedicamento.listarMedicamentos(getActivity());
-            filtraDados.setArrayAdapter(adapter);
-            lvMedicamento.setAdapter(adapter);
+        adapter = repMedicamento.listarMedicamentos(getActivity());
+        filtraDados.setArrayAdapter(adapter);
+        lvMedicamento.setAdapter(adapter);
 
     }
 }
