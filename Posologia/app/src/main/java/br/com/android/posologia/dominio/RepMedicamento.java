@@ -6,9 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import br.com.android.posologia.R;
+import br.com.android.posologia.database.DataBase;
 import br.com.android.posologia.dominio.entidades.Medicamento;
 import br.com.android.posologia.adapter.ArrayAdapterMedicamento;
-import br.com.android.posologia.dominio.entidades.Medicamento;
+
 
 /**
  * Created by Kevyn on 03/05/2017.
@@ -17,9 +18,10 @@ import br.com.android.posologia.dominio.entidades.Medicamento;
 public class RepMedicamento {
 
     private SQLiteDatabase conn;
+    private DataBase dataBase;
 
-    public RepMedicamento(SQLiteDatabase conn) {
-        this.conn = conn;
+    public RepMedicamento(Context ctx) {
+        dataBase = new DataBase(ctx);
     }
 
     private ContentValues preencheContentValues(Medicamento medicamento) {
@@ -34,20 +36,24 @@ public class RepMedicamento {
     }
 
     public void inserirMedicamento(Medicamento medicamento) {
+        conn = dataBase.getWritableDatabase();
         ContentValues values = preencheContentValues(medicamento);
         conn.insertOrThrow(Medicamento.TABELA, null, values);
     }
 
     public void alterarMedicamento(Medicamento medicamento) {
+        conn = dataBase.getWritableDatabase();
         ContentValues values = preencheContentValues(medicamento);
         conn.update(Medicamento.TABELA, values, "_id = ?", new String[]{String.valueOf(medicamento.getId())});
     }
 
     public void excluirMedicamento(long id) {
+        conn = dataBase.getWritableDatabase();
         conn.delete(Medicamento.TABELA, "_id = ?", new String[]{String.valueOf(id)});
     }
 
     public ArrayAdapterMedicamento listarMedicamentos(Context context) {
+        conn = dataBase.getReadableDatabase();
         ArrayAdapterMedicamento adpMedicamentos = new ArrayAdapterMedicamento(context, R.layout.item_medicamento);
 
         Cursor cursor = conn.query(Medicamento.TABELA, null, null, null, null, null, null);

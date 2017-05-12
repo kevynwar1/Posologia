@@ -34,8 +34,7 @@ public class MedicamentoFragment extends Fragment {
     private ArrayAdapter adapter;
     private EditText edtFiltro;
 
-    private DataBase dataBase;
-    private SQLiteDatabase conn;
+
     private RepMedicamento repMedicamento;
     private FiltraDados filtraDados;
     public static final String PARAM_MEDICAMENTO = "MEDICAMENTO";
@@ -55,9 +54,7 @@ public class MedicamentoFragment extends Fragment {
         edtFiltro = (EditText) view.findViewById(R.id.edtFiltro);
 
         try {
-            dataBase = new DataBase(getActivity());
-            conn = dataBase.getReadableDatabase();
-            repMedicamento = new RepMedicamento(conn);
+            repMedicamento = new RepMedicamento(getActivity());
             adapter = repMedicamento.listarMedicamentos(getActivity());
             lvMedicamento.setAdapter(adapter);
             filtraDados = new FiltraDados(adapter);
@@ -86,12 +83,22 @@ public class MedicamentoFragment extends Fragment {
     }
 
 
-    @Override
+  /*  @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         adapter = repMedicamento.listarMedicamentos(getActivity());
         filtraDados.setArrayAdapter(adapter);
         lvMedicamento.setAdapter(adapter);
+
+    }*/
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter = repMedicamento.listarMedicamentos(getActivity());
+        filtraDados.setArrayAdapter(adapter);
+        lvMedicamento.setAdapter(adapter);
+
 
     }
 }

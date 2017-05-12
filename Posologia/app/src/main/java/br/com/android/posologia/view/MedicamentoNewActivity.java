@@ -63,11 +63,8 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         }
 
         try {
-            dataBase = new DataBase(this);
-            conn = dataBase.getWritableDatabase();
-
             // Deixa o objeto de consulta pronto.
-            repMedicamento = new RepMedicamento(conn);
+            repMedicamento = new RepMedicamento(this);
         } catch (SQLException e) {
             MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_conexao) + ": " + e.getMessage());
         }

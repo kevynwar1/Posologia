@@ -31,7 +31,7 @@ public class ScriptSQL {
         return sqlBuilder.toString();
     }
 
-    // Table: Posologia (DropTablee)
+    // Table: Posologia (DropTable)
     public static String getDropTablePessoaMedicamento() {
         StringBuilder sqlBuilder = new StringBuilder();
 
