@@ -31,6 +31,7 @@ public class RepMedicamento {
         values.put(Medicamento.DOSAGEM, medicamento.getDosagem());
         values.put(Medicamento.OBSERVACAO, medicamento.getObservacao());
         values.put(Medicamento.TIPO, medicamento.getTipo());
+        values.put(Medicamento.FOTO, medicamento.getFoto());
 
         return values;
     }
@@ -70,6 +71,7 @@ public class RepMedicamento {
                 medicamento.setDosagem(cursor.getString(cursor.getColumnIndex(Medicamento.DOSAGEM)));
                 medicamento.setObservacao(cursor.getString(cursor.getColumnIndex(Medicamento.OBSERVACAO)));
                 medicamento.setTipo(cursor.getString(cursor.getColumnIndex(Medicamento.TIPO)));
+                medicamento.setFoto(cursor.getString(cursor.getColumnIndex(Medicamento.FOTO)));
 
                 adpMedicamentos.add(medicamento);
             } while (cursor.moveToNext());

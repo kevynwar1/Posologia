@@ -1,15 +1,25 @@
 package br.com.android.posologia.view;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.io.File;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.app.MessageBox;
@@ -24,12 +34,13 @@ public class MedicamentoNewActivity extends AppCompatActivity {
     private EditText edtDosagem;
     private EditText edtObservacoes;
     private Spinner spMedicamento;
+    private ImageView ivMedicamento;
 
-    private DataBase dataBase;
-    private SQLiteDatabase conn;
+
     private RepMedicamento repMedicamento;
     private Medicamento medicamento;
     ArrayAdapter<String> adapter;
+    String caminhoArquivo;
 
     // private String[] Tipos = new String[]{"Antibióticos, AntiInflamatorio, Analgésico, Outros"};
 
@@ -42,6 +53,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         edtDosagem = (EditText) findViewById(R.id.edtDosagem);
         edtObservacoes = (EditText) findViewById(R.id.edtObservacoes);
         spMedicamento = (Spinner) findViewById(R.id.spTipo);
+        ivMedicamento = (ImageView) findViewById(R.id.ivMedicamento);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,16 +80,9 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         } catch (SQLException e) {
             MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_conexao) + ": " + e.getMessage());
         }
+        clickImagem();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (conn != null) {
-            conn.close();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,6 +121,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         edtObservacoes.setText(medicamento.getObservacao());
         ArrayAdapter adapter2 = (ArrayAdapter) spMedicamento.getAdapter();
         spMedicamento.setSelection(adapter2.getPosition(medicamento.getTipo()));
+        carregaImagem(medicamento.getFoto());
     }
 
     private boolean salvar() {
@@ -124,7 +130,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
             medicamento.setDosagem(edtDosagem.getText().toString());
             medicamento.setObservacao(edtObservacoes.getText().toString());
             medicamento.setTipo(spMedicamento.getSelectedItem().toString());
-
+            carregaImagem(caminhoArquivo);
             if (medicamento.getNome().isEmpty()) {
                 MessageBox.showInfo(this, getResources().getString(R.string.lbl_atencao), getResources().getString(R.string.lbl_nome_requerido));
                 return false;
@@ -153,6 +159,50 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         }
     }
 
+    private void clickImagem() {
+        ivMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//gravar no SD... currentTimeMillis = tempo em milisegundos em que esta disparando o evento
+                caminhoArquivo = Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
+
+                //criando de fato o caminho do arquivo
+                File arquivo = new File(caminhoArquivo);
+// Uri.. explicando para o android onde fica o local da imagem
+                Uri localImagem = Uri.fromFile(arquivo);
+//salvar copia da imagem pelo Extra_output
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, localImagem);
+                // ESPERANDO RSULTADO VAI QUE ELE CLICOU SEM QUERER ENTÃƒO NECESSIDADE DE FORRESULT
+                startActivityForResult(intent, 1);
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            carregaImagem(caminhoArquivo);
+        }
+    }
+
+
+    public Bitmap carregaImagem(String caminhoArquivo) {
+        //salvando caminho da foto no banco de Dados
+        medicamento.setFoto(caminhoArquivo);
+        //carregando imagem no ImageView so que muito grande
+//aqui ta o problema
+        Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
+        // aqui da uma reduzida
+       // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
+        ivMedicamento.setImageBitmap(imagem);
+        return imagem;
+    }
 
 }
 

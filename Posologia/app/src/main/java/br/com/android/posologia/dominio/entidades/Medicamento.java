@@ -15,12 +15,22 @@ public class Medicamento implements Serializable {
     public static String DOSAGEM = "Dosagem";
     public static String OBSERVACAO = "Observacao";
     public static String TIPO = "Tipo";
+    public static String FOTO = "Foto";
 
     private long Id;
     private String Nome;
     private String Dosagem;
     private String Observacao;
     private String Tipo;
+    private String Foto;
+
+    public String getFoto() {
+        return Foto;
+    }
+
+    public void setFoto(String foto) {
+        Foto = foto;
+    }
 
     public Medicamento() {
 
@@ -41,8 +51,6 @@ public class Medicamento implements Serializable {
     public void setObservacao(String observacao) {
         Observacao = observacao;
     }
-
-
 
 
     public long getId() {

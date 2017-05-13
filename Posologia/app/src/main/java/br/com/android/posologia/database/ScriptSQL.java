@@ -25,7 +25,8 @@ public class ScriptSQL {
         sqlBuilder.append("Nome VARCHAR(150) NOT NULL UNIQUE, ");
         sqlBuilder.append("Dosagem VARCHAR(150) NOT NULL, ");
         sqlBuilder.append("Observacao VARCHAR(255), ");
-        sqlBuilder.append("Tipo VARCHAR (1) NOT NULL");
+        sqlBuilder.append("Tipo VARCHAR (1) NOT NULL,");
+        sqlBuilder.append("Foto VARCHAR (150) ");
         sqlBuilder.append(");");
 
         return sqlBuilder.toString();

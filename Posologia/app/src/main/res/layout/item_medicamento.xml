@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txtCor"
+    <ImageView
+        android:id="@+id/ivItem"
         style="@style/IconItemLista" />
 
     <LinearLayout
@@ -17,7 +17,7 @@
             style="@style/ItemLista" />
 
         <TextView
-            android:id="@+id/txtDescricao"
+            android:id="@+id/txtDosagem"
             style="@style/ItemLista" />
 
     </LinearLayout>

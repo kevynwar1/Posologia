@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.android.posologia.R;
@@ -37,9 +38,9 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
 
             view = inflater.inflate(resource, parent, false);
 
-            viewHolder.txtCor = (TextView) view.findViewById(R.id.txtCor);
+            viewHolder.ivItem = (ImageView) view.findViewById(R.id.ivItem);
             viewHolder.txtNome = (TextView) view.findViewById(R.id.txtNome);
-            viewHolder.txtDescricao = (TextView) view.findViewById(R.id.txtDescricao);
+            viewHolder.txtDosagem = (TextView) view.findViewById(R.id.txtDosagem);
 
             view.setTag(viewHolder);
 
@@ -51,16 +52,16 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
 
         Medicamento medicamento = getItem(position);
 
-        viewHolder.txtCor.setBackgroundColor(context.getResources().getColor(R.color.txtCor));
+        viewHolder.ivItem.setBackgroundColor(context.getResources().getColor(R.color.txtCor));
         viewHolder.txtNome.setText(medicamento.getNome());
-        viewHolder.txtDescricao.setText(medicamento.getDosagem());
+        viewHolder.txtDosagem.setText(medicamento.getDosagem());
 
         return view;
     }
 
     static class ViewHolder {
-        TextView txtCor;
+        ImageView ivItem;
         TextView txtNome;
-        TextView txtDescricao;
+        TextView txtDosagem;
     }
 }
