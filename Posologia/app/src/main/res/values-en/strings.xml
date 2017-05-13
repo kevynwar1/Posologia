@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Posology</string>
+    <string name="action_exit">Exit</string>
+    <string name="action_posologia">New Posology</string>
+    <string name="home_body">This application will help you with the medications and dosages you need to administer, and you can create several profiles.</string>
+    <string name="lbl_salvar">Save</string>
+    <string name="lbl_nome_requerido">Notify your name</string>
+    <string name="lbl_nome">Name</string>
+    <string name="lbl_medicamento">Medicament</string>
+    <string name="lbl_horario">Time</string>
+    <string name="lbl_excluir">Delete</string>
+    <string name="lbl_erro_salvar">Error saving data</string>
+    <string name="lbl_erro_excluir">Error deleting data</string>
+    <string name="lbl_erro_criar_base">Error creating database</string>
+    <string name="lbl_erro_conexao">Error connecting to database</string>
+    <string name="lbl_erro">Erro</string>
+    <string name="lbl_descricao">Description</string>
+    <string name="lbl_data_registro">Registration Data</string>
+    <string name="lbl_atencao">Atention</string>
+    <string name="lbl_Observacao">Comments</string>
+    <string name="home_header">Welcome!</string>
+    <string name="hint_filtro">Notify the filter</string>
+    <string name="btn_posologias">Posology</string>
+    <string name="btn_pessoas">People</string>
+    <string name="btn_medicamentos">Medicament</string>
+    <string name="app_title_posologia_new">Register of Dosage</string>
+    <string name="app_title_pessoa_new">Regiter of User</string>
+    <string name="app_title_medicamento_new">Register of Medicament</string>
+    <string name="action_pessoa">New Person</string>
+    <string name="action_medicamento">New Medicaments</string>
+</resources>

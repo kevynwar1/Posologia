@@ -1,7 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
-    package="br.com.android.posologia">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="br.com.android.posologia">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -23,7 +20,6 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".view.PosologiaNewActivity"
             android:label="@string/app_title_posologia_new" />
@@ -35,8 +31,5 @@
         <activity
             android:name=".view.MedicamentoNewActivity"
             android:label="@string/app_title_medicamento_new" />
-
     </application>
-
-
 </manifest>

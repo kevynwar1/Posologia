@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Posologia</string>
+
+    <string name="action_pessoa">New Pessoa</string>
+    <string name="action_exit">Sair</string>
+    <string name="action_medicamento">New Medicamentos</string>
+    <string name="action_posologia">New Posologia</string>
+
+    <string name="app_title_pessoa_new">Cadastrar de Usuário</string>
+    <string name="app_title_medicamento_new">Cadastro de Medicamento</string>
+    <string name="app_title_posologia_new">Cadastro de Posologia</string>
+
+    <string name="home_header">Seja bem-vindo!</string>
+    <string name="home_body">Esse aplicativo lhe auxiliará com os medicamentos e posologias que precisar administrar, podendo criar vários perfis.</string>
+    <string name="btn_pessoas">Pessoas</string>
+    <string name="btn_medicamentos">Medicamento</string>
+    <string name="btn_posologias">Posologia</string>
+
+    <string name="hint_filtro">Informe o filtro</string>
+    <string name="lbl_data_registro">Data de Registro</string>
+    <string name="lbl_nome">Nome</string>
+    <string name="lbl_medicamento">Medicamento</string>
+    <string name="lbl_horario">Horário</string>
+    <string name="lbl_Observacao">Observações</string>
+    <string name="lbl_descricao">Descrição</string>
+    <string name="lbl_salvar">Salvar</string>
+    <string name="lbl_excluir">Excluir</string>
+
+    <string name="lbl_atencao">Atenção</string>
+    <string name="lbl_nome_requerido">Informe seu Nome</string>
+    <string name="lbl_erro">Erro</string>
+    <string name="lbl_erro_salvar">Erro ao salvar os dados</string>
+    <string name="lbl_erro_excluir">Erro ao excluir os dados</string>
+    <string name="lbl_erro_criar_base">Erro ao criar o banco de dados</string>
+    <string name="lbl_erro_conexao">Erro ao conectar ao banco de dados</string>
+</resources>
