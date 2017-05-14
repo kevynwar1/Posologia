@@ -6,13 +6,7 @@ require '../vendor/autoload.php';
 require '../src/config/db.php';
 
 $app = new \Slim\App;
-$app->get('/hello/{name}', function (Request $request, Response $response) {
-    $name = $request->getAttribute('name');
-    $response->getBody()->write("Hello, $name");
 
-    return $response;
-});
-
-require '../src/routes/customers.php';
+require '../src/routes/usuario.php';
 
 $app->run();

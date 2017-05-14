@@ -25,7 +25,7 @@
     <string name="btn_pessoas">People</string>
     <string name="btn_medicamentos">Medicament</string>
     <string name="app_title_posologia_new">Register of Dosage</string>
-    <string name="app_title_pessoa_new">Regiter of User</string>
+    <string name="app_title_pessoa_new">Register of User</string>
     <string name="app_title_medicamento_new">Register of Medicament</string>
     <string name="action_pessoa">New Person</string>
     <string name="action_medicamento">New Medicaments</string>

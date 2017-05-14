@@ -3,7 +3,7 @@ class db {
 	private $dbhost = 'localhost';
 	private $dbuser = 'root';
 	private $dbpass = '';
-	private $dbname = 'slimapp';
+	private $dbname = 'coopera';
 
 	public function connect() {
 		$mysql_connect_str = "mysql:host=$this->dbhost;dbname=$this->dbname;";
