@@ -4,6 +4,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 
+import br.com.android.posologia.dominio.entidades.Medicamento;
+
 /**
  * Created by kevyn on 04/05/2017.
  */

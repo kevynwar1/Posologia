@@ -78,8 +78,8 @@ public class Medicamento implements Serializable {
     }
 
 
-    /*@Override
+    @Override
     public String toString() {
         return this.Nome + " " + this.Dosagem ;
-    }*/
+    }
 }

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import br.com.android.posologia.R;
+import br.com.android.posologia.adapter.ArrayAdapterMedicamento;
 import br.com.android.posologia.database.DataBase;
 import br.com.android.posologia.dominio.RepMedicamento;
 import br.com.android.posologia.dominio.entidades.Medicamento;
@@ -59,14 +60,25 @@ public class MedicamentoFragment extends Fragment {
             lvMedicamento.setAdapter(adapter);
             filtraDados = new FiltraDados(adapter);
             edtFiltro.addTextChangedListener(filtraDados);
+
         } catch (SQLException e) {
-            Toast.makeText(getActivity(), "Error em algum canto ai", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Error ao Listar", Toast.LENGTH_LONG).show();
 
         }
         clickLista();
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter = repMedicamento.listarMedicamentos(getActivity());
+        filtraDados.setArrayAdapter(adapter);
+        lvMedicamento.setAdapter(adapter);
+
+
     }
 
     private void clickLista() {
@@ -77,7 +89,7 @@ public class MedicamentoFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), MedicamentoNewActivity.class);
                 intent.putExtra(PARAM_MEDICAMENTO, medicamento);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
             }
         });
     }
@@ -92,13 +104,5 @@ public class MedicamentoFragment extends Fragment {
 
     }*/
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        adapter = repMedicamento.listarMedicamentos(getActivity());
-        filtraDados.setArrayAdapter(adapter);
-        lvMedicamento.setAdapter(adapter);
 
-
-    }
 }

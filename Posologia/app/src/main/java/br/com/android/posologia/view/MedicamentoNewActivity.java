@@ -188,6 +188,8 @@ public class MedicamentoNewActivity extends AppCompatActivity {
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             carregaImagem(caminhoArquivo);
+        } else {
+            ivMedicamento.setImageResource(R.drawable.picture_no_image);
         }
     }
 
@@ -196,13 +198,14 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         //salvando caminho da foto no banco de Dados
         medicamento.setFoto(caminhoArquivo);
         //carregando imagem no ImageView so que muito grande
-//aqui ta o problema
+
         Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
         // aqui da uma reduzida
-       // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
+        // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
         ivMedicamento.setImageBitmap(imagem);
         return imagem;
     }
+
 
 }
 

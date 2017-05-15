@@ -31,7 +31,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Nome"
-        android:inputType="textPersonName" />
+        android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/edtDosagem"
@@ -43,14 +43,14 @@
         android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="Dosagem"
-        android:inputType="textPersonName" />
+        android:inputType="textCapSentences" />
 
     <Spinner
         android:id="@+id/spTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtObservacoes"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edtObservacoes" />
 
     <EditText
         android:id="@+id/edtObservacoes"
@@ -62,7 +62,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Observações"
-        android:inputType="textMultiLine" />
+        android:inputType="textCapSentences" />
 
 
 </RelativeLayout>

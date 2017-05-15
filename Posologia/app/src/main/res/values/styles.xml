@@ -10,6 +10,7 @@
         <item name="colorAccent">#CFD8DC</item>
         <!-- App color to navigation bar -->
         <item name="android:navigationBarColor">#2196F3</item>
+
     </style>
 
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
