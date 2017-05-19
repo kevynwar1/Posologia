@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pessoa_new"
+    android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,18 +12,52 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.android.posologia.view.CadastroActivity">
 
-    <LinearLayout
+    <!-- LinearLayout
         android:id="@+id/lnlNome"
-        style="@style/LnlCampoForm">
+        style="@style/LnlCampoForm" -->
 
-        <TextView
-            android:id="@+id/lblNome"
-            style="@style/TxtForm"
-            android:text="@string/lbl_nome" />
+    <TextView
+        android:id="@+id/lblNome"
+        style="@style/TxtForm"
+        android:text="@string/lbl_nome" />
 
-        <EditText
-            android:id="@+id/edtNome"
-            style="@style/EdtForm" />
+    <EditText
+        android:id="@+id/edtNome"
+        style="@style/EdtForm" />
 
-    </LinearLayout>
+    <!-- /LinearLayout -->
+
+    <TextView
+        android:id="@+id/lblEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_email" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/lblSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_senha" />
+
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_cadastrar"
+        android:textColor="#FFFFFF" />
+
 </LinearLayout>
