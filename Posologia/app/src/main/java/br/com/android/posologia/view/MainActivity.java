@@ -40,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-
-
-
-        // Criar a base de dados.
+			//EXCLUIR DEPOIS
        /*   try {
             dataBase = new DataBase(this);
           conn = dataBase.getReadableDatabase();
