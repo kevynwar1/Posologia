@@ -1,1 +1,1 @@
-http://localhost/Posologia/WebService/public/api/usuario/
+http://coopera.pe.hu/WebService/public/api/usuario/

@@ -1,9 +1,9 @@
 <?php
 class db {
-	private $dbhost = 'localhost';
-	private $dbuser = 'root';
-	private $dbpass = '';
-	private $dbname = 'coopera';
+	private $dbhost = 'mysql.hostinger.com.br';
+	private $dbuser = 'u327363239_coop';
+	private $dbpass = '34663827';
+	private $dbname = 'u327363239_coop';
 
 	public function connect() {
 		$mysql_connect_str = "mysql:host=$this->dbhost;dbname=$this->dbname;";
