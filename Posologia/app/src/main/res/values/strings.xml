@@ -40,6 +40,7 @@
     <string name="lbl_Observacao">Observações</string>
     <string name="lbl_salvar">Salvar</string>
     <string name="lbl_senha">Senha</string>
+<<<<<<< HEAD
     <string name="tempo_de_medicacao">Tempo de Medicação</string>
     <string name="vezes_ao_dia">Vezes ao Dia</string>
     <string name="dosagem">Dosagem</string>
@@ -50,4 +51,6 @@
     <string name="observacoes">Observações</string>
     <string name="salvar_medicamento">Salvar</string>
     <string name="excluir_medicamento">Excluir</string>
+=======
+>>>>>>> e53f659aa6f3076c9c8293bb9e8b03063c65a516
 </resources>

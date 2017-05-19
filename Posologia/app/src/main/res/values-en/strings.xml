@@ -7,7 +7,7 @@
     <string name="action_pessoa">New Person</string>
     <string name="action_posologia">New Posology</string>
 
-    <string name="app_title_medicamento_new">Register of Medicament</string>
+    <string name="app_titl_medicamento_new">Register of Medicament</string>
     <string name="app_title_pessoa_new">Register of User</string>
     <string name="app_title_posologia_new">Register of Dosage</string>
 
@@ -41,6 +41,7 @@
     <string name="lbl_Observacao">Comments</string>
     <string name="lbl_salvar">Save</string>
     <string name="lbl_senha">Password</string>
+<<<<<<< HEAD
     <string name="tempo_de_medicacao">Tempo de Medicação</string>
     <string name="vezes_ao_dia">Vezes ao Dia</string>
     <string name="dosagem">Dosagem</string>
@@ -51,4 +52,6 @@
     <string name="observacoes">Observações</string>
     <string name="salvar_medicamento">Salvar</string>
     <string name="excluir_medicamento">Excluir</string>
+=======
+>>>>>>> e53f659aa6f3076c9c8293bb9e8b03063c65a516
 </resources>
