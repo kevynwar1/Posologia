@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-			//EXCLUIR DEPOI
+			//EXCLUIR DEPOISS
        /*   try {
             dataBase = new DataBase(this);
           conn = dataBase.getReadableDatabase();
