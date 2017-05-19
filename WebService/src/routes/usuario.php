@@ -6,7 +6,7 @@ $app = new \Slim\App;
 
 // List
 $app->get('/api/usuario/', function(Request $request, Response $response) {
-	$sql = "SELECT * FROM usuario";
+	$sql = "SELECT * FROM user";
 	try {
 		$db = new db();
 		$db = $db->connect();
@@ -23,7 +23,7 @@ $app->get('/api/usuario/', function(Request $request, Response $response) {
 // Search
 $app->get('/api/usuario/{id}', function(Request $request, Response $response) {
 	$id = $request->getAttribute('id');
-	$sql = "SELECT * FROM usuario WHERE id = $id";
+	$sql = "SELECT * FROM user WHERE id = $id";
 	try {
 		$db = new db();
 		$db = $db->connect();
@@ -39,55 +39,49 @@ $app->get('/api/usuario/{id}', function(Request $request, Response $response) {
 
 // Insert
 $app->post('/api/usuario/add', function(Request $request, Response $response) {
-	$nome 			= $request->getParam('nome');
-	$email 			= $request->getParam('email');
-	$sexo 			= $request->getParam('sexo');
-	$nascimento 	= $request->getParam('nascimento');
-	$senha 			= $request->getParam('senha');
+	$data = json_decode(file_get_contents('php://input'), true);
 
-	$sql =  "INSERT INTO usuario(nome, email, sexo, nascimento, senha) "; 
-	$sql += "VALUES (':nome', ':email', ':sexo', ':nascimento', ':senha')";
+	$nome  = $data['nome'];
+	$email = $data['email'];
+	$senha = $data['senha'];
+
+	$sql = "INSERT INTO user(nome, email, senha) VALUES ('$nome', '$email', '$senha')";
+
 	try {
 		$db = new db();
 		$db = $db->connect();
 
 		$stmt = $db->prepare($sql);
-		$stmt->bindParam(':nome'	, $nome);
-		$stmt->bindParam(':email'	, $email);
-		$stmt->bindParam(':sexo'	, $sexo);
-		$stmt->bindParam(':nascimento', $nascimento);
-		$stmt->bindParam(':senha'	, sha1(md5($senha)));
+		$stmt->bindParam(':nome', $nome);
+		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':senha', $senha);
+
 		$stmt->execute();
 	} catch(PDOException $e) {
 		echo "{'error': {'text': '".$e->getMessage()."'}}";
 	}
 });
 
-
 // Update
 $app->put('/api/usuario/update/{id}', function(Request $request, Response $response) {
-	$id 			= $request->getAttribute('id');
+	$data = json_decode(file_get_contents('php://input'), true);
 
-	$nome 			= $request->getParam('nome');
-	$email 			= $request->getParam('email');
-	$sexo 			= $request->getParam('sexo');
-	$nascimento 	= $request->getParam('nascimento');
-	$senha 			= $request->getParam('senha');
+	$id = $request->getAttribute('id');
 
-	$sql = "UPDATE usuario ";
-	$sql += "SET (':nome', ':email', ':sexo', ':nascimento', ':senha') ";
-	$sql += "WHERE id = $id";
+	$nome  = $data['nome'];
+	$email = $data['email'];
+	$senha = $data['senha'];
+
+	$sql = "UPDATE user SET nome = '$nome', email = '$email', senha = '$senha' WHERE id = $id";
 
 	try {
 		$db = new db();
 		$db = $db->connect();
 
 		$stmt = $db->prepare($sql);
-		$stmt->bindParam(':nome'	, $nome);
-		$stmt->bindParam(':email'	, $email);
-		$stmt->bindParam(':sexo'	, $sexo);
-		$stmt->bindParam(':nascimento', $nascimento);
-		$stmt->bindParam(':senha'	, sha1(md5($senha)));
+		$stmt->bindParam(':nome', $nome);
+		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':senha', sha1(md5($senha)));
 		$stmt->execute();
 	} catch(PDOException $e) {
 		echo "{'error': {'text': '".$e->getMessage()."'}}";
@@ -98,7 +92,7 @@ $app->put('/api/usuario/update/{id}', function(Request $request, Response $respo
 // Delete
 $app->delete('/api/usuario/delete/{id}', function(Request $request, Response $response) {
 	$id = $request->getAttribute('id');
-	$sql = "DELETE FROM usuario WHERE id = $id";
+	$sql = "DELETE FROM user WHERE id = $id";
 	
 	try {
 		$db = new db();

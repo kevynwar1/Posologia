@@ -20,7 +20,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@android:color/background_dark" />
+        app:titleTextColor="@android:color/background_light" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"

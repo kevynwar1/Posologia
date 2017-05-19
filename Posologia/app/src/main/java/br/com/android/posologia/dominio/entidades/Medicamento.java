@@ -12,74 +12,75 @@ public class Medicamento implements Serializable {
 
     public static String ID = "_id";
     public static String NOME = "Nome";
-    public static String DOSAGEM = "Dosagem";
+    public static String MILIGRAMA = "Miligrama";
     public static String OBSERVACAO = "Observacao";
     public static String TIPO = "Tipo";
     public static String FOTO = "Foto";
 
-    private long Id;
-    private String Nome;
-    private String Dosagem;
-    private String Observacao;
-    private String Tipo;
-    private String Foto;
-
-    public String getFoto() {
-        return Foto;
-    }
-
-    public void setFoto(String foto) {
-        Foto = foto;
-    }
+    private long id;
+    private String nome;
+    private String miligrama;
+    private String observacao;
+    private String tipo;
+    private String foto;
 
     public Medicamento() {
 
     }
 
-    public String getDosagem() {
-        return Dosagem;
-    }
-
-    public void setDosagem(String dosagem) {
-        Dosagem = dosagem;
-    }
-
-    public String getObservacao() {
-        return Observacao;
-    }
-
-    public void setObservacao(String observacao) {
-        Observacao = observacao;
-    }
-
-
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
+    }
+
+    public String getMiligrama() {
+        return miligrama;
+    }
+
+    public void setMiligrama(String miligrama) {
+        this.miligrama = miligrama;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public String getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(String tipo) {
-        Tipo = tipo;
+        this.tipo = tipo;
     }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+
 
 
     @Override
     public String toString() {
-        return this.Nome + " " + this.Dosagem ;
+        return this.nome + " " + this.miligrama;
     }
 }

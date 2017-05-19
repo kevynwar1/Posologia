@@ -4,6 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.media.MediaBrowserCompatUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.database.DataBase;
@@ -28,7 +32,7 @@ public class RepMedicamento {
         ContentValues values = new ContentValues();
 
         values.put(Medicamento.NOME, medicamento.getNome());
-        values.put(Medicamento.DOSAGEM, medicamento.getDosagem());
+        values.put(Medicamento.MILIGRAMA, medicamento.getMiligrama());
         values.put(Medicamento.OBSERVACAO, medicamento.getObservacao());
         values.put(Medicamento.TIPO, medicamento.getTipo());
         values.put(Medicamento.FOTO, medicamento.getFoto());
@@ -68,7 +72,7 @@ public class RepMedicamento {
 
                 medicamento.setId(cursor.getLong(cursor.getColumnIndex(Medicamento.ID)));
                 medicamento.setNome(cursor.getString(cursor.getColumnIndex(Medicamento.NOME)));
-                medicamento.setDosagem(cursor.getString(cursor.getColumnIndex(Medicamento.DOSAGEM)));
+                medicamento.setMiligrama(cursor.getString(cursor.getColumnIndex(Medicamento.MILIGRAMA)));
                 medicamento.setObservacao(cursor.getString(cursor.getColumnIndex(Medicamento.OBSERVACAO)));
                 medicamento.setTipo(cursor.getString(cursor.getColumnIndex(Medicamento.TIPO)));
                 medicamento.setFoto(cursor.getString(cursor.getColumnIndex(Medicamento.FOTO)));
@@ -79,5 +83,7 @@ public class RepMedicamento {
 
         return adpMedicamentos;
     }
+
+
 
 }

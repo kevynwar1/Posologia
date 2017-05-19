@@ -15,13 +15,13 @@
         style="@style/LnlFiltro">
 
         <EditText
-            android:id="@+id/edtFiltro"
+            android:id="@+id/edtFiltroPosologia"
             style="@style/EdtFiltro" />
 
     </LinearLayout>
 
     <ListView
-        android:id="@+id/lstPosologia"
+        android:id="@+id/lvPosologia"
         style="@style/LstView" />
 
 </LinearLayout>

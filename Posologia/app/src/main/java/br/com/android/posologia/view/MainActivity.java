@@ -9,9 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.adapter.ViewPagerAdapter;
+import br.com.android.posologia.dominio.entidades.Medicamento;
 import br.com.android.posologia.fragment.MedicamentoFragment;
 import br.com.android.posologia.fragment.PosologiaFragment;
 
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
+
+
         // Criar a base de dados.
        /*   try {
             dataBase = new DataBase(this);
@@ -62,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+
+
         return true;
     }
 
@@ -99,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
     private void NewMedicamentos() {
         Intent intent = new Intent(this, MedicamentoNewActivity.class);
         startActivity(intent);
+
+
     }
 
     private void Posologia() {

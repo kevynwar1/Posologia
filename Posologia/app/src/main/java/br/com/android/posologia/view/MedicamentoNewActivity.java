@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -31,10 +32,12 @@ import br.com.android.posologia.fragment.MedicamentoFragment;
 public class MedicamentoNewActivity extends AppCompatActivity {
 
     private EditText edtNome;
-    private EditText edtDosagem;
+    private EditText edtMiligrama;
     private EditText edtObservacoes;
     private Spinner spMedicamento;
     private ImageView ivMedicamento;
+    private Button btSalvarMedicamento;
+    private Button btExcluirMedicamento;
 
 
     private RepMedicamento repMedicamento;
@@ -50,10 +53,14 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medicamento_new);
 
         edtNome = (EditText) findViewById(R.id.edtNomeMedicamento);
-        edtDosagem = (EditText) findViewById(R.id.edtDosagem);
+        edtMiligrama = (EditText) findViewById(R.id.edtMiligrama);
         edtObservacoes = (EditText) findViewById(R.id.edtObservacoes);
+
         spMedicamento = (Spinner) findViewById(R.id.spTipo);
         ivMedicamento = (ImageView) findViewById(R.id.ivMedicamento);
+
+        btSalvarMedicamento = (Button) findViewById(R.id.btSalvarMedicamento);
+        btExcluirMedicamento = (Button) findViewById(R.id.btExcluirMedicamento);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -70,93 +77,75 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         if ((bundle != null) && (bundle.containsKey(MedicamentoFragment.PARAM_MEDICAMENTO))) {
             medicamento = ((Medicamento) bundle.getSerializable(MedicamentoFragment.PARAM_MEDICAMENTO));
             preencheDados();
+            btSalvarMedicamento.setText("Alterar");
+            btExcluirMedicamento.setVisibility(View.VISIBLE);
         } else {
             medicamento = new Medicamento();
         }
 
-        try {
-            // Deixa o objeto de consulta pronto.
-            repMedicamento = new RepMedicamento(this);
-        } catch (SQLException e) {
-            MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_conexao) + ": " + e.getMessage());
-        }
+
+        // Deixa o objeto de consulta pronto.
+        repMedicamento = new RepMedicamento(this);
+
         clickImagem();
+        clickSalvar();
+        clickExcluir();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_medicamento_new, menu);
-
-        // Se estiver editando apresenta opção Excluir.
-        if (medicamento.getId() != 0) {
-            menu.getItem(1).setVisible(true);
-        }
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.mn_salvar:
-                if (salvar()) {
-                    finish();
-                }
-                break;
-            case R.id.mn_excluir:
-                if (excluir()) {
-                    finish();
-                }
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void preencheDados() {
         edtNome.setText(medicamento.getNome());
-        edtDosagem.setText(medicamento.getDosagem());
+        edtMiligrama.setText(medicamento.getMiligrama());
         edtObservacoes.setText(medicamento.getObservacao());
-        ArrayAdapter adapter2 = (ArrayAdapter) spMedicamento.getAdapter();
-        spMedicamento.setSelection(adapter2.getPosition(medicamento.getTipo()));
-        carregaImagem(medicamento.getFoto());
+
+        ArrayAdapter adapterMedicamento = (ArrayAdapter) spMedicamento.getAdapter();
+        spMedicamento.setSelection(adapterMedicamento.getPosition(medicamento.getTipo()));
+        if (medicamento.getFoto() != null) {
+            carregaImagem(medicamento.getFoto());
+        } else {
+            ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
+        }
     }
 
-    private boolean salvar() {
-        try {
-            medicamento.setNome(edtNome.getText().toString());
-            medicamento.setDosagem(edtDosagem.getText().toString());
-            medicamento.setObservacao(edtObservacoes.getText().toString());
-            medicamento.setTipo(spMedicamento.getSelectedItem().toString());
-            carregaImagem(caminhoArquivo);
-            if (medicamento.getNome().isEmpty()) {
-                MessageBox.showInfo(this, getResources().getString(R.string.lbl_atencao), getResources().getString(R.string.lbl_nome_requerido));
-                return false;
-            } else {
-                if (medicamento.getId() == 0) {
-                    repMedicamento.inserirMedicamento(medicamento);
-                } else {
-                    repMedicamento.alterarMedicamento(medicamento);
+
+    private void clickSalvar() {
+        btSalvarMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    medicamento.setNome(edtNome.getText().toString());
+                    medicamento.setMiligrama(edtMiligrama.getText().toString());
+                    medicamento.setObservacao(edtObservacoes.getText().toString());
+                    medicamento.setTipo(spMedicamento.getSelectedItem().toString());
+                    medicamento.setFoto(caminhoArquivo);
+                    if (medicamento.getId() == 0) {
+                        repMedicamento.inserirMedicamento(medicamento);
+                        finish();
+                    } else {
+                        repMedicamento.alterarMedicamento(medicamento);
+                        finish();
+                    }
+                } catch (Exception e) {
+                    MessageBox.showAlert(MedicamentoNewActivity.this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_salvar) + ": " + e.getMessage());
                 }
-
-                return true;
             }
-        } catch (Exception e) {
-            MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_salvar) + ": " + e.getMessage());
-            return false;
-        }
+        });
     }
 
-    private boolean excluir() {
-        try {
-            repMedicamento.excluirMedicamento(medicamento.getId());
-            return true;
-        } catch (Exception e) {
-            MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_excluir) + ": " + e.getMessage());
-            return false;
-        }
+    private void clickExcluir() {
+        btExcluirMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    repMedicamento.excluirMedicamento(medicamento.getId());
+                    finish();
+
+                } catch (Exception e) {
+                    MessageBox.showAlert(MedicamentoNewActivity.this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_excluir) + ": " + e.getMessage());
+
+                }
+            }
+        });
     }
 
     private void clickImagem() {
@@ -174,7 +163,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
                 Uri localImagem = Uri.fromFile(arquivo);
 //salvar copia da imagem pelo Extra_output
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, localImagem);
-                // ESPERANDO RSULTADO VAI QUE ELE CLICOU SEM QUERER ENTÃƒO NECESSIDADE DE FORRESULT
+                // ESPERANDO RSULTADO VAI QUE ELE CLICOU SEM QUERER ENTAO NECESSIDADE DE FORRESULT
                 startActivityForResult(intent, 1);
 
             }
@@ -189,7 +178,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             carregaImagem(caminhoArquivo);
         } else {
-            ivMedicamento.setImageResource(R.drawable.picture_no_image);
+            ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
         }
     }
 

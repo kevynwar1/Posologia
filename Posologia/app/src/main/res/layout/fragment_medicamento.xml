@@ -21,5 +21,7 @@
 
     <ListView
         android:id="@+id/lstMedicamentos"
-        style="@style/LstView" />
+        style="@style/LstView"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp" />
 </LinearLayout>

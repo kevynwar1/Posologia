@@ -23,10 +23,10 @@ public class ScriptSQL {
         sqlBuilder.append("CREATE TABLE Medicamento ( ");
         sqlBuilder.append("_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
         sqlBuilder.append("Nome VARCHAR(150) NOT NULL UNIQUE, ");
-        sqlBuilder.append("Dosagem VARCHAR(150) NOT NULL, ");
+        sqlBuilder.append("Miligrama VARCHAR(150) NOT NULL, ");
         sqlBuilder.append("Observacao VARCHAR(255), ");
-        sqlBuilder.append("Tipo VARCHAR (1) NOT NULL,");
-        sqlBuilder.append("Foto VARCHAR (150) ");
+        sqlBuilder.append("Tipo VARCHAR(1) NOT NULL,");
+        sqlBuilder.append("Foto VARCHAR(150) ");
         sqlBuilder.append(");");
 
         return sqlBuilder.toString();
@@ -42,16 +42,18 @@ public class ScriptSQL {
     }
 
     // Table: Posologia (CreateTable)
-    public static String getCreateTablePessoaMedicamento() {
+    public static String getCreateTablePosologia() {
         StringBuilder sqlBuilder = new StringBuilder();
 
         sqlBuilder.append("CREATE TABLE Posologia ( ");
-        sqlBuilder.append("_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
-        sqlBuilder.append("PessoaId INTEGER REFERENCES Pessoa(_id) NOT NULL, ");
-        sqlBuilder.append("MedicamentoId INTEGER REFERENCES Medicamento(_id) NOT NULL, ");
-        sqlBuilder.append("Horario DATETIME NOT NULL, ");
-        sqlBuilder.append("Observacao VARCHAR(255), ");
-        sqlBuilder.append("DataRegistro DATETIME NOT NULL DEFAULT(getDate()) ");
+        sqlBuilder.append("_idPosologia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
+        sqlBuilder.append("FotoPosologia VARCHAR(150), ");
+        sqlBuilder.append("DiasTratamento VARCHAR(3), ");
+        sqlBuilder.append("VezesDia VARCHAR(3), ");
+        sqlBuilder.append("Horario VARCHAR(1), ");
+        sqlBuilder.append("Dosagem VARCHAR(10), ");
+        sqlBuilder.append("Tempo VARCHAR(1), ");
+        sqlBuilder.append("Tipo VARCHAR(1) ");
         sqlBuilder.append(");");
 
         return sqlBuilder.toString();

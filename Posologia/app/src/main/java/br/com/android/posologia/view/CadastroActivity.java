@@ -1,21 +1,35 @@
 package br.com.android.posologia.view;
 
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import br.com.android.posologia.R;
-import br.com.android.posologia.app.MessageBox;
-import br.com.android.posologia.database.DataBase;
+import br.com.android.posologia.database.WebService;
+import br.com.android.posologia.dominio.entidades.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
+    private EditText edtNome;
+    private EditText edtEmail;
+    private EditText edtSenha;
+    private Button btnCadastrar;
 
-   /*
+    WebService service;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,101 +37,24 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         edtNome = (EditText) findViewById(R.id.edtNome);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtSenha = (EditText) findViewById(R.id.edtSenha);
+        btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
 
-        Bundle bundle = getIntent().getExtras();
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                service = new WebService();
+                usuario = new Usuario();
 
-        // Se recebeu parametros da lista, modo edição.
-        if ((bundle != null) && (bundle.containsKey(PessoaFragment.PARAM_PESSOA))) {
-            pessoa = ((Pessoa) bundle.getSerializable(PessoaFragment.PARAM_PESSOA));
-            preencheDados();
-        } else {
-            pessoa = new Pessoa();
-        }
+                usuario.setNome(edtNome.getText().toString());
+                usuario.setEmail(edtEmail.getText().toString());
+                usuario.setSenha(edtSenha.getText().toString());
 
-        try {
-            dataBase = new DataBase(this);
-            conn = dataBase.getWritableDatabase();
-
-            // Deixa o objeto de consulta pronto.
-            repPessoa = new RepPessoa(conn);
-        } catch (SQLException e) {
-            MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_conexao) + ": " + e.getMessage());
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (conn != null) {
-            conn.close();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_posologia_new, menu);
-
-        // Se estiver editando apresenta opção Excluir.
-        if (pessoa.getId() != 0) {
-            menu.getItem(1).setVisible(true);
-        }
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.mn_salvar:
-                if (salvar()) {
-                    finish();
-                }
-                break;
-            case R.id.mn_excluir:
-                if (excluir()) {
-                    finish();
-                }
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void preencheDados() {
-        edtNome.setText(pessoa.getNome());
-    }
-
-    private boolean salvar() {
-        try {
-            pessoa.setNome(edtNome.getText().toString());
-
-            if (pessoa.getNome().isEmpty()) {
-                MessageBox.showInfo(this, getResources().getString(R.string.lbl_atencao), getResources().getString(R.string.lbl_nome_requerido));
-                return false;
-            } else {
-                if (pessoa.getId() == 0) {
-                    repPessoa.inserirPessoa(pessoa);
-                } else {
-                    repPessoa.alterarPessoa(pessoa);
-                }
-
-                return true;
+                service.cadastrar(usuario);
+                Toast.makeText(CadastroActivity.this, "Cadastrado com Sucesso", Toast.LENGTH_LONG).show();
+                finish();
             }
-        } catch (Exception e) {
-            MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_salvar) + ": " + e.getMessage());
-            return false;
-        }
+        });
     }
-
-    private boolean excluir() {
-        try {
-            repPessoa.excluirPessoa(pessoa.getId());
-            return true;
-        } catch (Exception e) {
-            MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_excluir) + ": " + e.getMessage());
-            return false;
-        }
-    }*/
 }

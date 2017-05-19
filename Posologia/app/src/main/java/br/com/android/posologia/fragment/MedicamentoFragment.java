@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class MedicamentoFragment extends Fragment {
         lvMedicamento = (ListView) view.findViewById(R.id.lstMedicamentos);
         edtFiltro = (EditText) view.findViewById(R.id.edtFiltro);
 
+
         try {
             repMedicamento = new RepMedicamento(getActivity());
             adapter = repMedicamento.listarMedicamentos(getActivity());
@@ -62,7 +64,7 @@ public class MedicamentoFragment extends Fragment {
             edtFiltro.addTextChangedListener(filtraDados);
 
         } catch (SQLException e) {
-            Toast.makeText(getActivity(), "Error ao Listar", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Error do SQL" + e, Toast.LENGTH_LONG).show();
 
         }
         clickLista();
@@ -90,6 +92,8 @@ public class MedicamentoFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), MedicamentoNewActivity.class);
                 intent.putExtra(PARAM_MEDICAMENTO, medicamento);
                 startActivity(intent);
+
+
             }
         });
     }

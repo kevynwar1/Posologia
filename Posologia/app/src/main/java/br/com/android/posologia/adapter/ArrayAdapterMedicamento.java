@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import br.com.android.posologia.R;
 import br.com.android.posologia.dominio.entidades.Medicamento;
 import br.com.android.posologia.view.MainActivity;
@@ -21,8 +23,8 @@ import br.com.android.posologia.view.MedicamentoNewActivity;
  */
 
 public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
+    int resource;
 
-    private int resource;
     private LayoutInflater inflater;
     private Context context;
     private Bitmap foto;
@@ -33,6 +35,8 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
         this.resource = resource;
         this.context = context;
     }
+
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -60,13 +64,13 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
         Medicamento medicamento = getItem(position);
 
         viewHolder.txtNome.setText(medicamento.getNome());
-        viewHolder.txtDosagem.setText(medicamento.getDosagem());
-     if(medicamento.getFoto() != null) {
-         foto = BitmapFactory.decodeFile(medicamento.getFoto());
-         viewHolder.ivItem.setImageBitmap(foto);
-     }else{
-         viewHolder.ivItem.setImageResource(R.drawable.picture_no_image);
-     }
+        viewHolder.txtDosagem.setText(medicamento.getMiligrama() + "mg");
+        if (medicamento.getFoto() != null) {
+            foto = BitmapFactory.decodeFile(medicamento.getFoto());
+            viewHolder.ivItem.setImageBitmap(foto);
+        } else {
+            viewHolder.ivItem.setImageResource(R.drawable.picture_no_image);
+        }
 
 
         return view;
