@@ -20,6 +20,7 @@ public class Posologia implements Serializable {
     public static String DOSAGEM = "Dosagem";
     public static String TEMPO = "Tempo";
     public static String TIPO = "Tipo";
+    public static String MEDICAMENTOID = "MedicamentoID";
 
 
     private long idPosologia;
@@ -29,7 +30,12 @@ public class Posologia implements Serializable {
     private String horario;
     private String dosagem;
     private String tempo;
-    private String Tipo;
+    private String tipo;
+    private Medicamento medicamentoID;
+
+    public Posologia() {
+        medicamentoID = new Medicamento();
+    }
 
 
     public long getIdPosologia() {
@@ -89,15 +95,23 @@ public class Posologia implements Serializable {
     }
 
     public String getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(String tipo) {
-        Tipo = tipo;
+        this.tipo = tipo;
+    }
+
+    public Medicamento getMedicamentoID() {
+        return medicamentoID;
+    }
+
+    public void setMedicamentoID(Medicamento medicamentoID) {
+        this.medicamentoID = medicamentoID;
     }
 
     @Override
     public String toString() {
-        return this.diasTratamento + " " + this.vezesDia + " " + this.horario;
+        return this.diasTratamento + " " + this.vezesDia + " " + this.horario + " " + this.medicamentoID;
     }
 }

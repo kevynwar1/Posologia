@@ -120,4 +120,11 @@
         android:layout_marginBottom="8dp"
         android:layout_toEndOf="@+id/textInputLayout4" />
 
+    <Spinner
+        android:id="@+id/spNomeMedicamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btExcluirPosologia"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

@@ -103,7 +103,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         if (medicamento.getFoto() != null) {
             carregaImagem(medicamento.getFoto());
         } else {
-            ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
+            ivMedicamento.setImageResource(R.drawable.picture_no_image);
         }
     }
 

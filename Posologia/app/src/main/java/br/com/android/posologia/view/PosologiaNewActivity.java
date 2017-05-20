@@ -16,10 +16,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.app.MessageBox;
 import br.com.android.posologia.dominio.RepPosologia;
+import br.com.android.posologia.dominio.entidades.Medicamento;
 import br.com.android.posologia.dominio.entidades.Posologia;
 import br.com.android.posologia.fragment.PosologiaFragment;
 
@@ -32,6 +34,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
     private Spinner spHora;
     private Spinner spTempo;
     private Spinner spTipo;
+    private Spinner spNomeMedicamento;
 
     private Button btSalvarPosologa;
     private Button btExcluirPosologia;
@@ -42,7 +45,9 @@ public class PosologiaNewActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterHorario;
     ArrayAdapter<String> adapterTempo;
     ArrayAdapter<String> adapterTipo;
+    ArrayAdapter adapter;
     private String pathImg;
+    ArrayList<Posologia> list;
     Bitmap imagem;
 
 
@@ -60,6 +65,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
         spHora = (Spinner) findViewById(R.id.spHora);
         spTempo = (Spinner) findViewById(R.id.spTempo);
         spTipo = (Spinner) findViewById(R.id.spDosagem);
+        spNomeMedicamento = (Spinner) findViewById(R.id.spNomeMedicamento);
 
         btSalvarPosologa = (Button) findViewById(R.id.btSalvarPosologia);
         btExcluirPosologia = (Button) findViewById(R.id.btExcluirPosologia);
@@ -87,6 +93,14 @@ public class PosologiaNewActivity extends AppCompatActivity {
         spTipo.setAdapter(adapterTipo);
         adapterTipo.add("Gotas");
         adapterTipo.add("Comprimidos");
+        adapterTipo.add("Milimetro");
+
+        //SPINNER NOME DO MEDICAMENTO
+
+
+        list = repPosologia.listaNomeMedicamento();
+        adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
+        spNomeMedicamento.setAdapter(adapter);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -121,6 +135,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
         ArrayAdapter adapterTipo2 = (ArrayAdapter) spTipo.getAdapter();
         spTipo.setSelection(adapterTipo2.getPosition(posologia.getTipo()));
+
         if (posologia.getFotoPosologia() != null) {
             carregaImagem(posologia.getFotoPosologia());
         } else {
@@ -133,25 +148,26 @@ public class PosologiaNewActivity extends AppCompatActivity {
         btSalvarPosologa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    posologia.setDiasTratamento(edtDiasMedicamento.getText().toString());
-                    posologia.setVezesDia(edtVezesDia.getText().toString());
-                    posologia.setDosagem(edtDosagem.getText().toString());
-                    posologia.setHorario(spHora.getSelectedItem().toString());
-                    posologia.setTempo(spTempo.getSelectedItem().toString());
-                    posologia.setTipo(spTipo.getSelectedItem().toString());
-                    posologia.setFotoPosologia(pathImg);
 
-                    if (posologia.getIdPosologia() == 0) {
-                        repPosologia.inserirPosologia(posologia);
-                        finish();
-                    } else {
-                        repPosologia.alterarPosologia(posologia);
-                        finish();
-                    }
-                } catch (Exception e) {
-                    MessageBox.showAlert(PosologiaNewActivity.this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_salvar) + ": " + e.getMessage());
+
+                posologia.setDiasTratamento(edtDiasMedicamento.getText().toString());
+                posologia.setVezesDia(edtVezesDia.getText().toString());
+                posologia.setDosagem(edtDosagem.getText().toString());
+                posologia.setHorario(spHora.getSelectedItem().toString());
+                posologia.setTempo(spTempo.getSelectedItem().toString());
+                posologia.setTipo(spTipo.getSelectedItem().toString());
+                //posologia.getMedicamentoID().setNome(spNomeMedicamento.getSelectedItem().toString());
+                posologia.setFotoPosologia(pathImg);
+                validandoCampos();
+
+                if (posologia.getIdPosologia() == 0) {
+                    repPosologia.inserirPosologia(posologia);
+                    finish();
+                } else {
+                    repPosologia.alterarPosologia(posologia);
+                    finish();
                 }
+
             }
         });
     }
@@ -185,7 +201,6 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Uri imageSelecionada = data.getData();
 
@@ -198,7 +213,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
             ivPosologia.setImageBitmap(imagem);
 
             cursor.close();
-        }else{
+        } else {
             ivPosologia.setImageResource(android.R.drawable.ic_menu_camera);
         }
 
@@ -212,4 +227,15 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
 
     }
+
+    public void validandoCampos() {
+        if (edtDiasMedicamento.getText().toString().length() == 0) {
+            edtDiasMedicamento.setError("Digite o numero de Dias");
+        } else if (edtDosagem.getText().toString().length() == 0) {
+            edtDosagem.setError("Digite a Dosagem do Medicamento");
+        } else if (edtVezesDia.getText().toString().length() == 0) {
+            edtVezesDia.setError("Digite o numero de Vezes ao Dia");
+        }
+    }
 }
+

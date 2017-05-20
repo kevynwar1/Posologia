@@ -52,11 +52,9 @@ public class CadastroActivity extends AppCompatActivity {
                 usuario.setSenha(edtSenha.getText().toString());
 
                 service.cadastrar(usuario);
-<<<<<<< HEAD
+
                 Toast.makeText(CadastroActivity.this, "Cadastrado com Sucesso", Toast.LENGTH_LONG).show();
                 finish();
-=======
->>>>>>> e53f659aa6f3076c9c8293bb9e8b03063c65a516
             }
         });
     }

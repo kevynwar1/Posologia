@@ -22,6 +22,9 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(ScriptSQL.getDropTableMedicamento());
+        db.execSQL(ScriptSQL.getDropTablePosologia());
 
+        onCreate(db);
     }
 }
