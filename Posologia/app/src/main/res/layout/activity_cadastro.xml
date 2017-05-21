@@ -1,63 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pessoa_new"
-    android:background="#FFFFFF"
+    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.android.posologia.view.CadastroActivity">
 
-    <!-- LinearLayout
-        android:id="@+id/lnlNome"
-        style="@style/LnlCampoForm" -->
-
-    <TextView
-        android:id="@+id/lblNome"
-        style="@style/TxtForm"
-        android:text="@string/lbl_nome" />
-
-    <EditText
-        android:id="@+id/edtNome"
-        style="@style/EdtForm" />
-
-    <!-- /LinearLayout -->
-
-    <TextView
-        android:id="@+id/lblEmail"
+    <ImageView
+        android:id="@+id/topImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lbl_email" />
+        android:layout_height="200dp"
+        android:layout_above="@+id/edtNome"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="129dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/header" />
 
     <EditText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/edtSenha"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="0dp"
         android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/lblSenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lbl_senha" />
+        android:hint="@string/lbl_email"
+        android:background="#FFF"
+        android:padding="15dp"
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/edtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnCadastrar"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="46dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:hint="@string/lbl_senha"
+        android:background="#FFF"
+        android:padding="15dp"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/btnCadastrar"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+        android:layout_marginLeft="17dp"
         android:layout_height="wrap_content"
         android:text="@string/btn_cadastrar"
+        android:background="@drawable/button"
+        android:textAllCaps="false"
+        android:textSize="16dp"
+        android:textColor="#008CB3"
+        android:layout_above="@+id/btnConta"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/edtNome"
+        style="@style/EdtForm"
+        android:layout_above="@+id/edtEmail"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="0dp"
+        android:hint="@string/lbl_nome"
+        android:background="#FFF"
+        android:padding="15dp"
         android:textColor="#FFFFFF" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/logotipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edtNome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="63dp"
+        app:srcCompat="@drawable/medicamentos_branco_transparente" />
+
+    <Button
+        android:id="@+id/btnConta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btnCadastrar"
+        android:textAllCaps="false"
+        android:textSize="16dp"
+        android:background="#0088AD"
+        android:textColor="#FFFFFF"
+        android:text="@string/btn_tenhoconta"
+        android:layout_alignEnd="@+id/btnCadastrar" />
+
+</RelativeLayout>

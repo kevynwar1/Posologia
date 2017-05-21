@@ -122,6 +122,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">textPersonName|textCapCharacters</item>
+        <item name="colorControlNormal">#0099FF</item>
+        <item name="colorControlActivated">#0099FF</item>
+        <item name="colorControlHighlight">#0099FF</item>
     </style>
 
     <!-- Style for LnlItemLista -->
