@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txtCor"
+    <ImageView
+        android:id="@+id/ivPosologia"
         style="@style/IconItemLista" />
 
 
     <TextView
-        android:id="@+id/txtNome"
-        style="@style/ItemLista"
-        android:layout_above="@+id/txtDataRegistro"
-        android:layout_toEndOf="@+id/txtCor" />
+        android:id="@+id/txtDiasTratamento"
+
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtVezesDia"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/ivPosologia" />
 
     <TextView
-        android:id="@+id/txtDataRegistro"
+        android:id="@+id/txtVezesDia"
         style="@style/ItemLista"
-        android:layout_alignBottom="@+id/txtCor"
-        android:layout_toEndOf="@+id/txtCor" />
+        android:layout_alignBottom="@+id/ivPosologia"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/ivPosologia" />
 
     <TextView
         android:id="@+id/txtHorario"
-        style="@style/ItemLista"
-        android:layout_below="@+id/txtNome"
-        android:layout_toEndOf="@+id/txtNome" />
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDiasTratamento"
+        android:layout_toEndOf="@+id/txtVezesDia" />
 
 
 </RelativeLayout>

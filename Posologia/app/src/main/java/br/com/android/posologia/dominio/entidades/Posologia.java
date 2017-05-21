@@ -9,76 +9,109 @@ import java.util.Date;
 
 public class Posologia implements Serializable {
 
+
     public static String TABELA = "Posologia";
 
-    public static String ID = "_id";
-    public static String PESSOAID = "PessoaId";
-    public static String MEDICAMENTOID = "MedicamentoId";
+    public static String IDPOSOLOGIA = "_idPosologia";
+    public static String FOTOPOSOLOGIA = "FotoPosologia";
+    public static String DIASTRATAMENTO = "DiasTratamento";
+    public static String VEZESDIA = "VezesDia";
     public static String HORARIO = "Horario";
-    public static String OBSERVACAO = "Observacao";
-    public static String DATAREGISTRO = "DataRegistro";
+    public static String DOSAGEM = "Dosagem";
+    public static String TEMPO = "Tempo";
+    public static String TIPO = "Tipo";
+    public static String MEDICAMENTOID = "MedicamentoID";
 
-    private long Id;
-    private long PessoaId;
-    private long MedicamentoId;
-    private Date Horario;
-    private String Observacao;
-    private Date DataRegistro;
+
+    private long idPosologia;
+    private String fotoPosologia;
+    private String diasTratamento;
+    private String vezesDia;
+    private String horario;
+    private String dosagem;
+    private String tempo;
+    private String tipo;
+    private Medicamento medicamentoID;
 
     public Posologia() {
-        this.DataRegistro = new Date();
+        medicamentoID = new Medicamento();
     }
 
-    public long getId() {
-        return Id;
+
+    public long getIdPosologia() {
+        return idPosologia;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setIdPosologia(long idPosologia) {
+        this.idPosologia = idPosologia;
     }
 
-    public long getPessoaId() {
-        return PessoaId;
+    public String getFotoPosologia() {
+        return fotoPosologia;
     }
 
-    public void setPessoaId(long pessoaId) {
-        PessoaId = pessoaId;
+    public void setFotoPosologia(String fotoPosologia) {
+        this.fotoPosologia = fotoPosologia;
     }
 
-    public long getMedicamentoId() {
-        return MedicamentoId;
+    public String getDiasTratamento() {
+        return diasTratamento;
     }
 
-    public void setMedicamentoId(long medicamentoId) {
-        MedicamentoId = medicamentoId;
+    public void setDiasTratamento(String diasTratamento) {
+        this.diasTratamento = diasTratamento;
     }
 
-    public Date getHorario() {
-        return Horario;
+    public String getVezesDia() {
+        return vezesDia;
     }
 
-    public void setHorario(Date horario) {
-        Horario = horario;
+    public void setVezesDia(String vezesDia) {
+        this.vezesDia = vezesDia;
     }
 
-    public String getObservacao() {
-        return Observacao;
+    public String getHorario() {
+        return horario;
     }
 
-    public void setObservacao(String observacao) {
-        Observacao = observacao;
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 
-    public Date getDataRegistro() {
-        return DataRegistro;
+    public String getDosagem() {
+        return dosagem;
     }
 
-    public void setDataRegistro(Date dataRegistro) {
-        DataRegistro = dataRegistro;
+    public void setDosagem(String dosagem) {
+        this.dosagem = dosagem;
+    }
+
+    public String getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Medicamento getMedicamentoID() {
+        return medicamentoID;
+    }
+
+    public void setMedicamentoID(Medicamento medicamentoID) {
+        this.medicamentoID = medicamentoID;
     }
 
     @Override
     public String toString() {
-        return this.Horario + " " + this.Observacao;
+        return this.diasTratamento + " " + this.vezesDia + " " + this.horario + " " + this.medicamentoID;
     }
 }

@@ -1,73 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp">
 
-    <TextView
-        android:id="@+id/txtNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:text="@string/lbl_nome"
+    <ImageView
+        android:id="@+id/ivPosologia"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp" />
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
-    <Spinner
-        android:id="@+id/spNome"
+    <android.support.design.widget.TextInputLayout
+
+        android:id="@+id/LayoutTratamento"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivPosologia">
+
+        <EditText
+            android:id="@+id/edtDiasMedicamento"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ivPosologia"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/tempo_de_medicacao"
+            android:inputType="number" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+
+        android:id="@+id/LayoutVezes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtNome" />
+        android:layout_below="@+id/textInputLayout4">
 
-    <TextView
-        android:id="@+id/txtMedicamento"
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edtVezesDia"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/LayoutTratamento"
+            android:ems="10"
+            android:hint="@string/vezes_ao_dia"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout4"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtNome"
-        android:layout_below="@+id/spNome"
-        android:layout_marginTop="22dp"
-        android:text="@string/lbl_medicamento" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/LayoutTratamento">
+
+        <EditText
+            android:id="@+id/edtDosagem"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:hint="@string/dosagem"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
 
     <Spinner
-        android:id="@+id/spMedicamento"
+        android:id="@+id/spHora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtMedicamento" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/LayoutVezes"
+        android:layout_marginEnd="6dp" />
 
-    <TextView
-        android:id="@+id/txtHorario"
+
+    <Button
+        android:id="@+id/btSalvarPosologia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtMedicamento"
-        android:layout_below="@+id/spMedicamento"
-        android:layout_marginTop="27dp"
-        android:text="@string/lbl_horario" />
+        android:layout_alignEnd="@+id/spHora"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spHora"
+        android:layout_marginTop="39dp"
+        android:text="@string/salvar" />
+
+    <Button
+        android:id="@+id/btExcluirPosologia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btSalvarPosologia"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btSalvarPosologia"
+        android:text="@string/excluir"
+        android:visibility="invisible" />
 
     <Spinner
-        android:id="@+id/spHorario"
+        android:id="@+id/spTempo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtHorario" />
+        android:layout_above="@+id/textInputLayout4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="6dp"
+        android:layout_toEndOf="@+id/LayoutTratamento"
+        android:popupBackground="@android:color/holo_blue_bright" />
 
-    <TextView
-        android:id="@+id/txtObservacoes"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spDosagem"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtHorario"
-        android:layout_below="@+id/spHorario"
-        android:layout_marginTop="28dp"
-        android:text="@string/lbl_Observacao" />
+        android:layout_above="@+id/LayoutVezes"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@+id/textInputLayout4" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spNomeMedicamento"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtObservacoes"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/btExcluirPosologia"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

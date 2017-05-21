@@ -35,7 +35,7 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-
+///sd
         edtNome = (EditText) findViewById(R.id.edtNome);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
@@ -52,6 +52,9 @@ public class CadastroActivity extends AppCompatActivity {
                 usuario.setSenha(edtSenha.getText().toString());
 
                 service.cadastrar(usuario);
+
+                Toast.makeText(CadastroActivity.this, "Cadastrado com Sucesso", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
     }
