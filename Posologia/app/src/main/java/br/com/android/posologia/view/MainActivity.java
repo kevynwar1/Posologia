@@ -1,6 +1,7 @@
 package br.com.android.posologia.view;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -23,15 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    int orientation;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar3);
-        toolbar.setTitle("Posologia");
         setSupportActionBar(toolbar);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -61,11 +61,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        orientation = this.getResources().getConfiguration().orientation;
+        if(orientation== Configuration.ORIENTATION_PORTRAIT){
+            //code for portrait mode
+            toolbar.setTitle("Posologia");
+        }
+        else{
+            //code for landscape mode
+            toolbar.setTitle("Posologia - Controle seus Medicamentos");
+        }
+
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-
-
 
         return true;
     }
