@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     int orientation;
-
+    boolean isTablet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (SQLException e) {
             MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_criar_base) + ": " + e.getMessage());
         }*/
+
+        isTablet = getResources().getBoolean(R.bool.isTablet);
     }
 
     @Override
@@ -74,10 +76,16 @@ public class MainActivity extends AppCompatActivity {
         if(orientation== Configuration.ORIENTATION_PORTRAIT){
             //code for portrait mode
             toolbar.setTitle("Posologia");
+            if(isTablet){
+                toolbar.setTitle("Posologia - TABLET");
+            }
         }
         else{
             //code for landscape mode
             toolbar.setTitle("Posologia - Controle seus Medicamentos");
+            if(isTablet){
+                toolbar.setTitle("Posologia - Controle seus Medicamentos - TABLET");
+            }
         }
 
     }
