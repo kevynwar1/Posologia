@@ -26,12 +26,14 @@
         android:layout_above="@+id/edtSenha"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="0dp"
-        android:ems="10"
-        android:hint="@string/lbl_email"
         android:background="#FFF"
-        android:padding="15dp"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="@string/lbl_email"
         android:inputType="textEmailAddress"
-        android:textColor="#FFFFFF" />
+        android:padding="15dp"
+        android:textColor="#000"
+        android:textSize="16dp" />
 
     <EditText
         android:id="@+id/edtSenha"
@@ -40,12 +42,14 @@
         android:layout_above="@+id/btnCadastrar"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="46dp"
-        android:ems="10"
-        android:hint="@string/lbl_senha"
         android:background="#FFF"
-        android:padding="15dp"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="@string/lbl_senha"
         android:inputType="textPassword"
-        android:textColor="#FFFFFF" />
+        android:padding="15dp"
+        android:textColor="#000"
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/btnCadastrar"
@@ -66,10 +70,12 @@
         android:layout_above="@+id/edtEmail"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="0dp"
-        android:hint="@string/lbl_nome"
         android:background="#FFF"
+        android:fontFamily="sans-serif"
+        android:hint="@string/lbl_nome"
         android:padding="15dp"
-        android:textColor="#FFFFFF" />
+        android:textColor="#000000"
+        android:textSize="16dp" />
 
     <ImageView
         android:id="@+id/logotipo"

@@ -1,8 +1,14 @@
 package br.com.android.posologia.view;
 
-/**
- * Created by kevyn on 08/05/2017.
- */
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class LoginActivity {
+import br.com.android.posologia.R;
+
+public class LoginActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+    }
 }
