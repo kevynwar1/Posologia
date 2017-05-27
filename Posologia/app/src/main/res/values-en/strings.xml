@@ -13,10 +13,12 @@
     <string name="app_title_posologia_new">Register of Dosage</string>
 
     <string name="btn_cadastrar">Register</string>
+    <string name="btn_entrar">Sign in</string>
     <string name="btn_medicamentos">Medicament</string>
     <string name="btn_pessoas">People</string>
     <string name="btn_posologias">Posology</string>
     <string name="btn_tenhoconta">I have an account</string>
+    <string name="btn_queroconta">I want an account</string>
 
     <string name="hint_filtro">Notify the filter</string>
 
