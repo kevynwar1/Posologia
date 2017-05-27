@@ -10,12 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.adapter.ViewPagerAdapter;
-import br.com.android.posologia.dominio.entidades.Medicamento;
 import br.com.android.posologia.fragment.MedicamentoFragment;
 import br.com.android.posologia.fragment.PosologiaFragment;
 
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 NewMedicamentos();
                 break;
             case R.id.action_posologia:
-                Posologia();
+                NewPosologia();
                 break;
 
         }
@@ -136,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void Posologia() {
+    private void NewPosologia() {
         Intent intent = new Intent(this, PosologiaNewActivity.class);
         startActivity(intent);
     }

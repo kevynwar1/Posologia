@@ -1,10 +1,7 @@
 package br.com.android.posologia.view;
 
 import android.content.Intent;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,96 +11,64 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.File;
 
 import br.com.android.posologia.R;
-import br.com.android.posologia.app.MessageBox;
-import br.com.android.posologia.database.DataBase;
-import br.com.android.posologia.dominio.RepMedicamento;
-import br.com.android.posologia.dominio.entidades.Medicamento;
+import br.com.android.posologia.dao.RepMedicamento;
+import br.com.android.posologia.helper.MedicamentoHelper;
+import br.com.android.posologia.model.Medicamento;
 import br.com.android.posologia.fragment.MedicamentoFragment;
+
 
 public class MedicamentoNewActivity extends AppCompatActivity {
 
-    private EditText edtNome;
-    private EditText edtMiligrama;
-    private EditText edtObservacoes;
-    private Spinner spMedicamento;
-    private ImageView ivMedicamento;
     private Button btSalvarMedicamento;
     private Button btExcluirMedicamento;
 
-
-    private RepMedicamento repMedicamento;
     private Medicamento medicamento;
-    ArrayAdapter<String> adapter;
-    String caminhoArquivo;
+    private RepMedicamento repMedicamento;
 
-    // private String[] Tipos = new String[]{"Antibióticos, AntiInflamatorio, Analgésico, Outros"};
+    MedicamentoHelper medHelper;
+    private String caminhoArquivo;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicamento_new);
 
-        edtNome = (EditText) findViewById(R.id.edtNomeMedicamento);
-        edtMiligrama = (EditText) findViewById(R.id.edtMiligrama);
-        edtObservacoes = (EditText) findViewById(R.id.edtObservacoes);
-
-        spMedicamento = (Spinner) findViewById(R.id.spTipo);
-        ivMedicamento = (ImageView) findViewById(R.id.ivMedicamento);
+        medHelper = new MedicamentoHelper(this);
 
         btSalvarMedicamento = (Button) findViewById(R.id.btSalvarMedicamento);
         btExcluirMedicamento = (Button) findViewById(R.id.btExcluirMedicamento);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spMedicamento.setAdapter(adapter);
-        adapter.add("Antibioticos");
-        adapter.add("AntiInflamatorio");
-        adapter.add("Analgésico");
-        adapter.add("Outros");
 
+        //SPINNER TIPO DE MEDICAMENTO
+        medHelper.spinnerTipoMedicamento(this);
 
-        Bundle bundle = getIntent().getExtras();
-
-        // Se recebeu parametros da lista, modo edição.
-        if ((bundle != null) && (bundle.containsKey(MedicamentoFragment.PARAM_MEDICAMENTO))) {
-            medicamento = ((Medicamento) bundle.getSerializable(MedicamentoFragment.PARAM_MEDICAMENTO));
-            preencheDados();
-            btSalvarMedicamento.setText("Alterar");
-            btExcluirMedicamento.setVisibility(View.VISIBLE);
-        } else {
-            medicamento = new Medicamento();
-        }
+        bundle = getIntent().getExtras();
+        receberDados();
 
 
         // Deixa o objeto de consulta pronto.
         repMedicamento = new RepMedicamento(this);
 
-        clickImagem();
+
         clickSalvar();
         clickExcluir();
     }
 
-
-    private void preencheDados() {
-        edtNome.setText(medicamento.getNome());
-        edtMiligrama.setText(medicamento.getMiligrama());
-        edtObservacoes.setText(medicamento.getObservacao());
-
-        ArrayAdapter adapterMedicamento = (ArrayAdapter) spMedicamento.getAdapter();
-        spMedicamento.setSelection(adapterMedicamento.getPosition(medicamento.getTipo()));
-        if (medicamento.getFoto() != null) {
-            carregaImagem(medicamento.getFoto());
+    private void receberDados() {
+        if ((bundle != null) && (bundle.containsKey(MedicamentoFragment.PARAM_MEDICAMENTO))) {
+            Medicamento medicamentoalter = ((Medicamento) bundle.getSerializable(MedicamentoFragment.PARAM_MEDICAMENTO));
+            medHelper.preencheForm(medicamentoalter);
+            btSalvarMedicamento.setText("Alterar");
+            btExcluirMedicamento.setVisibility(View.VISIBLE);
         } else {
-            ivMedicamento.setImageResource(R.drawable.picture_no_image);
+            medicamento = new Medicamento();
         }
     }
 
@@ -113,11 +78,9 @@ public class MedicamentoNewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    medicamento.setNome(edtNome.getText().toString());
-                    medicamento.setMiligrama(edtMiligrama.getText().toString());
-                    medicamento.setObservacao(edtObservacoes.getText().toString());
-                    medicamento.setTipo(spMedicamento.getSelectedItem().toString());
-                    medicamento.setFoto(caminhoArquivo);
+                    medicamento = medHelper.getMedicamento();
+                    medHelper.salvaImagem(caminhoArquivo);
+
                     if (medicamento.getId() == 0) {
                         repMedicamento.inserirMedicamento(medicamento);
                         finish();
@@ -126,7 +89,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
                         finish();
                     }
                 } catch (Exception e) {
-                    MessageBox.showAlert(MedicamentoNewActivity.this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_salvar) + ": " + e.getMessage());
+                    Toast.makeText(MedicamentoNewActivity.this, "Error ao Salvar Dados", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -141,58 +104,56 @@ public class MedicamentoNewActivity extends AppCompatActivity {
                     finish();
 
                 } catch (Exception e) {
-                    MessageBox.showAlert(MedicamentoNewActivity.this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_excluir) + ": " + e.getMessage());
+                    Toast.makeText(MedicamentoNewActivity.this, "Error ao Excluir Dados", Toast.LENGTH_LONG).show();
 
                 }
             }
         });
     }
 
-    private void clickImagem() {
-        ivMedicamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_medicamento, menu);
 
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//gravar no SD... currentTimeMillis = tempo em milisegundos em que esta disparando o evento
-                caminhoArquivo = Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
-
-                //criando de fato o caminho do arquivo
-                File arquivo = new File(caminhoArquivo);
-// Uri.. explicando para o android onde fica o local da imagem
-                Uri localImagem = Uri.fromFile(arquivo);
-//salvar copia da imagem pelo Extra_output
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, localImagem);
-                // ESPERANDO RSULTADO VAI QUE ELE CLICOU SEM QUERER ENTAO NECESSIDADE DE FORRESULT
-                startActivityForResult(intent, 1);
-
-            }
-        });
-
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_foto:
+                capturaFoto();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            carregaImagem(caminhoArquivo);
-        } else {
-            ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
+            medHelper.carregaImagem(caminhoArquivo);
         }
     }
 
 
-    public Bitmap carregaImagem(String caminhoArquivo) {
-        //salvando caminho da foto no banco de Dados
-        medicamento.setFoto(caminhoArquivo);
-        //carregando imagem no ImageView so que muito grande
+    private void capturaFoto() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//gravar no SD... currentTimeMillis = tempo em milisegundos em que esta disparando o evento
+        caminhoArquivo = Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
 
-        Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
-        // aqui da uma reduzida
-        // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
-        ivMedicamento.setImageBitmap(imagem);
-        return imagem;
+        //criando de fato o caminho do arquivo
+        File arquivo = new File(caminhoArquivo);
+// Uri.. explicando para o android onde fica o local da imagem
+        Uri localImagem = Uri.fromFile(arquivo);
+//salvar copia da imagem pelo Extra_output
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, localImagem);
+        startActivityForResult(intent, 1);
     }
 
 

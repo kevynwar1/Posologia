@@ -138,8 +138,8 @@
 
     <!-- Style for IconItemLista -->
     <style name="IconItemLista">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">90dp</item>
     </style>
 
     <!-- Style for ItemLista -->

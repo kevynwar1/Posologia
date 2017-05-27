@@ -13,8 +13,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import br.com.android.posologia.R;
-import br.com.android.posologia.dominio.RepPosologia;
-import br.com.android.posologia.dominio.entidades.Posologia;
+import br.com.android.posologia.dao.RepPosologia;
+import br.com.android.posologia.model.Posologia;
 import br.com.android.posologia.util.FiltraDados;
 import br.com.android.posologia.view.PosologiaNewActivity;
 

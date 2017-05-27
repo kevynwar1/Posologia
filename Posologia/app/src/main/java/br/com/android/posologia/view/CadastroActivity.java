@@ -1,9 +1,6 @@
 package br.com.android.posologia.view;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import br.com.android.posologia.R;
-import br.com.android.posologia.database.WebService;
-import br.com.android.posologia.dominio.entidades.Usuario;
+import br.com.android.posologia.dao.WebService;
+import br.com.android.posologia.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText edtNome;

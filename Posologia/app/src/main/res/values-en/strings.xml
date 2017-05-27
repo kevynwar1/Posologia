@@ -54,5 +54,6 @@
     <string name="observacoes">Observações</string>
     <string name="salvar_medicamento">Salvar</string>
     <string name="excluir_medicamento">Excluir</string>
+    <string name="lbl_Foto">Tirar Foto</string>
 
 </resources>

@@ -8,157 +8,85 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 
-import java.lang.reflect.Array;
+import android.widget.Toast;
+
+
 import java.util.ArrayList;
 
 import br.com.android.posologia.R;
-import br.com.android.posologia.app.MessageBox;
-import br.com.android.posologia.dominio.RepPosologia;
-import br.com.android.posologia.dominio.entidades.Medicamento;
-import br.com.android.posologia.dominio.entidades.Posologia;
+
+import br.com.android.posologia.dao.RepMedicamento;
+import br.com.android.posologia.dao.RepPosologia;
+import br.com.android.posologia.helper.PosologiaHelper;
+import br.com.android.posologia.model.Medicamento;
+import br.com.android.posologia.model.Posologia;
 import br.com.android.posologia.fragment.PosologiaFragment;
 
-public class PosologiaNewActivity extends AppCompatActivity {
-    private ImageView ivPosologia;
-    private EditText edtDiasMedicamento;
-    private EditText edtVezesDia;
-    private EditText edtDosagem;
+import static br.com.android.posologia.R.id.ivPosologia;
 
-    private Spinner spHora;
-    private Spinner spTempo;
-    private Spinner spTipo;
-    private Spinner spNomeMedicamento;
+public class PosologiaNewActivity extends AppCompatActivity {
 
     private Button btSalvarPosologa;
     private Button btExcluirPosologia;
 
     private Posologia posologia;
     private RepPosologia repPosologia;
-
-    ArrayAdapter<String> adapterHorario;
-    ArrayAdapter<String> adapterTempo;
-    ArrayAdapter<String> adapterTipo;
-    ArrayAdapter adapter;
-    private String pathImg;
-    ArrayList<Posologia> list;
-    Bitmap imagem;
-
+    private RepMedicamento repMedicamento;
+    ArrayList<Medicamento> list;
+    Bundle bundle;
+    PosologiaHelper posHelper;
+    String pathImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posologia_new);
 
-        ivPosologia = (ImageView) findViewById(R.id.ivPosologia);
-
-        edtDiasMedicamento = (EditText) findViewById(R.id.edtDiasMedicamento);
-        edtVezesDia = (EditText) findViewById(R.id.edtVezesDia);
-        edtDosagem = (EditText) findViewById(R.id.edtDosagem);
-
-        spHora = (Spinner) findViewById(R.id.spHora);
-        spTempo = (Spinner) findViewById(R.id.spTempo);
-        spTipo = (Spinner) findViewById(R.id.spDosagem);
-        spNomeMedicamento = (Spinner) findViewById(R.id.spNomeMedicamento);
+        posHelper = new PosologiaHelper(this);
 
         btSalvarPosologa = (Button) findViewById(R.id.btSalvarPosologia);
         btExcluirPosologia = (Button) findViewById(R.id.btExcluirPosologia);
 
+        posHelper.spinnerDosagem(this);
+        posHelper.spinnerHorario(this);
+        posHelper.spinnerTempo(this);
+
+        bundle = getIntent().getExtras();
+        receberDados();
+
         repPosologia = new RepPosologia(this);
+        repMedicamento = new RepMedicamento(this);
 
-        //SPINNER DO HORARIO
-        adapterHorario = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item);
-        spHora.setAdapter(adapterHorario);
-        adapterHorario.add("02 em 02 Horas");
-        adapterHorario.add("04 em 04 Horas");
-        adapterHorario.add("06 em 06 Horas");
-        adapterHorario.add("08 em 08 Horas");
-        adapterHorario.add("12 em 12 Horas");
+        clickSalvaPosologia();
+        clickExcluirPosologia();
+        listMedicamento();
+    }
 
-        //SPINNER DO TEMPO
-        adapterTempo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item);
-        spTempo.setAdapter(adapterTempo);
-        adapterTempo.add("Dias");
-        adapterTempo.add("Meses");
-        adapterTempo.add("Anos");
-
-        //SPINNER TIPO
-        adapterTipo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item);
-        spTipo.setAdapter(adapterTipo);
-        adapterTipo.add("Gotas");
-        adapterTipo.add("Comprimidos");
-        adapterTipo.add("Milimetro");
-
-        //SPINNER NOME DO MEDICAMENTO
-
-
-        list = repPosologia.listaNomeMedicamento();
-        adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
-        spNomeMedicamento.setAdapter(adapter);
-
-
-        Bundle bundle = getIntent().getExtras();
-
-        // Se recebeu parametros da lista, modo edição.
+    private void receberDados() {
         if ((bundle != null) && (bundle.containsKey(PosologiaFragment.PARAM_POSOLOGIA))) {
-            posologia = (Posologia) bundle.getSerializable(PosologiaFragment.PARAM_POSOLOGIA);
-            preencheDados();
+            Posologia posologiaalter = (Posologia) bundle.getSerializable(PosologiaFragment.PARAM_POSOLOGIA);
+            posHelper.preencheForm(posologiaalter);
             btSalvarPosologa.setText("Alterar");
             btExcluirPosologia.setVisibility(View.VISIBLE);
         } else {
             posologia = new Posologia();
         }
-
-
-        clickSalvaPosologia();
-        clickExcluirPosologia();
-        clickImagem();
     }
 
-    private void preencheDados() {
-
-        edtDiasMedicamento.setText(posologia.getDiasTratamento());
-        edtVezesDia.setText(posologia.getVezesDia());
-        edtDosagem.setText(posologia.getDosagem());
-
-        ArrayAdapter adapterPosologia2 = (ArrayAdapter) spHora.getAdapter();
-        spHora.setSelection(adapterPosologia2.getPosition(posologia.getHorario()));
-
-        ArrayAdapter adapterTempo2 = (ArrayAdapter) spTempo.getAdapter();
-        spTempo.setSelection(adapterTempo2.getPosition(posologia.getTempo()));
-
-        ArrayAdapter adapterTipo2 = (ArrayAdapter) spTipo.getAdapter();
-        spTipo.setSelection(adapterTipo2.getPosition(posologia.getTipo()));
-
-        if (posologia.getFotoPosologia() != null) {
-            carregaImagem(posologia.getFotoPosologia());
-        } else {
-            ivPosologia.setImageResource(R.drawable.picture_no_image);
-        }
-
-    }
-
-    private void clickSalvaPosologia() {
+      private void clickSalvaPosologia() {
         btSalvarPosologa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-                posologia.setDiasTratamento(edtDiasMedicamento.getText().toString());
-                posologia.setVezesDia(edtVezesDia.getText().toString());
-                posologia.setDosagem(edtDosagem.getText().toString());
-                posologia.setHorario(spHora.getSelectedItem().toString());
-                posologia.setTempo(spTempo.getSelectedItem().toString());
-                posologia.setTipo(spTipo.getSelectedItem().toString());
-                //posologia.getMedicamentoID().setNome(spNomeMedicamento.getSelectedItem().toString());
-                posologia.setFotoPosologia(pathImg);
-                validandoCampos();
+                posologia = posHelper.getPosologia();
+                posHelper.salvarImagem(pathImg);
 
                 if (posologia.getIdPosologia() == 0) {
                     repPosologia.inserirPosologia(posologia);
@@ -167,7 +95,6 @@ public class PosologiaNewActivity extends AppCompatActivity {
                     repPosologia.alterarPosologia(posologia);
                     finish();
                 }
-
             }
         });
     }
@@ -181,26 +108,48 @@ public class PosologiaNewActivity extends AppCompatActivity {
                     finish();
 
                 } catch (Exception e) {
-                    MessageBox.showAlert(PosologiaNewActivity.this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_excluir) + ": " + e.getMessage());
-
+                    Toast.makeText(PosologiaNewActivity.this, "Error ao Excluir", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
+    public void listMedicamento() {
+        list = repMedicamento.listaNomeMedicamento();
+        ArrayList<String> listaa = new ArrayList<>();
+        for (Medicamento pos : list) {
+            listaa.add(pos.getNome());
+        }
+        posHelper.spinnerNomeMedicamento(this, listaa);
+    }
 
-    private void clickImagem() {
-        ivPosologia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_medicamento, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_foto:
+                capturaFoto();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void capturaFoto() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, 1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Uri imageSelecionada = data.getData();
 
@@ -208,34 +157,14 @@ public class PosologiaNewActivity extends AppCompatActivity {
             Cursor cursor = getContentResolver().query(imageSelecionada, colunas, null, null, null);
             cursor.moveToFirst();
             int indexColuna = cursor.getColumnIndex(colunas[0]);
+
             pathImg = cursor.getString(indexColuna);
-            imagem = BitmapFactory.decodeFile(pathImg);
-            ivPosologia.setImageBitmap(imagem);
-
+            posHelper.carregaImagem(pathImg);
             cursor.close();
-        } else {
-            ivPosologia.setImageResource(android.R.drawable.ic_menu_camera);
         }
 
     }
 
-    public Bitmap carregaImagem(String pathImg) {
-        posologia.setFotoPosologia(pathImg);
-        imagem = BitmapFactory.decodeFile(pathImg);
-        ivPosologia.setImageBitmap(imagem);
-        return imagem;
 
-
-    }
-
-    public void validandoCampos() {
-        if (edtDiasMedicamento.getText().toString().length() == 0) {
-            edtDiasMedicamento.setError("Digite o numero de Dias");
-        } else if (edtDosagem.getText().toString().length() == 0) {
-            edtDosagem.setError("Digite a Dosagem do Medicamento");
-        } else if (edtVezesDia.getText().toString().length() == 0) {
-            edtVezesDia.setError("Digite o numero de Vezes ao Dia");
-        }
-    }
 }
 
