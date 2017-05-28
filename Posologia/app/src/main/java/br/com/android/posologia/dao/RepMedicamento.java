@@ -25,14 +25,17 @@ public class RepMedicamento {
         dataBase = new DataBase(ctx);
     }
 
+    public RepMedicamento() {
+    }
+
     private ContentValues preencheContentValues(Medicamento medicamento) {
         ContentValues values = new ContentValues();
 
-        values.put(Medicamento.NOME, medicamento.getNome());
-        values.put(Medicamento.MILIGRAMA, medicamento.getMiligrama());
-        values.put(Medicamento.OBSERVACAO, medicamento.getObservacao());
-        values.put(Medicamento.TIPO, medicamento.getTipo());
-        values.put(Medicamento.FOTO, medicamento.getFoto());
+        values.put(MedicamentoTable.NOME, medicamento.getNome());
+        values.put(MedicamentoTable.MILIGRAMA, medicamento.getMiligrama());
+        values.put(MedicamentoTable.OBSERVACAO, medicamento.getObservacao());
+        values.put(MedicamentoTable.TIPO, medicamento.getTipo());
+        values.put(MedicamentoTable.FOTO, medicamento.getFoto());
 
         return values;
     }
@@ -40,25 +43,25 @@ public class RepMedicamento {
     public void inserirMedicamento(Medicamento medicamento) {
         conn = dataBase.getWritableDatabase();
         ContentValues values = preencheContentValues(medicamento);
-        conn.insertOrThrow(Medicamento.TABELA, null, values);
+        conn.insertOrThrow(MedicamentoTable.TABELA, null, values);
     }
 
     public void alterarMedicamento(Medicamento medicamento) {
         conn = dataBase.getWritableDatabase();
         ContentValues values = preencheContentValues(medicamento);
-        conn.update(Medicamento.TABELA, values, "_id = ?", new String[]{String.valueOf(medicamento.getId())});
+        conn.update(MedicamentoTable.TABELA, values, "_id = ?", new String[]{String.valueOf(medicamento.getId())});
     }
 
     public void excluirMedicamento(long id) {
         conn = dataBase.getWritableDatabase();
-        conn.delete(Medicamento.TABELA, "_id = ?", new String[]{String.valueOf(id)});
+        conn.delete(MedicamentoTable.TABELA, "_id = ?", new String[]{String.valueOf(id)});
     }
 
     public ArrayAdapterMedicamento listarMedicamentos(Context context) {
         conn = dataBase.getReadableDatabase();
         ArrayAdapterMedicamento adpMedicamentos = new ArrayAdapterMedicamento(context, R.layout.item_medicamento);
 
-        Cursor cursor = conn.query(Medicamento.TABELA, null, null, null, null, null, null);
+        Cursor cursor = conn.query(MedicamentoTable.TABELA, null, null, null, null, null, null);
 
         if (cursor.getCount() > 0) {
 
@@ -67,12 +70,12 @@ public class RepMedicamento {
             do {
                 Medicamento medicamento = new Medicamento();
 
-                medicamento.setId(cursor.getLong(cursor.getColumnIndex(Medicamento.ID)));
-                medicamento.setNome(cursor.getString(cursor.getColumnIndex(Medicamento.NOME)));
-                medicamento.setMiligrama(cursor.getString(cursor.getColumnIndex(Medicamento.MILIGRAMA)));
-                medicamento.setObservacao(cursor.getString(cursor.getColumnIndex(Medicamento.OBSERVACAO)));
-                medicamento.setTipo(cursor.getString(cursor.getColumnIndex(Medicamento.TIPO)));
-                medicamento.setFoto(cursor.getString(cursor.getColumnIndex(Medicamento.FOTO)));
+                medicamento.setId(cursor.getLong(cursor.getColumnIndex(MedicamentoTable.ID)));
+                medicamento.setNome(cursor.getString(cursor.getColumnIndex(MedicamentoTable.NOME)));
+                medicamento.setMiligrama(cursor.getString(cursor.getColumnIndex(MedicamentoTable.MILIGRAMA)));
+                medicamento.setObservacao(cursor.getString(cursor.getColumnIndex(MedicamentoTable.OBSERVACAO)));
+                medicamento.setTipo(cursor.getString(cursor.getColumnIndex(MedicamentoTable.TIPO)));
+                medicamento.setFoto(cursor.getString(cursor.getColumnIndex(MedicamentoTable.FOTO)));
 
                 adpMedicamentos.add(medicamento);
             } while (cursor.moveToNext());
@@ -86,7 +89,7 @@ public class RepMedicamento {
         ArrayList<Medicamento> lista = new ArrayList<>();
 
         // Cursor cursor = conn.query(BPosologia.TABELA, null, null, null, null, null, null);
-        Cursor cursor = conn.rawQuery("SELECT Nome FROM Medicamento ", null);
+        Cursor cursor = conn.rawQuery("SELECT Nome FROM Medicamento  ", null);
 
         if (cursor.getCount() > 0) {
 
@@ -94,8 +97,8 @@ public class RepMedicamento {
 
             do {
                 Medicamento medicamento = new Medicamento();
-                //medicamento.setId(cursor.getLong(cursor.getColumnIndex(BMedicamento.ID)));
-                medicamento.setNome(cursor.getString(cursor.getColumnIndex(Medicamento.NOME)));
+                //medicamento.setId(cursor.getLong(cursor.getColumnIndex(Medicamento.ID)));
+                medicamento.setNome(cursor.getString(cursor.getColumnIndex(MedicamentoTable.NOME)));
                 lista.add(medicamento);
             } while (cursor.moveToNext());
         }
@@ -103,7 +106,6 @@ public class RepMedicamento {
         return lista;
 
     }
-
 
 
 }

@@ -101,7 +101,7 @@ public class PosologiaHelper {
 
         spTipo.setSelection(adapterTipo.getPosition(posologia.getTipo()));
 
-        spNomeMedicamento.setSelection(adapterNome.getPosition(posologia.getMedicamentoID().getId()));
+        //  spNomeMedicamento.setSelection(adapterNome.getPosition(posologia.getMedicamentoID().getId()));
 
     }
 
@@ -113,7 +113,9 @@ public class PosologiaHelper {
         posologia.setHorario(spHora.getSelectedItem().toString());
         posologia.setTempo(spTempo.getSelectedItem().toString());
         posologia.setTipo(spTipo.getSelectedItem().toString());
-        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId());
+
+        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemPosition());
+
         //posologia.getMedicamentoID().setNome(spNomeMedicamento.getSelectedItem().toString());
 
         return posologia;
@@ -141,4 +143,28 @@ public class PosologiaHelper {
         }
 
     }
+
+    public boolean validarCampos() {
+
+
+        if (edtDiasMedicamento.getText().toString().isEmpty()) {
+            edtDiasMedicamento.setError("Informe o Tempo de Medicação");
+            edtDiasMedicamento.setFocusable(true);
+            edtDiasMedicamento.requestFocus();
+            return false;
+        } else if (edtDosagem.getText().toString().isEmpty()) {
+            edtDosagem.setError("Informe a Dosagem do Medicamento");
+            edtDosagem.setFocusable(true);
+            edtDosagem.requestFocus();
+            return false;
+        } else if (edtVezesDia.getText().toString().isEmpty()) {
+            edtVezesDia.setError("Informe Quantidade vezes ao dia");
+            edtVezesDia.setFocusable(true);
+            edtVezesDia.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+
 }

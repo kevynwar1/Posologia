@@ -82,26 +82,18 @@ public class MedicamentoFragment extends Fragment {
         lvMedicamento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Medicamento medicamento = (Medicamento) adapter.getItem(position);
+                try {
+                    Medicamento medicamento = (Medicamento) adapter.getItem(position);
 
-                Intent intent = new Intent(getActivity(), MedicamentoNewActivity.class);
-                intent.putExtra(PARAM_MEDICAMENTO, medicamento);
-                startActivity(intent);
-
+                    Intent intent = new Intent(getActivity(), MedicamentoNewActivity.class);
+                    intent.putExtra(PARAM_MEDICAMENTO, medicamento);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Error no click da lista Medicamento", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
     }
-
-
-  /*  @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        adapter = repMedicamento.listarMedicamentos(getActivity());
-        filtraDados.setArrayAdapter(adapter);
-        lvMedicamento.setAdapter(adapter);
-
-    }*/
-
 
 }

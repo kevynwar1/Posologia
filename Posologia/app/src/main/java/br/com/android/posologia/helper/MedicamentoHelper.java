@@ -47,6 +47,8 @@ public class MedicamentoHelper {
 
 
         return medicamento;
+
+
     }
 
     public void spinnerTipoMedicamento(MedicamentoNewActivity medicamentoNew) {
@@ -73,7 +75,7 @@ public class MedicamentoHelper {
     public void carregaImagem(String caminhoArquivo) {
         if (caminhoArquivo != null) {
             Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
-           // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
+            // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
             ivMedicamento.setImageBitmap(imagem);
         } else {
             ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
@@ -91,6 +93,34 @@ public class MedicamentoHelper {
             ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
         }
 
+    }
+
+    public boolean validarCampos() {
+
+
+        if (edtNome.getText().toString().isEmpty()) {
+            edtNome.setError("Informe o Nome do Medicamento");
+            edtNome.setFocusable(true);
+            edtNome.requestFocus();
+            return false;
+        } else if (edtNome.getText().toString().length() < 5) {
+            edtNome.setError("Informe um Nome maior que 5 letras");
+            edtNome.setFocusable(true);
+            edtNome.requestFocus();
+            return false;
+        } else if (edtMiligrama.getText().toString().isEmpty()) {
+            edtMiligrama.setError("Informe o Miligrama");
+            edtMiligrama.setFocusable(true);
+            edtMiligrama.requestFocus();
+            return false;
+        } else if (edtMiligrama.getText().toString().length() < 2) {
+            edtMiligrama.setError("Informe o Miligrama com 2 Numeros ou mais");
+            edtMiligrama.setFocusable(true);
+            edtMiligrama.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 }
 

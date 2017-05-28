@@ -9,17 +9,6 @@ import java.io.Serializable;
 public class Posologia implements Serializable {
 
 
-    public static String TABELA = "Posologia";
-
-    public static String IDPOSOLOGIA = "_idPosologia";
-    public static String FOTOPOSOLOGIA = "FotoPosologia";
-    public static String DIASTRATAMENTO = "DiasTratamento";
-    public static String VEZESDIA = "VezesDia";
-    public static String HORARIO = "Horario";
-    public static String DOSAGEM = "Dosagem";
-    public static String TEMPO = "Tempo";
-    public static String TIPO = "Tipo";
-    public static String MEDICAMENTOID = "MedicamentoID";
 
 
     private long idPosologia;

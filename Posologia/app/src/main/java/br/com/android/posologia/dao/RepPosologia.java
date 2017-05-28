@@ -25,14 +25,16 @@ public class RepPosologia {
     private ContentValues preencheContentValues(Posologia posologia) {
         ContentValues values = new ContentValues();
 
-        values.put(Posologia.FOTOPOSOLOGIA, posologia.getFotoPosologia());
-        values.put(Posologia.DIASTRATAMENTO, posologia.getDiasTratamento());
-        values.put(Posologia.VEZESDIA, posologia.getVezesDia());
-        values.put(Posologia.HORARIO, posologia.getHorario());
-        values.put(Posologia.DOSAGEM, posologia.getDosagem());
-        values.put(Posologia.TEMPO, posologia.getTempo());
-        values.put(Posologia.TIPO, posologia.getTipo());
-        values.put(Posologia.MEDICAMENTOID, posologia.getMedicamentoID().getId());
+        values.put(PosologiaTable.FOTOPOSOLOGIA, posologia.getFotoPosologia());
+        values.put(PosologiaTable.DIASTRATAMENTO, posologia.getDiasTratamento());
+        values.put(PosologiaTable.VEZESDIA, posologia.getVezesDia());
+        values.put(PosologiaTable.HORARIO, posologia.getHorario());
+        values.put(PosologiaTable.DOSAGEM, posologia.getDosagem());
+        values.put(PosologiaTable.TEMPO, posologia.getTempo());
+        values.put(PosologiaTable.TIPO, posologia.getTipo());
+
+        values.put(PosologiaTable.MEDICAMENTOID, posologia.getMedicamentoID().getId());
+        //values.put(Posologia.MEDICAMENTOID, posologia.getMedicamentoID().getNome());
 
 
         return values;
@@ -41,28 +43,28 @@ public class RepPosologia {
     public void inserirPosologia(Posologia posologia) {
         conn = dataBase.getWritableDatabase();
         ContentValues values = preencheContentValues(posologia);
-        conn.insertOrThrow(Posologia.TABELA, null, values);
+        conn.insertOrThrow(PosologiaTable.TABELA, null, values);
 
     }
 
     public void alterarPosologia(Posologia posologia) {
         conn = dataBase.getWritableDatabase();
         ContentValues values = preencheContentValues(posologia);
-        conn.update(Posologia.TABELA, values, "_idPosologia = ?", new String[]{String.valueOf(posologia.getIdPosologia())});
+        conn.update(PosologiaTable.TABELA, values, "_idPosologia = ?", new String[]{String.valueOf(posologia.getIdPosologia())});
     }
 
     public void excluirPosologia(long id) {
         conn = dataBase.getWritableDatabase();
-        conn.delete(Posologia.TABELA, "_idPosologia = ?", new String[]{String.valueOf(id)});
+        conn.delete(PosologiaTable.TABELA, "_idPosologia = ?", new String[]{String.valueOf(id)});
     }
 
     public ArrayAdapterPosologia listarPosologias(Context context) {
         conn = dataBase.getReadableDatabase();
         ArrayAdapterPosologia adpPosologia = new ArrayAdapterPosologia(context, R.layout.item_posologia);
 
-        //  Cursor cursor = conn.query(BPosologia.TABELA, null, null, null, null, null, null);
-        Cursor cursor = conn.rawQuery("SELECT _id, Nome, _idPosologia, FotoPosologia, DiasTratamento, VezesDia, Dosagem, Horario," +
-                "Tempo, Posologia.Tipo,MedicamentoID FROM Posologia INNER JOIN Medicamento  ON (_id = MedicamentoID)", null);
+        //Cursor cursor = conn.query(PosologiaTable.TABELA, null, null, null, null, null, null);
+          Cursor cursor = conn.rawQuery("SELECT _idPosologia, MedicamentoID, Nome, FotoPosologia, DiasTratamento, VezesDia, Dosagem, Horario," +
+          "Tempo, Posologia.Tipo FROM Posologia INNER JOIN Medicamento  ON (_id = MedicamentoID)", null);
 
         if (cursor.getCount() > 0) {
 
@@ -71,17 +73,16 @@ public class RepPosologia {
             do {
                 Posologia posologia = new Posologia();
 
-                posologia.setIdPosologia(cursor.getInt(cursor.getColumnIndex(Posologia.IDPOSOLOGIA)));
-                posologia.setFotoPosologia(cursor.getString(cursor.getColumnIndex(Posologia.FOTOPOSOLOGIA)));
-                posologia.setDiasTratamento(cursor.getString(cursor.getColumnIndex(Posologia.DIASTRATAMENTO)));
-                posologia.setVezesDia(cursor.getString(cursor.getColumnIndex(Posologia.VEZESDIA)));
-                posologia.setDosagem(cursor.getString(cursor.getColumnIndex(Posologia.DOSAGEM)));
-                posologia.setHorario(cursor.getString(cursor.getColumnIndex(Posologia.HORARIO)));
-                posologia.setTempo(cursor.getString(cursor.getColumnIndex(Posologia.TEMPO)));
-                posologia.setTipo(cursor.getString(cursor.getColumnIndex(Posologia.TIPO)));
-
-                posologia.getMedicamentoID().setId(cursor.getLong(cursor.getColumnIndex(Posologia.MEDICAMENTOID)));
-                posologia.getMedicamentoID().setNome(cursor.getString(cursor.getColumnIndex(Medicamento.NOME)));
+                posologia.setIdPosologia(cursor.getInt(cursor.getColumnIndex(PosologiaTable.IDPOSOLOGIA)));
+                posologia.getMedicamentoID().setId(cursor.getLong(cursor.getColumnIndex(PosologiaTable.MEDICAMENTOID)));
+                posologia.getMedicamentoID().setNome(cursor.getString(cursor.getColumnIndex(MedicamentoTable.NOME)));
+                posologia.setFotoPosologia(cursor.getString(cursor.getColumnIndex(PosologiaTable.FOTOPOSOLOGIA)));
+                posologia.setDiasTratamento(cursor.getString(cursor.getColumnIndex(PosologiaTable.DIASTRATAMENTO)));
+                posologia.setVezesDia(cursor.getString(cursor.getColumnIndex(PosologiaTable.VEZESDIA)));
+                posologia.setDosagem(cursor.getString(cursor.getColumnIndex(PosologiaTable.DOSAGEM)));
+                posologia.setHorario(cursor.getString(cursor.getColumnIndex(PosologiaTable.HORARIO)));
+                posologia.setTempo(cursor.getString(cursor.getColumnIndex(PosologiaTable.TEMPO)));
+                posologia.setTipo(cursor.getString(cursor.getColumnIndex(PosologiaTable.TIPO)));
 
                 adpPosologia.add(posologia);
             } while (cursor.moveToNext());

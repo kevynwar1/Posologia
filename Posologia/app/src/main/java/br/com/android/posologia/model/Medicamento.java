@@ -8,14 +8,7 @@ import java.io.Serializable;
 
 public class Medicamento implements Serializable {
 
-    public static String TABELA = "Medicamento";
 
-    public static String ID = "_id";
-    public static String NOME = "Nome";
-    public static String MILIGRAMA = "Miligrama";
-    public static String OBSERVACAO = "Observacao";
-    public static String TIPO = "Tipo";
-    public static String FOTO = "Foto";
 
     private long id;
     private String nome;

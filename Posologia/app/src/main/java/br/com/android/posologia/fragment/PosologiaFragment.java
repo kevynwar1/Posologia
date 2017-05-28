@@ -72,11 +72,15 @@ public class PosologiaFragment extends Fragment {
         lvPosologia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Posologia posologia = (Posologia) adapterPosologia.getItem(position);
+                try {
+                    Posologia posologia = (Posologia) adapterPosologia.getItem(position);
 
-                Intent intent = new Intent(getActivity(), PosologiaNewActivity.class);
-                intent.putExtra(PARAM_POSOLOGIA, posologia);
-                startActivity(intent);
+                    Intent intent = new Intent(getActivity(), PosologiaNewActivity.class);
+                    intent.putExtra(PARAM_POSOLOGIA, posologia);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Error no click da Lista Posologia", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

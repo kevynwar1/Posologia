@@ -30,7 +30,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
 
     private Medicamento medicamento;
     private RepMedicamento repMedicamento;
-
+    Medicamento medicamentoalter;
     MedicamentoHelper medHelper;
     private String caminhoArquivo;
     Bundle bundle;
@@ -63,7 +63,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
 
     private void receberDados() {
         if ((bundle != null) && (bundle.containsKey(MedicamentoFragment.PARAM_MEDICAMENTO))) {
-            Medicamento medicamentoalter = ((Medicamento) bundle.getSerializable(MedicamentoFragment.PARAM_MEDICAMENTO));
+            medicamentoalter = ((Medicamento) bundle.getSerializable(MedicamentoFragment.PARAM_MEDICAMENTO));
             medHelper.preencheForm(medicamentoalter);
             btSalvarMedicamento.setText("Alterar");
             btExcluirMedicamento.setVisibility(View.VISIBLE);
@@ -80,11 +80,13 @@ public class MedicamentoNewActivity extends AppCompatActivity {
                 try {
                     medicamento = medHelper.getMedicamento();
                     medHelper.salvaImagem(caminhoArquivo);
+                    boolean validar = medHelper.validarCampos();
 
-                    if (medicamento.getId() == 0) {
+                    if (medicamento.getId() == 0 && validar == true) {
+
                         repMedicamento.inserirMedicamento(medicamento);
                         finish();
-                    } else {
+                    } else if (medicamento.getId() != 0 && validar == true) {
                         repMedicamento.alterarMedicamento(medicamento);
                         finish();
                     }
@@ -95,12 +97,13 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         });
     }
 
+
     private void clickExcluir() {
         btExcluirMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    repMedicamento.excluirMedicamento(medicamento.getId());
+                    repMedicamento.excluirMedicamento(medicamentoalter.getId());
                     finish();
 
                 } catch (Exception e) {
@@ -144,10 +147,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
 
     private void capturaFoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//gravar no SD... currentTimeMillis = tempo em milisegundos em que esta disparando o evento
         caminhoArquivo = Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
-
-        //criando de fato o caminho do arquivo
         File arquivo = new File(caminhoArquivo);
 // Uri.. explicando para o android onde fica o local da imagem
         Uri localImagem = Uri.fromFile(arquivo);

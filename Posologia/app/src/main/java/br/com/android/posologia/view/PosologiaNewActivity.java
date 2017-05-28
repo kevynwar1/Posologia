@@ -42,6 +42,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
     ArrayList<Medicamento> list;
     Bundle bundle;
     PosologiaHelper posHelper;
+    Posologia posologiaalter;
     String pathImg;
 
     @Override
@@ -71,7 +72,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
     private void receberDados() {
         if ((bundle != null) && (bundle.containsKey(PosologiaFragment.PARAM_POSOLOGIA))) {
-            Posologia posologiaalter = (Posologia) bundle.getSerializable(PosologiaFragment.PARAM_POSOLOGIA);
+            posologiaalter = (Posologia) bundle.getSerializable(PosologiaFragment.PARAM_POSOLOGIA);
             posHelper.preencheForm(posologiaalter);
             btSalvarPosologa.setText("Alterar");
             btExcluirPosologia.setVisibility(View.VISIBLE);
@@ -80,20 +81,39 @@ public class PosologiaNewActivity extends AppCompatActivity {
         }
     }
 
-      private void clickSalvaPosologia() {
+    public void listMedicamento() {
+
+        list = repMedicamento.listaNomeMedicamento();
+        ArrayList<String> listaa = new ArrayList<>();
+        for (Medicamento pos : list) {
+            listaa.add(pos.getNome());
+
+        }
+      /*for (int i = 1; i < list.size(); i++){
+          listaa.add(String.valueOf(list.get(i)));
+      }*/
+
+        posHelper.spinnerNomeMedicamento(this, listaa);
+    }
+
+    private void clickSalvaPosologia() {
         btSalvarPosologa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    posologia = posHelper.getPosologia();
+                    posHelper.salvarImagem(pathImg);
+                    boolean valid = posHelper.validarCampos();
 
-                posologia = posHelper.getPosologia();
-                posHelper.salvarImagem(pathImg);
-
-                if (posologia.getIdPosologia() == 0) {
-                    repPosologia.inserirPosologia(posologia);
-                    finish();
-                } else {
-                    repPosologia.alterarPosologia(posologia);
-                    finish();
+                    if (posologia.getIdPosologia() == 0 && valid == true) {
+                        repPosologia.inserirPosologia(posologia);
+                        finish();
+                    } else if (posologia.getIdPosologia() != 0 && valid == true) {
+                        repPosologia.alterarPosologia(posologia);
+                        finish();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(PosologiaNewActivity.this, "Error ao salvar", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -104,7 +124,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    repPosologia.excluirPosologia(posologia.getIdPosologia());
+                    repPosologia.excluirPosologia(posologiaalter.getIdPosologia());
                     finish();
 
                 } catch (Exception e) {
@@ -113,14 +133,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
             }
         });
     }
-    public void listMedicamento() {
-        list = repMedicamento.listaNomeMedicamento();
-        ArrayList<String> listaa = new ArrayList<>();
-        for (Medicamento pos : list) {
-            listaa.add(pos.getNome());
-        }
-        posHelper.spinnerNomeMedicamento(this, listaa);
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
