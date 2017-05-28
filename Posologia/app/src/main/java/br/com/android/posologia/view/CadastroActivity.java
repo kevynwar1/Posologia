@@ -1,5 +1,6 @@
 package br.com.android.posologia.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ public class CadastroActivity extends AppCompatActivity {
     private Button btnCadastrar;
     private Button btnConta;
 
-    WebService service;
     Usuario usuario;
 
     @Override
@@ -36,17 +36,17 @@ public class CadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                service = new WebService();
                 usuario = new Usuario();
 
                 usuario.setNome(edtNome.getText().toString());
                 usuario.setEmail(edtEmail.getText().toString());
                 usuario.setSenha(edtSenha.getText().toString());
 
-                service.cadastrar(usuario);
+                new WebService(usuario).execute();
 
                 Toast.makeText(CadastroActivity.this, "Cadastrado com Sucesso", Toast.LENGTH_LONG).show();
-                finish();
+                Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
+                startActivity(it);
             }
         });
 

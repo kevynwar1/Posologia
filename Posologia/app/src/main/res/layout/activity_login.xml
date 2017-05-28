@@ -40,17 +40,17 @@
         android:textColor="#0088AD"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnEntrarLogin"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnCadastrarLogin"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="17dp"
         android:background="@drawable/button_entrar"
-        android:textAllCaps="false"
-        android:textSize="16dp"
-        android:textColor="#FFF"
         android:text="@string/btn_entrar"
-        android:layout_above="@+id/btnCadastrarLogin"
-        android:layout_centerHorizontal="true" />
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textSize="16dp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -62,12 +62,12 @@
         app:srcCompat="@drawable/title_entrar" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edtLEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/lbl_nome"
+        android:inputType="textEmailAddress"
+        android:hint="@string/lbl_email"
         android:textColor="#000"
         android:background="#FFF"
         android:padding="15dp"
@@ -78,7 +78,7 @@
         android:layout_marginTop="31dp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edtLSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -89,7 +89,7 @@
         android:textColor="#000"
         android:background="#FFF"
         android:textSize="16dp"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/edtLEmail"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

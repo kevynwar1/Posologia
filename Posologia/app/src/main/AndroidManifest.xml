@@ -13,9 +13,7 @@
         <activity
             android:name=".view.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/MyTheme">
-
-        </activity>
+            android:theme="@style/MyTheme"/>
 
         <activity
             android:name=".view.PosologiaNewActivity"
@@ -24,11 +22,6 @@
         <activity
             android:name=".view.LoginActivity"
             android:label="@string/app_title_pessoa"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name=".view.CadastroActivity"
-            android:label="@string/app_title_pessoa_new"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.CadastroActivity"
+            android:label="@string/app_title_pessoa_new"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".view.MedicamentoNewActivity"
