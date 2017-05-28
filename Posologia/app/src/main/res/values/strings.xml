@@ -12,10 +12,12 @@
     <string name="app_title_posologia_new">Cadastro de Posologia</string>
 
     <string name="btn_cadastrar">Cadastrar</string>
+    <string name="btn_entrar">Entrar</string>
     <string name="btn_medicamentos">Medicamentos</string>
     <string name="btn_pessoas">Pessoas</string>
     <string name="btn_posologias">Posologias</string>
     <string name="btn_tenhoconta">Eu tenho uma conta</string>
+    <string name="btn_queroconta">Quero me Cadastrar</string>
 
     <string name="hint_filtro">Informe o filtro</string>
 
