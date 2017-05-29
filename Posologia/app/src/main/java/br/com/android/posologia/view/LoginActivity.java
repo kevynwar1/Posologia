@@ -37,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 usuario.setEmail(edtEmail.getText().toString());
                 usuario.setSenha(edtSenha.getText().toString());
+
+                Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(it);
             }
         });
 
