@@ -4,6 +4,27 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+
+    <!-- Para permitir à API verificar a conexão antes de tentar baixar os mapas -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <!-- Para permitir à API guardar cache de mapas no armazenamento externo -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <!-- Permite à API usar o wifi ou 3G ou ambos para determinar a localização -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <!-- Permite à API utilizar o GPS para determinar a localização -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"></uses-permission>
+    <uses-feature
+
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+    <!-- Indica a utilização da versão 2 do OpenGL para renderização dos mapas -->
+
+
+
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
@@ -47,5 +68,16 @@
         <activity
             android:name=".view.MedicamentoNewActivity"
             android:label="@string/app_title_medicamento_new"/>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDrToPy9jS3fOZL0wIqotFqk0pb4k3jE3k"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"
+            />
+
+
+
     </application>
 </manifest>
