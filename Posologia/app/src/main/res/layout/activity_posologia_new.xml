@@ -12,7 +12,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:srcCompat="@drawable/medical_pot_pills" />
 
     <android.support.design.widget.TextInputLayout
 

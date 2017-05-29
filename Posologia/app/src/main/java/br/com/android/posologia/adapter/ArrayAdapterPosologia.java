@@ -68,7 +68,7 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
             //Bitmap imagemreduzida = Bitmap.createScaledBitmap(foto, 100, 100, true);
             viewHolder.ivPosologia.setImageBitmap(foto);
         } else {
-            viewHolder.ivPosologia.setImageResource(R.drawable.picture_no_image);
+            viewHolder.ivPosologia.setImageResource(R.drawable.medical_pot_pills);
         }
 
 

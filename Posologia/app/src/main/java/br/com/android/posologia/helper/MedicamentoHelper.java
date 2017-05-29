@@ -78,7 +78,7 @@ public class MedicamentoHelper {
             // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
             ivMedicamento.setImageBitmap(imagem);
         } else {
-            ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
+            ivMedicamento.setImageResource(R.drawable.medical_pot_pills);
         }
 
     }
@@ -90,7 +90,7 @@ public class MedicamentoHelper {
             Bitmap imagem = BitmapFactory.decodeFile(caminho);
             ivMedicamento.setImageBitmap(imagem);
         } else {
-            ivMedicamento.setImageResource(android.R.drawable.ic_menu_camera);
+            ivMedicamento.setImageResource(R.drawable.medical_pot_pills);
         }
 
     }

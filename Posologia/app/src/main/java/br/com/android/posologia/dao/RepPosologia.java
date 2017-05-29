@@ -34,7 +34,6 @@ public class RepPosologia {
         values.put(PosologiaTable.TIPO, posologia.getTipo());
 
         values.put(PosologiaTable.MEDICAMENTOID, posologia.getMedicamentoID().getId());
-        //values.put(Posologia.MEDICAMENTOID, posologia.getMedicamentoID().getNome());
 
 
         return values;
@@ -64,7 +63,8 @@ public class RepPosologia {
 
         //Cursor cursor = conn.query(PosologiaTable.TABELA, null, null, null, null, null, null);
           Cursor cursor = conn.rawQuery("SELECT _idPosologia, MedicamentoID, Nome, FotoPosologia, DiasTratamento, VezesDia, Dosagem, Horario," +
-          "Tempo, Posologia.Tipo FROM Posologia INNER JOIN Medicamento  ON (_id = MedicamentoID)", null);
+          "Tempo, Posologia.Tipo FROM Posologia INNER JOIN Medicamento ON (MedicamentoID = _id)", null);
+
 
         if (cursor.getCount() > 0) {
 

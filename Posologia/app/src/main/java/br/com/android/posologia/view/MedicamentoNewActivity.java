@@ -30,8 +30,10 @@ public class MedicamentoNewActivity extends AppCompatActivity {
 
     private Medicamento medicamento;
     private RepMedicamento repMedicamento;
+
     Medicamento medicamentoalter;
     MedicamentoHelper medHelper;
+
     private String caminhoArquivo;
     Bundle bundle;
 

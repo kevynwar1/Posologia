@@ -79,7 +79,7 @@ public class PosologiaFragment extends Fragment {
                     intent.putExtra(PARAM_POSOLOGIA, posologia);
                     startActivity(intent);
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Error no click da Lista Posologia", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Error no click da Lista Posologia" + e, Toast.LENGTH_LONG).show();
                 }
             }
         });

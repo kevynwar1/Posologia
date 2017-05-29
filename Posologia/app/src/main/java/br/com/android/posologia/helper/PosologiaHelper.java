@@ -39,7 +39,7 @@ public class PosologiaHelper {
     ArrayAdapter<String> adapterHorario;
     ArrayAdapter<String> adapterTempo;
     ArrayAdapter<String> adapterTipo;
-    ArrayAdapter adapterNome;
+    ArrayAdapter<String> adapterNome;
 
 
     public PosologiaHelper(PosologiaNewActivity posologiaNew) {
@@ -81,7 +81,7 @@ public class PosologiaHelper {
         spTipo.setAdapter(adapterTipo);
         adapterTipo.add("Gotas");
         adapterTipo.add("Comprimidos");
-        adapterTipo.add("Milimetro");
+        adapterTipo.add("ML");
     }
 
     public void spinnerNomeMedicamento(PosologiaNewActivity posologiaNew, ArrayList<String> list) {
@@ -91,16 +91,19 @@ public class PosologiaHelper {
 
     public void preencheForm(Posologia posologiaalter) {
         posologia = posologiaalter;
+
         edtDiasMedicamento.setText(posologia.getDiasTratamento());
         edtVezesDia.setText(posologia.getVezesDia());
         edtDosagem.setText(posologia.getDosagem());
+
+        carregaImagem(posologiaalter.getFotoPosologia());
 
         spHora.setSelection(adapterHorario.getPosition(posologia.getHorario()));
 
         spTempo.setSelection(adapterTempo.getPosition(posologia.getTempo()));
 
         spTipo.setSelection(adapterTipo.getPosition(posologia.getTipo()));
-
+            //Aqui adapter ta vindo null
         //  spNomeMedicamento.setSelection(adapterNome.getPosition(posologia.getMedicamentoID().getId()));
 
     }
@@ -114,7 +117,7 @@ public class PosologiaHelper {
         posologia.setTempo(spTempo.getSelectedItem().toString());
         posologia.setTipo(spTipo.getSelectedItem().toString());
 
-        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemPosition());
+        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId());
 
         //posologia.getMedicamentoID().setNome(spNomeMedicamento.getSelectedItem().toString());
 
@@ -127,7 +130,7 @@ public class PosologiaHelper {
             // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
             ivPosologia.setImageBitmap(imagem);
         } else {
-            ivPosologia.setImageResource(android.R.drawable.ic_menu_camera);
+            ivPosologia.setImageResource(R.drawable.medical_pot_pills);
         }
 
     }
@@ -139,7 +142,7 @@ public class PosologiaHelper {
             Bitmap imagem = BitmapFactory.decodeFile(caminho);
             ivPosologia.setImageBitmap(imagem);
         } else {
-            ivPosologia.setImageResource(android.R.drawable.ic_menu_camera);
+            ivPosologia.setImageResource(R.drawable.medical_pot_pills);
         }
 
     }

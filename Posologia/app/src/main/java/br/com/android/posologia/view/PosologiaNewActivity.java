@@ -73,7 +73,9 @@ public class PosologiaNewActivity extends AppCompatActivity {
     private void receberDados() {
         if ((bundle != null) && (bundle.containsKey(PosologiaFragment.PARAM_POSOLOGIA))) {
             posologiaalter = (Posologia) bundle.getSerializable(PosologiaFragment.PARAM_POSOLOGIA);
+
             posHelper.preencheForm(posologiaalter);
+
             btSalvarPosologa.setText("Alterar");
             btExcluirPosologia.setVisibility(View.VISIBLE);
         } else {
@@ -85,11 +87,11 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
         list = repMedicamento.listaNomeMedicamento();
         ArrayList<String> listaa = new ArrayList<>();
-        for (Medicamento pos : list) {
+       for (Medicamento pos : list) {
             listaa.add(pos.getNome());
 
         }
-      /*for (int i = 1; i < list.size(); i++){
+ /*      for (int i = 1; i < list.size(); i++){
           listaa.add(String.valueOf(list.get(i)));
       }*/
 
@@ -113,7 +115,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
                         finish();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(PosologiaNewActivity.this, "Error ao salvar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PosologiaNewActivity.this, "Error ao salvar" + e, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -128,7 +130,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
                     finish();
 
                 } catch (Exception e) {
-                    Toast.makeText(PosologiaNewActivity.this, "Error ao Excluir", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PosologiaNewActivity.this, "Error ao Excluir" + e, Toast.LENGTH_LONG).show();
                 }
             }
         });

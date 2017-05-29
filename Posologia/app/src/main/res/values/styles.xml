@@ -13,9 +13,11 @@
 
     </style>
 
-    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
+    <style name="MyTheme" parent="Theme.AppCompat.NoActionBar">
+        <!--item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item-->
+
+        <!--item name="android:windowBackground">@color/colorWindow</item-->
 
         <item name="colorPrimaryDark">#1976D2</item>
         <item name="colorPrimary">#2196F3</item>
@@ -24,61 +26,35 @@
         <item name="android:navigationBarColor">#2196F3</item>
 
     </style>
+    <style name="FullScreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
-    <!-- Style for HomeImage
-    <style name="HomeImage">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:src">@drawable/medicamentos</item>
-        <item name="android:scaleType">centerCrop</item>
-    </style>-->
 
-    <!-- Style for HomeHeader
-    <style name="HomeHeader">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:layout_marginTop">4dp</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_alignParentTop">true</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:text">@string/home_header</item>
-    </style>-->
 
-    <!-- Style for HomeBody
-    <style name="HomeBody">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:layout_marginBottom">22dp</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:text">@string/home_body</item>
-    </style>-->
 
-    <!-- Style for HomeLnlButtons -->
+    <!-- Style for HomeLnlButtons
     <style name="HomeLnlButtons">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-    </style>
+    </style>-->
 
-    <!-- Style for BtnHome -->
+    <!-- Style for BtnHome
     <style name="BtnHome">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@color/colorButtons</item>
-    </style>
+    </style>-->
 
-    <!-- Style for BtnMenu -->
+    <!-- Style for BtnMenu
     <style name="BtnMenu">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:src">@android:drawable/ic_input_add</item>
-    </style>
+    </style>-->
 
     <!-- Style for LnlFiltro -->
     <style name="LnlFiltro">
@@ -104,24 +80,24 @@
         <item name="android:layout_marginTop">11dp</item>
     </style>
 
-    <!-- Style for LnlCampoForm -->
+    <!-- Style for LnlCampoForm
     <style name="LnlCampoForm">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-    </style>
+    </style>-->
 
-    <!-- Style for TxtForm -->
+    <!-- Style for TxtForm
     <style name="TxtForm">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-    </style>
+    </style>-->
 
     <!-- Style for EdtForm -->
     <style name="EdtForm">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:inputType">textPersonName|textCapCharacters</item>
+        <item name="android:inputType">textPersonName|textCapSentences</item>
         <item name="colorControlNormal">#0099FF</item>
         <item name="colorControlActivated">#0099FF</item>
         <item name="colorControlHighlight">#0099FF</item>

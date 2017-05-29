@@ -64,7 +64,7 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
             foto = BitmapFactory.decodeFile(medicamento.getFoto());
             viewHolder.ivItem.setImageBitmap(foto);
         } else {
-            viewHolder.ivItem.setImageResource(R.drawable.picture_no_image);
+            viewHolder.ivItem.setImageResource(R.drawable.medical_pot_pills);
         }
 
 
