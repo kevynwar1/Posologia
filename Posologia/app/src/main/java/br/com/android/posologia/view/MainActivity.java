@@ -19,7 +19,7 @@ import br.com.android.posologia.R;
 import br.com.android.posologia.adapter.ViewPagerAdapter;
 import br.com.android.posologia.fragment.MedicamentoFragment;
 import br.com.android.posologia.fragment.PosologiaFragment;
-import br.com.android.posologia.util.ServiceNotificador;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,30 +42,11 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-			//EXCLUIR DEPOISS
-       /*   try {
-            dataBase = new DataBase(this);
-          conn = dataBase.getReadableDatabase();
-
-            repPessoa = new RepPessoa(conn);
-            repMedicamento = new RepMedicamento(conn);
-            repPosologia = new RepPosologia();
-
-
-            //  adapter = repPessoa.listarPessoas(this);
-
-            //lvPessoa.setAdapter(adapter);
-
-            filtraDados = new FiltraDados(adapter);
-        } catch (SQLException e) {
-            MessageBox.showAlert(this, getResources().getString(R.string.lbl_erro), getResources().getString(R.string.lbl_erro_criar_base) + ": " + e.getMessage());
-        }*/
-
         isTablet = getResources().getBoolean(R.bool.isTablet);
 
         boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
 
-        if(alarmeAtivo){
+        if (alarmeAtivo) {
             Intent intent = new Intent("ALARME_DISPARADO");
             PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
 
@@ -74,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             c.add(Calendar.SECOND, 3);
 
             AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
+          //  alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
         }
     }
 
@@ -89,17 +70,16 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         orientation = this.getResources().getConfiguration().orientation;
-        if(orientation== Configuration.ORIENTATION_PORTRAIT){
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             //code for portrait mode
             toolbar.setTitle("Posologia");
-            if(isTablet){
+            if (isTablet) {
                 toolbar.setTitle("Posologia - TABLET");
             }
-        }
-        else{
+        } else {
             //code for landscape mode
             toolbar.setTitle("Posologia - Controle seus Medicamentos");
-            if(isTablet){
+            if (isTablet) {
                 toolbar.setTitle("Posologia - Controle seus Medicamentos - TABLET");
             }
         }

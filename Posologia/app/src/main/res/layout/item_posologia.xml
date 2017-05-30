@@ -10,20 +10,20 @@
         style="@style/IconItemLista" />
 
 
-    <TextView
+    <!--TextView
         android:id="@+id/txtDiasTratamento"
 
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ivPosologia"
         android:layout_alignStart="@+id/txtHorario"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" /-->
 
     <TextView
         android:id="@+id/txtVezesDia"
         style="@style/ItemLista"
-        android:layout_width="300dp"
-        android:layout_above="@+id/txtHorario"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/txtNomeMedicamento"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivPosologia" />
 
@@ -31,26 +31,27 @@
         android:id="@+id/txtHorario"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/txtDiasTratamento"
-        android:layout_alignStart="@+id/txtVezesDia"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/txtVezesDia"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/txtVezesDia" />
 
-    <TextView
+    <!--TextView
         android:id="@+id/txtDosagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtVezesDia"
-        android:layout_alignStart="@+id/txtVezesDia" />
+        android:layout_alignStart="@+id/txtVezesDia" /-->
 
     <TextView
         android:id="@+id/txtNomeMedicamento"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/txtDosagem"
-        android:layout_marginTop="5dp"
-        android:layout_alignStart="@+id/txtDosagem"
 
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/ivPosologia" />
 
 
 </RelativeLayout>

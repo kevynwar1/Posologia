@@ -39,7 +39,7 @@ public class PosologiaHelper {
     ArrayAdapter<String> adapterHorario;
     ArrayAdapter<String> adapterTempo;
     ArrayAdapter<String> adapterTipo;
-    ArrayAdapter<String> adapterNome;
+    ArrayAdapter adapterNome;
 
 
     public PosologiaHelper(PosologiaNewActivity posologiaNew) {
@@ -54,6 +54,7 @@ public class PosologiaHelper {
         spTipo = (Spinner) posologiaNew.findViewById(R.id.spDosagem);
         spNomeMedicamento = (Spinner) posologiaNew.findViewById(R.id.spNomeMedicamento);
         posologia = new Posologia();
+
 
     }
 
@@ -85,8 +86,10 @@ public class PosologiaHelper {
     }
 
     public void spinnerNomeMedicamento(PosologiaNewActivity posologiaNew, ArrayList<String> list) {
-        adapterNome = new ArrayAdapter<String>(posologiaNew, android.R.layout.simple_spinner_dropdown_item, list);
+
+        adapterNome = new ArrayAdapter(posologiaNew, android.R.layout.simple_spinner_dropdown_item, list);
         spNomeMedicamento.setAdapter(adapterNome);
+
     }
 
     public void preencheForm(Posologia posologiaalter) {
@@ -103,8 +106,8 @@ public class PosologiaHelper {
         spTempo.setSelection(adapterTempo.getPosition(posologia.getTempo()));
 
         spTipo.setSelection(adapterTipo.getPosition(posologia.getTipo()));
-            //Aqui adapter ta vindo null
-        //  spNomeMedicamento.setSelection(adapterNome.getPosition(posologia.getMedicamentoID().getId()));
+
+        spNomeMedicamento.setSelection(adapterNome.getPosition(posologia.getMedicamentoID().getNome()));
 
     }
 
@@ -117,7 +120,7 @@ public class PosologiaHelper {
         posologia.setTempo(spTempo.getSelectedItem().toString());
         posologia.setTipo(spTipo.getSelectedItem().toString());
 
-        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId());
+        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId() + 1);
 
         //posologia.getMedicamentoID().setNome(spNomeMedicamento.getSelectedItem().toString());
 

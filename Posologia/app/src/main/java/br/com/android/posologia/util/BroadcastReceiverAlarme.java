@@ -34,59 +34,22 @@ public class BroadcastReceiverAlarme extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        DataBase dataBase;
-        dataBase = new DataBase(context);
-        SQLiteDatabase conn = dataBase.getReadableDatabase();
-        Cursor cursor = conn.rawQuery("SELECT _idPosologia, MedicamentoID, Nome, FotoPosologia, DiasTratamento, VezesDia, Dosagem, Horario," +
-                "Tempo, Posologia.Tipo FROM Posologia INNER JOIN Medicamento  ON (_id = MedicamentoID)", null);
+        RepPosologia repPosologia = new RepPosologia(context);
+        repPosologia.listarPosologias(context);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        String currentDateandTime = sdf.format(new Date());
-        Toast.makeText(context, "Horario: " + currentDateandTime, Toast.LENGTH_SHORT).show();
+       /* SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        String currentDateandTime = sdf.format(new Date());*/
 
 
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            do {
-                Posologia posologia = new Posologia();
-
-                posologia.setIdPosologia(cursor.getInt(cursor.getColumnIndex(PosologiaTable.IDPOSOLOGIA)));
-                posologia.getMedicamentoID().setId(cursor.getLong(cursor.getColumnIndex(PosologiaTable.MEDICAMENTOID)));
-                posologia.getMedicamentoID().setNome(cursor.getString(cursor.getColumnIndex(MedicamentoTable.NOME)));
-                posologia.setFotoPosologia(cursor.getString(cursor.getColumnIndex(PosologiaTable.FOTOPOSOLOGIA)));
-                posologia.setDiasTratamento(cursor.getString(cursor.getColumnIndex(PosologiaTable.DIASTRATAMENTO)));
-                posologia.setVezesDia(cursor.getString(cursor.getColumnIndex(PosologiaTable.VEZESDIA)));
-                posologia.setDosagem(cursor.getString(cursor.getColumnIndex(PosologiaTable.DOSAGEM)));
-                posologia.setHorario(cursor.getString(cursor.getColumnIndex(PosologiaTable.HORARIO)));
-                posologia.setTempo(cursor.getString(cursor.getColumnIndex(PosologiaTable.TEMPO)));
-                posologia.setTipo(cursor.getString(cursor.getColumnIndex(PosologiaTable.TIPO)));
-
-                //SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-                //String currentDateandTime = sdf.format(new Date());
-
-                Toast.makeText(context, "Horario: " + currentDateandTime, Toast.LENGTH_SHORT).show();
-                if (posologia.getHorario().equals(currentDateandTime)){
-
-                    gerarNotificacao(context, new Intent(context, MainActivity.class), "Nova Mensagem", "Titulo",
-                            "Descricao Msg");
-
-                }
-
-
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        dataBase.close();
-
-
+        gerarNotificacao(context, new Intent(context, MainActivity.class), "Nova Mensagem", "Titulo",
+                "Descricao Msg");
 
 
     }
 
     //Metodo para Notificação
     public void gerarNotificacao(Context context, Intent intent, CharSequence ticker,
-                                 CharSequence titulo, CharSequence descricao){
+                                 CharSequence titulo, CharSequence descricao) {
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent p = PendingIntent.getActivity(context, 0, intent, 0);
 
@@ -114,11 +77,11 @@ public class BroadcastReceiverAlarme extends BroadcastReceiver {
         nm.notify(R.drawable.medicamentos, n);
 
         //Toque para Notificação
-        try{
+        try {
             Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone toque = RingtoneManager.getRingtone(context, som);
             toque.play();
-        }catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }

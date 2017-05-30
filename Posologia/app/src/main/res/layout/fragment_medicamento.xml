@@ -15,7 +15,8 @@
 
         <EditText
             android:id="@+id/edtFiltro"
-            style="@style/EdtFiltro" />
+            style="@style/EdtFiltro"
+            android:fitsSystemWindows="false" />
 
     </LinearLayout>
 

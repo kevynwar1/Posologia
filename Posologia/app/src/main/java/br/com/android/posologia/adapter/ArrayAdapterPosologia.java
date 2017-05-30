@@ -42,10 +42,10 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
             view = inflater.inflate(resource, parent, false);
 
             viewHolder.ivPosologia = (ImageView) view.findViewById(R.id.ivPosologia);
-            viewHolder.txtDiasTratamento = (TextView) view.findViewById(R.id.txtDiasTratamento);
+        //    viewHolder.txtDiasTratamento = (TextView) view.findViewById(R.id.txtDiasTratamento);
             viewHolder.txtVezesDia = (TextView) view.findViewById(R.id.txtVezesDia);
             viewHolder.txtHorario = (TextView) view.findViewById(R.id.txtHorario);
-            viewHolder.txtDosagem = (TextView) view.findViewById(R.id.txtDosagem);
+          //  viewHolder.txtDosagem = (TextView) view.findViewById(R.id.txtDosagem);
             viewHolder.txtNomeMedicamento = (TextView) view.findViewById(R.id.txtNomeMedicamento);
 
 
@@ -58,11 +58,13 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
         }
 
         Posologia posologia = getItem(position);
+
         viewHolder.txtNomeMedicamento.setText(posologia.getMedicamentoID().getNome());
-        viewHolder.txtDosagem.setText("Tomar :" + " " + posologia.getDosagem() + " " + posologia.getTipo());
+//        viewHolder.txtDosagem.setText("Tomar :" + " " + posologia.getDosagem() + " " + posologia.getTipo());
         viewHolder.txtVezesDia.setText(posologia.getVezesDia() + " " + " Vezes ao Dia");
         viewHolder.txtHorario.setText("De: " + posologia.getHorario());
-        viewHolder.txtDiasTratamento.setText("Durante :" + " " + posologia.getDiasTratamento() + " " + posologia.getTempo());
+  //      viewHolder.txtDiasTratamento.setText("Durante :" + " " + posologia.getDiasTratamento() + " " + posologia.getTempo());
+
         if (posologia.getFotoPosologia() != null) {
             foto = BitmapFactory.decodeFile(posologia.getFotoPosologia());
             //Bitmap imagemreduzida = Bitmap.createScaledBitmap(foto, 100, 100, true);
@@ -77,10 +79,10 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
 
     static class ViewHolder {
         ImageView ivPosologia;
-        TextView txtDosagem;
+    //    TextView txtDosagem;
         TextView txtVezesDia;
         TextView txtHorario;
-        TextView txtDiasTratamento;
+      //  TextView txtDiasTratamento;
         TextView txtNomeMedicamento;
     }
 }

@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void openTela() {
         Intent intent = new Intent(SplashActivity.this,
-                MainActivity.class);
+                LoginActivity.class);
         startActivity(intent);
         finish();
     }

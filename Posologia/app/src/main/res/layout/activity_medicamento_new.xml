@@ -105,4 +105,5 @@
         android:layout_marginTop="13dp"
         android:text="@string/excluir_medicamento"
         android:visibility="invisible" />
+
 </RelativeLayout>

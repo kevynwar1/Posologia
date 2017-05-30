@@ -39,11 +39,13 @@ public class PosologiaNewActivity extends AppCompatActivity {
     private Posologia posologia;
     private RepPosologia repPosologia;
     private RepMedicamento repMedicamento;
+
     ArrayList<Medicamento> list;
     Bundle bundle;
     PosologiaHelper posHelper;
     Posologia posologiaalter;
     String pathImg;
+    ArrayList<String> listaa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_posologia_new);
 
         posHelper = new PosologiaHelper(this);
+        listaa = new ArrayList<>();
 
         btSalvarPosologa = (Button) findViewById(R.id.btSalvarPosologia);
         btExcluirPosologia = (Button) findViewById(R.id.btExcluirPosologia);
@@ -59,15 +62,16 @@ public class PosologiaNewActivity extends AppCompatActivity {
         posHelper.spinnerHorario(this);
         posHelper.spinnerTempo(this);
 
-        bundle = getIntent().getExtras();
-        receberDados();
-
         repPosologia = new RepPosologia(this);
         repMedicamento = new RepMedicamento(this);
 
         clickSalvaPosologia();
         clickExcluirPosologia();
         listMedicamento();
+
+        bundle = getIntent().getExtras();
+        receberDados();
+
     }
 
     private void receberDados() {
@@ -84,18 +88,11 @@ public class PosologiaNewActivity extends AppCompatActivity {
     }
 
     public void listMedicamento() {
-
         list = repMedicamento.listaNomeMedicamento();
-        ArrayList<String> listaa = new ArrayList<>();
-       for (Medicamento pos : list) {
+        for (Medicamento pos : list) {
             listaa.add(pos.getNome());
-
+            posHelper.spinnerNomeMedicamento(this, listaa);
         }
- /*      for (int i = 1; i < list.size(); i++){
-          listaa.add(String.valueOf(list.get(i)));
-      }*/
-
-        posHelper.spinnerNomeMedicamento(this, listaa);
     }
 
     private void clickSalvaPosologia() {

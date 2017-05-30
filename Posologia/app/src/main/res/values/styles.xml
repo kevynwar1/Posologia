@@ -17,7 +17,8 @@
         <!--item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item-->
 
-        <!--item name="android:windowBackground">@color/colorWindow</item-->
+        <item name="android:windowBackground">@android:color/background_light</item>
+        <item name="android:textColor">@android:color/background_dark</item>
 
         <item name="colorPrimaryDark">#1976D2</item>
         <item name="colorPrimary">#2196F3</item>
@@ -26,11 +27,10 @@
         <item name="android:navigationBarColor">#2196F3</item>
 
     </style>
+
     <style name="FullScreen" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
-
-
 
 
     <!-- Style for HomeLnlButtons
@@ -70,7 +70,8 @@
         <item name="android:layout_weight">1</item>
         <item name="android:ems">10</item>
         <item name="android:hint">@string/hint_filtro</item>
-        <item name="android:inputType">textPersonName</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="android:inputType">textPersonName|textCapSentences</item>
     </style>
 
     <!-- Style for ListView -->
