@@ -10,6 +10,7 @@
     <string name="app_title_pessoa">Entrar</string>
     <string name="app_title_pessoa_new">Cadastro de Usuário</string>
     <string name="app_title_posologia_new">Cadastro de Posologia</string>
+    <string name="app_title_mapas">Poso Maps</string>
 
     <string name="btn_cadastrar">Cadastrar</string>
     <string name="btn_entrar">Entrar</string>
@@ -56,6 +57,7 @@
     <string name="observacoes">Observações</string>
     <string name="salvar_medicamento">Salvar</string>
     <string name="excluir_medicamento">Excluir</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

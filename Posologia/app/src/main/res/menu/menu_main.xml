@@ -21,4 +21,11 @@
         android:title="@string/action_posologia"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/action_mapa"
+        android:orderInCategory="100"
+        android:title="Poso Maps"
+        app:showAsAction="never"/>
+
+
 </menu>

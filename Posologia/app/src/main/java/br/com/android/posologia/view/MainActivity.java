@@ -108,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_posologia:
                 NewPosologia();
                 break;
+            case R.id.action_mapa:
+                NewMapa();
+                break;
 
         }
 
@@ -136,6 +139,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PosologiaNewActivity.class);
         startActivity(intent);
     }
+
+    private void NewMapa(){
+        Intent it = new Intent(this,MapsActivity.class);
+        startActivity(it);
+    }
+
+
 
 }
 
