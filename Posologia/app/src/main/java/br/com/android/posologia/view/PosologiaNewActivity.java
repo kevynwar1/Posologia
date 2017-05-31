@@ -1,11 +1,14 @@
 package br.com.android.posologia.view;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,11 +44,12 @@ public class PosologiaNewActivity extends AppCompatActivity {
     private RepMedicamento repMedicamento;
 
     ArrayList<Medicamento> list;
+    ArrayList<String> listaa;
     Bundle bundle;
     PosologiaHelper posHelper;
     Posologia posologiaalter;
     String pathImg;
-    ArrayList<String> listaa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +84,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
             posHelper.preencheForm(posologiaalter);
 
-            btSalvarPosologa.setText("Alterar");
+            btSalvarPosologa.setText(R.string.alterar);
             btExcluirPosologia.setVisibility(View.VISIBLE);
         } else {
             posologia = new Posologia();
@@ -112,7 +116,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
                         finish();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(PosologiaNewActivity.this, "Error ao salvar" + e, Toast.LENGTH_LONG).show();
+                    Toast.makeText(PosologiaNewActivity.this, getString(R.string.lbl_erro_salvar) + e, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -123,11 +127,9 @@ public class PosologiaNewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    repPosologia.excluirPosologia(posologiaalter.getIdPosologia());
-                    finish();
-
+                    verificaExclusao();
                 } catch (Exception e) {
-                    Toast.makeText(PosologiaNewActivity.this, "Error ao Excluir" + e, Toast.LENGTH_LONG).show();
+                    Toast.makeText(PosologiaNewActivity.this, getString(R.string.lbl_erro_excluir) + e, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -175,6 +177,28 @@ public class PosologiaNewActivity extends AppCompatActivity {
             cursor.close();
         }
 
+    }
+
+    public void verificaExclusao() {
+
+        AlertDialog.Builder mensagem = new AlertDialog.Builder(this);
+        mensagem.setMessage(R.string.verifica_exclusao);
+
+        mensagem.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                repPosologia.excluirPosologia(posologiaalter.getIdPosologia());
+                finish();
+
+            }
+        });
+        mensagem.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mensagem.create().show();
     }
 
 

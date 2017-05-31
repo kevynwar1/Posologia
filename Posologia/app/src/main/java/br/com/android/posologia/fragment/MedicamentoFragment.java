@@ -59,7 +59,7 @@ public class MedicamentoFragment extends Fragment {
             edtFiltro.addTextChangedListener(filtraDados);
 
         } catch (SQLException e) {
-            Toast.makeText(getActivity(), "Error do SQL" + e, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getString(R.string.lbl_sql) + e, Toast.LENGTH_LONG).show();
 
         }
         clickLista();
@@ -89,7 +89,7 @@ public class MedicamentoFragment extends Fragment {
                     intent.putExtra(PARAM_MEDICAMENTO, medicamento);
                     startActivity(intent);
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Error no click da lista Medicamento", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), R.string.erro_lista_medicamento, Toast.LENGTH_LONG).show();
                 }
 
             }

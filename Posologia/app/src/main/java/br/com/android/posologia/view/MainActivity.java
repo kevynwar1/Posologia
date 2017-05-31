@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             c.add(Calendar.SECOND, 3);
 
             AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-          //  alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
+            //  alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
         }
     }
 
@@ -140,12 +140,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void NewMapa(){
-        Intent it = new Intent(this,MapsActivity.class);
+    private void NewMapa() {
+        Intent it = new Intent(this, MapsActivity.class);
         startActivity(it);
     }
-
-
 
 }
 

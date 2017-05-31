@@ -70,6 +70,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:ems">10</item>
         <item name="android:hint">@string/hint_filtro</item>
+        <item name="android:textColor">@android:color/background_dark</item>
         <item name="android:textColorHint">@color/colorAccent</item>
         <item name="android:inputType">textPersonName|textCapSentences</item>
     </style>

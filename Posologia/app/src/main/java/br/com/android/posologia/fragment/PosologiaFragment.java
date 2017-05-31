@@ -51,7 +51,7 @@ public class PosologiaFragment extends Fragment {
             filtraDadosPosologia = new FiltraDados(adapterPosologia);
             edtFiltroPosologia.addTextChangedListener(filtraDadosPosologia);
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "Error do SQL" + e, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getString(R.string.lbl_sql) + e, Toast.LENGTH_LONG).show();
         }
         clickListaPosologia();
 
@@ -79,7 +79,7 @@ public class PosologiaFragment extends Fragment {
                     intent.putExtra(PARAM_POSOLOGIA, posologia);
                     startActivity(intent);
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Error no click da Lista Posologia" + e, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.erro_lista_posologia) + e, Toast.LENGTH_LONG).show();
                 }
             }
         });

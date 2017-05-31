@@ -9,9 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DataBase extends SQLiteOpenHelper {
+    private static final String NOME_BANCO = "Posologia";
+    private static final int VERSAO = 1;
+
 
     public DataBase(Context context) {
-        super(context, "Posologia", null, 1);
+        super(context, NOME_BANCO, null, VERSAO);
     }
 
     @Override

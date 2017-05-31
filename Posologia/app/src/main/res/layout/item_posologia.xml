@@ -45,12 +45,12 @@
     <TextView
         android:id="@+id/txtNomeMedicamento"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
 
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="5dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/ivPosologia" />
 
 

@@ -56,10 +56,10 @@ public class MedicamentoHelper {
         adapter = new ArrayAdapter<String>(medicamentoNew, android.R.layout.simple_spinner_dropdown_item);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMedicamento.setAdapter(adapter);
-        adapter.add("Antibioticos");
-        adapter.add("AntiInflamatorio");
-        adapter.add("Analgésico");
-        adapter.add("Outros");
+        adapter.add(medicamentoNew.getString(R.string.lbl_antibioticos));
+        adapter.add(medicamentoNew.getString(R.string.lbl_antiinflamatorio));
+        adapter.add(medicamentoNew.getString(R.string.lbl_analgesico));
+        adapter.add(medicamentoNew.getString(R.string.lbl_outros));
     }
 
     public void preencheForm(Medicamento medicamentoalter) {
@@ -95,26 +95,26 @@ public class MedicamentoHelper {
 
     }
 
-    public boolean validarCampos() {
+    public boolean validarCampos(MedicamentoNewActivity med) {
 
 
         if (edtNome.getText().toString().isEmpty()) {
-            edtNome.setError("Informe o Nome do Medicamento");
+            edtNome.setError(med.getString(R.string.nome_medicamento_erro));
             edtNome.setFocusable(true);
             edtNome.requestFocus();
             return false;
-        } else if (edtNome.getText().toString().length() < 5) {
-            edtNome.setError("Informe um Nome maior que 5 letras");
+        } else if (edtNome.getText().toString().length() < 3) {
+            edtNome.setError(med.getString(R.string.nome_medicamento_maior));
             edtNome.setFocusable(true);
             edtNome.requestFocus();
             return false;
         } else if (edtMiligrama.getText().toString().isEmpty()) {
-            edtMiligrama.setError("Informe o Miligrama");
+            edtMiligrama.setError(med.getString(R.string.nome_miligrama_erro));
             edtMiligrama.setFocusable(true);
             edtMiligrama.requestFocus();
             return false;
-        } else if (edtMiligrama.getText().toString().length() < 2) {
-            edtMiligrama.setError("Informe o Miligrama com 2 Numeros ou mais");
+        } else if (edtMiligrama.getText().toString().length() < 1) {
+            edtMiligrama.setError(med.getString(R.string.nome_miligrama_maior));
             edtMiligrama.setFocusable(true);
             edtMiligrama.requestFocus();
             return false;

@@ -59,7 +59,7 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
         Medicamento medicamento = getItem(position);
 
         viewHolder.txtNome.setText(medicamento.getNome());
-        viewHolder.txtDosagem.setText(medicamento.getMiligrama() + "mg");
+        viewHolder.txtDosagem.setText(medicamento.getMiligrama() + context.getString(R.string.lbl_mg));
         if (medicamento.getFoto() != null) {
             foto = BitmapFactory.decodeFile(medicamento.getFoto());
             viewHolder.ivItem.setImageBitmap(foto);

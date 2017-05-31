@@ -1,11 +1,13 @@
 package br.com.android.posologia.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,7 +69,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
         if ((bundle != null) && (bundle.containsKey(MedicamentoFragment.PARAM_MEDICAMENTO))) {
             medicamentoalter = ((Medicamento) bundle.getSerializable(MedicamentoFragment.PARAM_MEDICAMENTO));
             medHelper.preencheForm(medicamentoalter);
-            btSalvarMedicamento.setText("Alterar");
+            btSalvarMedicamento.setText(getString(R.string.alterar));
             btExcluirMedicamento.setVisibility(View.VISIBLE);
         } else {
             medicamento = new Medicamento();
@@ -82,7 +84,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
                 try {
                     medicamento = medHelper.getMedicamento();
                     medHelper.salvaImagem(caminhoArquivo);
-                    boolean validar = medHelper.validarCampos();
+                    boolean validar = medHelper.validarCampos(MedicamentoNewActivity.this);
 
                     if (medicamento.getId() == 0 && validar == true) {
 
@@ -93,7 +95,7 @@ public class MedicamentoNewActivity extends AppCompatActivity {
                         finish();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(MedicamentoNewActivity.this, "Error ao Salvar Dados", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MedicamentoNewActivity.this, getString(R.string.lbl_erro_salvar), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -105,11 +107,9 @@ public class MedicamentoNewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    repMedicamento.excluirMedicamento(medicamentoalter.getId());
-                    finish();
-
+                    verificaExclusao();
                 } catch (Exception e) {
-                    Toast.makeText(MedicamentoNewActivity.this, "Error ao Excluir Dados", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MedicamentoNewActivity.this, getString(R.string.lbl_erro_excluir), Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -156,6 +156,29 @@ public class MedicamentoNewActivity extends AppCompatActivity {
 //salvar copia da imagem pelo Extra_output
         intent.putExtra(MediaStore.EXTRA_OUTPUT, localImagem);
         startActivityForResult(intent, 1);
+    }
+
+    public void verificaExclusao() {
+
+        AlertDialog.Builder mensagem = new AlertDialog.Builder(this);
+        mensagem.setMessage(R.string.verifica_exclusao);
+
+
+        mensagem.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                repMedicamento.excluirMedicamento(medicamentoalter.getId());
+                finish();
+
+            }
+        });
+        mensagem.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mensagem.create().show();
     }
 
 

@@ -1,11 +1,14 @@
 package br.com.android.posologia.helper;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -121,9 +124,6 @@ public class PosologiaHelper {
         posologia.setTipo(spTipo.getSelectedItem().toString());
 
         posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId() + 1);
-
-        //posologia.getMedicamentoID().setNome(spNomeMedicamento.getSelectedItem().toString());
-
         return posologia;
     }
 
