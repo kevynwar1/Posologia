@@ -2,6 +2,7 @@ package br.com.android.posologia.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import br.com.android.posologia.R;
-import br.com.android.posologia.dao.WebService;
 import br.com.android.posologia.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -42,11 +50,59 @@ public class CadastroActivity extends AppCompatActivity {
                 usuario.setEmail(edtEmail.getText().toString());
                 usuario.setSenha(edtSenha.getText().toString());
 
-                new WebService(usuario).execute();
+                new AsyncTask<Object, Object, Usuario>() {
+                    public ProgressDialog dialog;
 
-                Toast.makeText(CadastroActivity.this, "Cadastrado com Sucesso", Toast.LENGTH_LONG).show();
-                Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
-                startActivity(it);
+                    protected void onPreExecute(){
+                        dialog = ProgressDialog.show(CadastroActivity.this, "Aguarde...", "Cadastrando usuário.", true, true);
+                    }
+
+                    @Override
+                    protected Usuario doInBackground(Object... params) {
+                        try {
+                            URL url = new URL("http://coopera.pe.hu/WebService/public/api/usuario/add");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                            conn.setRequestProperty("Accept", "application/json");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("nome", usuario.getNome());
+                            jsonParam.put("email", usuario.getEmail());
+                            jsonParam.put("senha", usuario.getSenha());
+
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            os.writeBytes(jsonParam.toString());
+
+                            try {
+                                BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+                                StringBuilder sb = new StringBuilder();
+                                String linha;
+
+                                while ((linha = br.readLine()) != null) {
+                                    sb.append(linha);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            os.flush();
+                            os.close();
+                            conn.disconnect();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return usuario;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Usuario params) {
+                        Toast.makeText(CadastroActivity.this, usuario.getNome()+", cadastrado com Sucesso.", Toast.LENGTH_LONG).show();
+                        Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
+                        startActivity(it);
+                    }
+                }.execute();
             }
         });
 

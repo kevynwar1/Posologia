@@ -1,13 +1,18 @@
 package br.com.android.posologia.model;
 
 /**
- * Created by kevyn on 08/05/2017.
+ * Created by Ikaro Sales on 08/05/2017.
  */
 
 public class Usuario {
+    private int id;
     private String nome;
     private String email;
     private String senha;
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getNome() { return nome; }
 
