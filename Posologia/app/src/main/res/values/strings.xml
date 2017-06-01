@@ -10,7 +10,7 @@
     <string name="app_title_pessoa">Entrar</string>
     <string name="app_title_pessoa_new">Cadastro de Usuário</string>
     <string name="app_title_posologia_new">Cadastro de Posologia</string>
-    <string name="app_title_mapas">Poso Maps</string>
+    <string name="app_title_mapas">Mapa Posologia</string>
 
     <string name="btn_cadastrar">Cadastrar</string>
     <string name="btn_entrar">Entrar</string>
@@ -50,7 +50,7 @@
     <string name="lbl_vezes_dia">Vezes ao Dia</string>
     <string name="lbl_de">De:</string>
     <string name="lbl_sql">Error do SQL</string>
-    <string name="lbl_antibioticos">Antibioticos</string>
+    <string name="lbl_antibioticos">Antibióticos</string>
     <string name="lbl_antiinflamatorio">AntiInflamatorio</string>
     <string name="lbl_analgesico">Analgésico</string>
     <string name="lbl_outros">Outros</string>
@@ -65,7 +65,7 @@
     <string name="observacoes">Observações</string>
     <string name="salvar_medicamento">Salvar</string>
     <string name="excluir_medicamento">Excluir</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Mapa</string>
 
     <string name="erro_lista_medicamento">Error no click da lista Medicamento</string>
     <string name="erro_lista_posologia">Error no click da Lista Posologia</string>
@@ -79,5 +79,8 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="alterar">Alterar</string>
+    <string name="lbl_Foto">Tirar Foto</string>
+    <string name="lbl_Observacao">Comentários</string>
+    <string name="home_body">Este aplicativo irá ajudá-lo com os medicamentos e doses que você precisa administrar, e você pode criar vários perfis.</string>
 
 </resources>

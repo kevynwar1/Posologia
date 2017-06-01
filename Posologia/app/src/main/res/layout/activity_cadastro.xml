@@ -13,9 +13,7 @@
         android:id="@+id/topImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_above="@+id/edtNome"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="129dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/header" />
 
@@ -23,33 +21,33 @@
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/edtSenha"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="0dp"
-        android:background="#FFF"
+        android:background="#0088AD"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="@string/lbl_email"
         android:inputType="textEmailAddress"
         android:padding="15dp"
-        android:textColor="#000"
-        android:textSize="16dp" />
+        android:textColor="#FFF"
+        android:textColorHint="#FFF"
+        android:textSize="16dp"
+        android:layout_below="@+id/edtNome"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/edtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnCadastrar"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="46dp"
-        android:background="#FFF"
+        android:background="#0088AD"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="@string/lbl_senha"
         android:inputType="textPassword"
         android:padding="15dp"
-        android:textColor="#000"
-        android:textSize="16dp" />
+        android:textColor="#FFF"
+        android:textColorHint="#FFF"
+        android:textSize="16dp"
+        android:layout_below="@+id/edtEmail"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnCadastrar"
@@ -67,15 +65,16 @@
     <EditText
         android:id="@+id/edtNome"
         style="@style/EdtForm"
-        android:layout_above="@+id/edtEmail"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="0dp"
-        android:background="#FFF"
+        android:background="#0088AD"
         android:fontFamily="sans-serif"
         android:hint="@string/lbl_nome"
         android:padding="15dp"
-        android:textColor="#000000"
-        android:textSize="16dp" />
+        android:textColor="#FFF"
+        android:textColorHint="#FFF"
+        android:textSize="16dp"
+        android:layout_below="@+id/logotipo"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp" />
 
     <ImageView
         android:id="@+id/logotipo"
