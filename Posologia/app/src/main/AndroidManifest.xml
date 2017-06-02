@@ -42,7 +42,9 @@
             android:theme="@style/MyTheme" />
         <activity
             android:name=".view.PosologiaNewActivity"
-            android:label="@string/app_title_posologia_new" />
+            android:label="@string/app_title_posologia_new">
+
+        </activity>
         <activity
             android:name=".view.SplashActivity"
             android:theme="@style/FullScreen">
