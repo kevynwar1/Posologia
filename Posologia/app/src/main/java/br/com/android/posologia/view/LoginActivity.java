@@ -99,10 +99,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(Usuario usuario) {
                         dialog.dismiss();
-                        if(usuario.getNome() != null) {
-                            // Toast.makeText(LoginActivity.this, "Olá, "+usuario.getNome()+".", Toast.LENGTH_LONG).show();
+                        if (usuario.getNome() != null) {
+                            Toast.makeText(LoginActivity.this, "Olá, " + usuario.getNome() + ".", Toast.LENGTH_LONG).show();
                             Intent it = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(it);
+                            edtEmail.setText("");
+                            edtSenha.setText("");
                         } else {
                             Toast.makeText(LoginActivity.this, "E-mail e/ou Senha incorreta.", Toast.LENGTH_LONG).show();
                         }
@@ -117,6 +119,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(LoginActivity.this, CadastroActivity.class);
                 startActivity(it);
+
+
             }
         });
     }
@@ -138,4 +142,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         return result;
     }
+
+
 }

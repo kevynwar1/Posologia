@@ -1,14 +1,25 @@
 package br.com.android.posologia.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,7 +41,11 @@ public class PosologiaFragment extends Fragment {
 
     private RepPosologia repPosologia;
     private FiltraDados filtraDadosPosologia;
+
     public static final String PARAM_POSOLOGIA = "POSOLOGIA";
+
+
+    View view;
 
     public PosologiaFragment() {
 
@@ -40,7 +55,7 @@ public class PosologiaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_posologia, container, false);
+        view = inflater.inflate(R.layout.fragment_posologia, container, false);
         lvPosologia = (ListView) view.findViewById(R.id.lvPosologia);
         edtFiltroPosologia = (EditText) view.findViewById(R.id.edtFiltroPosologia);
 
@@ -55,7 +70,6 @@ public class PosologiaFragment extends Fragment {
         }
         clickListaPosologia();
 
-
         return view;
     }
 
@@ -67,6 +81,7 @@ public class PosologiaFragment extends Fragment {
         lvPosologia.setAdapter(adapterPosologia);
 
     }
+
 
     private void clickListaPosologia() {
         lvPosologia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,4 +100,6 @@ public class PosologiaFragment extends Fragment {
         });
 
     }
+
+
 }

@@ -3,10 +3,12 @@ package br.com.android.posologia.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +33,7 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
         this.context = context;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
@@ -42,12 +45,9 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
             view = inflater.inflate(resource, parent, false);
 
             viewHolder.ivPosologia = (ImageView) view.findViewById(R.id.ivPosologia);
-        //    viewHolder.txtDiasTratamento = (TextView) view.findViewById(R.id.txtDiasTratamento);
             viewHolder.txtVezesDia = (TextView) view.findViewById(R.id.txtVezesDia);
             viewHolder.txtHorario = (TextView) view.findViewById(R.id.txtHorario);
-          //  viewHolder.txtDosagem = (TextView) view.findViewById(R.id.txtDosagem);
             viewHolder.txtNomeMedicamento = (TextView) view.findViewById(R.id.txtNomeMedicamento);
-
 
             view.setTag(viewHolder);
 
@@ -60,10 +60,8 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
         Posologia posologia = getItem(position);
 
         viewHolder.txtNomeMedicamento.setText(posologia.getMedicamentoID().getNome());
-//        viewHolder.txtDosagem.setText("Tomar :" + " " + posologia.getDosagem() + " " + posologia.getTipo());
         viewHolder.txtVezesDia.setText(posologia.getVezesDia() + " " + context.getString(R.string.lbl_vezes_dia));
         viewHolder.txtHorario.setText(context.getString(R.string.lbl_de) + posologia.getHorario());
-  //      viewHolder.txtDiasTratamento.setText("Durante :" + " " + posologia.getDiasTratamento() + " " + posologia.getTempo());
 
         if (posologia.getFotoPosologia() != null) {
             foto = BitmapFactory.decodeFile(posologia.getFotoPosologia());
@@ -77,12 +75,11 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
         return view;
     }
 
+
     static class ViewHolder {
         ImageView ivPosologia;
-    //    TextView txtDosagem;
         TextView txtVezesDia;
         TextView txtHorario;
-      //  TextView txtDiasTratamento;
         TextView txtNomeMedicamento;
     }
 }

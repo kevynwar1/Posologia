@@ -19,8 +19,9 @@
         android:id="@+id/LayoutTratamento"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/spNomeMedicamento"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivPosologia">
+        android:layout_marginTop="20dp">
 
         <EditText
             android:id="@+id/edtDiasMedicamento"
@@ -41,8 +42,8 @@
         android:id="@+id/LayoutVezes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textInputLayout4">
+        android:layout_below="@+id/textInputLayout4"
+        android:layout_alignParentStart="true">
 
         <EditText
             android:id="@+id/edtVezesDia"
@@ -60,8 +61,8 @@
         android:id="@+id/textInputLayout4"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/LayoutTratamento">
+        android:layout_below="@+id/LayoutTratamento"
+        android:layout_alignParentStart="true">
 
         <EditText
             android:id="@+id/edtDosagem"
@@ -77,30 +78,29 @@
         android:id="@+id/spHora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/LayoutVezes"
-        android:layout_marginEnd="6dp" />
+        android:layout_alignParentEnd="true" />
 
 
     <Button
         android:id="@+id/btSalvarPosologia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/spHora"
-        android:layout_alignParentStart="true"
+        android:text="@string/salvar"
         android:layout_below="@+id/spHora"
-        android:layout_marginTop="39dp"
-        android:text="@string/salvar" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btExcluirPosologia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btSalvarPosologia"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btSalvarPosologia"
         android:text="@string/excluir"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/btSalvarPosologia"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/spHora" />
 
     <Spinner
         android:id="@+id/spTempo"
@@ -109,8 +109,7 @@
         android:layout_above="@+id/textInputLayout4"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="6dp"
-        android:layout_toEndOf="@+id/LayoutTratamento"
-        android:popupBackground="@android:color/holo_blue_bright" />
+        android:layout_toEndOf="@+id/LayoutTratamento" />
 
     <Spinner
         android:id="@+id/spDosagem"
@@ -124,7 +123,7 @@
         android:id="@+id/spNomeMedicamento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btExcluirPosologia"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/ivPosologia"
+        android:layout_alignEnd="@+id/spHora" />
 
 </RelativeLayout>

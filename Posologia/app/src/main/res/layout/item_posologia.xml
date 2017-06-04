@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
@@ -8,7 +9,6 @@
     <ImageView
         android:id="@+id/ivPosologia"
         style="@style/IconItemLista" />
-
 
     <!--TextView
         android:id="@+id/txtDiasTratamento"
@@ -31,9 +31,9 @@
         android:id="@+id/txtHorario"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtVezesDia"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/txtVezesDia" />
+        android:layout_alignStart="@+id/txtVezesDia"
+        android:layout_below="@+id/txtVezesDia" />
 
     <!--TextView
         android:id="@+id/txtDosagem"

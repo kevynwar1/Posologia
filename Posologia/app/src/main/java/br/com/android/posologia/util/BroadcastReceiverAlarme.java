@@ -41,8 +41,8 @@ public class BroadcastReceiverAlarme extends BroadcastReceiver {
         String currentDateandTime = sdf.format(new Date());*/
 
 
-        gerarNotificacao(context, new Intent(context, MainActivity.class), "Nova Mensagem", "Titulo",
-                "Descricao Msg");
+        //    gerarNotificacao(context, new Intent(context, MainActivity.class), "Nova Mensagem", "Titulo",
+        //          "Descricao Msg");
 
 
     }

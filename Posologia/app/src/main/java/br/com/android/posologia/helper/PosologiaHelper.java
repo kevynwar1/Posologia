@@ -150,7 +150,7 @@ public class PosologiaHelper {
 
     }
 
-    public boolean validarCampos() {
+    public boolean validarCampos(PosologiaNewActivity pos) {
 
 
         if (edtDiasMedicamento.getText().toString().isEmpty()) {

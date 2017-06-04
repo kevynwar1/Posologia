@@ -106,7 +106,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
                 try {
                     posologia = posHelper.getPosologia();
                     posHelper.salvarImagem(pathImg);
-                    boolean valid = posHelper.validarCampos();
+                    boolean valid = posHelper.validarCampos(PosologiaNewActivity.this);
 
                     if (posologia.getIdPosologia() == 0 && valid == true) {
                         repPosologia.inserirPosologia(posologia);
