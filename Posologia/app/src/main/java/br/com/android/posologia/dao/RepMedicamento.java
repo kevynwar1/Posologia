@@ -89,7 +89,7 @@ public class RepMedicamento {
         ArrayList<Medicamento> lista = new ArrayList<>();
 
         // Cursor cursor = conn.query(BPosologia.TABELA, null, null, null, null, null, null);
-        Cursor cursor = conn.rawQuery("SELECT Nome, _id FROM Medicamento ORDER BY _id", null);
+        Cursor cursor = conn.rawQuery("SELECT _id, Nome FROM Medicamento ORDER BY _id", null);
 
         if (cursor.getCount() > 0) {
 
@@ -97,7 +97,7 @@ public class RepMedicamento {
 
             do {
                 Medicamento medicamento = new Medicamento();
-             //   medicamento.setId(cursor.getLong(cursor.getColumnIndex(MedicamentoTable.ID)));
+                medicamento.setId(cursor.getLong(cursor.getColumnIndex(MedicamentoTable.ID)));
                 medicamento.setNome(cursor.getString(cursor.getColumnIndex(MedicamentoTable.NOME)));
                 lista.add(medicamento);
             } while (cursor.moveToNext());

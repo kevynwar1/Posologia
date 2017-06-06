@@ -95,6 +95,7 @@ public class PosologiaNewActivity extends AppCompatActivity {
         list = repMedicamento.listaNomeMedicamento();
         for (Medicamento pos : list) {
             listaa.add(pos.getNome());
+
             posHelper.spinnerNomeMedicamento(this, listaa);
         }
     }

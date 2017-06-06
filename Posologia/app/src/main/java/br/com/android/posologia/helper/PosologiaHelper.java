@@ -13,10 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.com.android.posologia.R;
+import br.com.android.posologia.dao.RepMedicamento;
 import br.com.android.posologia.model.Medicamento;
 import br.com.android.posologia.model.Posologia;
 import br.com.android.posologia.view.PosologiaNewActivity;
@@ -38,6 +40,7 @@ public class PosologiaHelper {
     private Spinner spNomeMedicamento;
 
     private Posologia posologia;
+    ArrayList<Medicamento> mede;
 
     ArrayAdapter<String> adapterHorario;
     ArrayAdapter<String> adapterTempo;
@@ -57,6 +60,8 @@ public class PosologiaHelper {
         spTipo = (Spinner) posologiaNew.findViewById(R.id.spDosagem);
         spNomeMedicamento = (Spinner) posologiaNew.findViewById(R.id.spNomeMedicamento);
         posologia = new Posologia();
+        RepMedicamento rep = new RepMedicamento(posologiaNew);
+        mede = rep.listaNomeMedicamento();
 
 
     }
@@ -122,8 +127,8 @@ public class PosologiaHelper {
         posologia.setHorario(spHora.getSelectedItem().toString());
         posologia.setTempo(spTempo.getSelectedItem().toString());
         posologia.setTipo(spTipo.getSelectedItem().toString());
-
-        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId() + 1);
+        listMedicamento2(posologia);
+//        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId());
         return posologia;
     }
 
@@ -170,6 +175,18 @@ public class PosologiaHelper {
             return false;
         }
         return true;
+    }
+
+    public void listMedicamento2(Posologia pos) {
+        for (int i = 0; i < mede.size(); i++) {
+            int poss = spNomeMedicamento.getSelectedItemPosition();
+            Medicamento medec = mede.get(poss);
+            try {
+                pos.getMedicamentoID().setId(medec.getId());
+            } catch (Exception e) {
+
+            }
+        }
     }
 
 
