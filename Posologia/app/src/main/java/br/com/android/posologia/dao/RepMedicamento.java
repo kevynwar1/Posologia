@@ -91,7 +91,7 @@ public class RepMedicamento {
         // Cursor cursor = conn.query(BPosologia.TABELA, null, null, null, null, null, null);
         Cursor cursor = conn.rawQuery("SELECT _id, Nome FROM Medicamento ORDER BY _id", null);
 
-        if (cursor.getCount() > 0) {
+        if (cursor != null & cursor.getCount() > 0) {
 
             cursor.moveToFirst();
 

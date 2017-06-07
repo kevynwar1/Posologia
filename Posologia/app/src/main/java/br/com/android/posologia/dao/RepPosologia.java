@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import br.com.android.posologia.R;
 import br.com.android.posologia.adapter.ArrayAdapterPosologia;
 import br.com.android.posologia.model.Medicamento;
@@ -89,5 +91,28 @@ public class RepPosologia {
         }
 
         return adpPosologia;
+    }
+
+    public ArrayList<Posologia> listaArrayPosologia() {
+        conn = dataBase.getReadableDatabase();
+        ArrayList<Posologia> lista = new ArrayList<>();
+
+        // Cursor cursor = conn.query(BPosologia.TABELA, null, null, null, null, null, null);
+        Cursor cursor = conn.rawQuery("SELECT Horario, MedicamentoID FROM Posologia", null);
+
+        if (cursor != null & cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+
+            do {
+                Posologia posologia = new Posologia();
+                posologia.setHorario(cursor.getString(cursor.getColumnIndex(PosologiaTable.HORARIO)));
+                posologia.setMedicamento_ID(cursor.getInt(cursor.getColumnIndex(PosologiaTable.MEDICAMENTOID)));
+                lista.add(posologia);
+            } while (cursor.moveToNext());
+        }
+
+        return lista;
+
     }
 }

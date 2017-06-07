@@ -19,6 +19,7 @@ import br.com.android.posologia.R;
 import br.com.android.posologia.adapter.ViewPagerAdapter;
 import br.com.android.posologia.fragment.MedicamentoFragment;
 import br.com.android.posologia.fragment.PosologiaFragment;
+import br.com.android.posologia.util.ServiceNotification;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,25 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
         isTablet = getResources().getBoolean(R.bool.isTablet);
 
-        boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
-
-        if (alarmeAtivo) {
-            Intent intent = new Intent("ALARME_DISPARADO");
-            PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
-
-            Calendar c = Calendar.getInstance();
-            c.setTimeInMillis(System.currentTimeMillis());
-            c.add(Calendar.SECOND, 3);
-
-            AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-            //  alarme.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 5000, p);
-        }
+        Intent it = new Intent(this, ServiceNotification.class);
+        startService(it);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     @Override
@@ -83,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setTitle("Posologia - Controle seus Medicamentos - TABLET");
             }
         }
-
     }
 
     @Override
@@ -111,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_mapa:
                 NewMapa();
                 break;
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -127,12 +114,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-
     private void NewMedicamentos() {
         Intent intent = new Intent(this, MedicamentoNewActivity.class);
         startActivity(intent);
-
-
     }
 
     private void NewPosologia() {
@@ -144,6 +128,5 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(this, MapsActivity.class);
         startActivity(it);
     }
-
 }
 

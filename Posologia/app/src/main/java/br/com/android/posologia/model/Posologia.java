@@ -19,6 +19,10 @@ public class Posologia implements Serializable {
     private String dosagem;
     private String tempo;
     private String tipo;
+
+
+
+    private Integer medicamento_ID;
     private Medicamento medicamentoID;
 
     public Posologia() {
@@ -96,6 +100,14 @@ public class Posologia implements Serializable {
 
     public void setMedicamentoID(Medicamento medicamentoID) {
         this.medicamentoID = medicamentoID;
+    }
+
+    public Integer getMedicamento_ID() {
+        return medicamento_ID;
+    }
+
+    public void setMedicamento_ID(Integer medicamento_ID) {
+        this.medicamento_ID = medicamento_ID;
     }
 
     @Override
