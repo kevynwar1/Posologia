@@ -8,15 +8,14 @@
     android:layout_marginTop="16dp"
     tools:context="br.com.android.posologia.view.MedicamentoNewActivity">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivMedicamento"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
         android:background="@drawable/rounded_image"
-        app:srcCompat="@drawable/medical_pot_pills" />
+        android:src="@drawable/medical_pot_pills" />
 
     <EditText
         android:id="@+id/edtNomeMedicamento"
@@ -62,18 +61,18 @@
         android:id="@+id/spTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/edtObservacoes"
-        android:layout_marginTop="1.5dp"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="1.5dp" />
 
     <Button
         android:id="@+id/btSalvarMedicamento"
         android:layout_width="350dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="17dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/spTipo"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="14dp"
         android:background="@drawable/button_entrar"
         android:text="@string/salvar_medicamento"
         android:textAllCaps="false"
@@ -94,9 +93,9 @@
         android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/spTipo"
         android:layout_alignStart="@+id/btSalvarMedicamento"
         android:layout_alignTop="@+id/edtNomeMedicamento"
-        app:srcCompat="@drawable/more"
-        android:layout_above="@+id/spTipo" />
+        app:srcCompat="@drawable/more" />
 
 </RelativeLayout>

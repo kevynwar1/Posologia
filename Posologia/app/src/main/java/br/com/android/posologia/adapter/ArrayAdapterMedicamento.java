@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.model.Medicamento;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Kevyn on 03/05/2017.
@@ -32,7 +33,6 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
     }
 
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
@@ -43,7 +43,7 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
 
             view = inflater.inflate(resource, parent, false);
 
-            viewHolder.ivItem = (ImageView) view.findViewById(R.id.ivItem);
+            viewHolder.ivItem = (CircleImageView) view.findViewById(R.id.ivItem);
             viewHolder.txtNome = (TextView) view.findViewById(R.id.txtNome);
             viewHolder.txtDosagem = (TextView) view.findViewById(R.id.txtDosagem);
 
@@ -60,9 +60,16 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
 
         viewHolder.txtNome.setText(medicamento.getNome());
         viewHolder.txtDosagem.setText(medicamento.getMiligrama() + context.getString(R.string.lbl_mg));
-        if (medicamento.getFoto() != null) {
-            foto = BitmapFactory.decodeFile(medicamento.getFoto());
-            viewHolder.ivItem.setImageBitmap(foto);
+
+        String caminhoFoto = medicamento.getFoto();
+
+        if (caminhoFoto != null) {
+            foto = BitmapFactory.decodeFile(caminhoFoto);
+            Bitmap imagemreduzida = Bitmap.createScaledBitmap(foto, 100, 100, true);
+
+            viewHolder.ivItem.setImageBitmap(imagemreduzida);
+
+
         } else {
             viewHolder.ivItem.setImageResource(R.drawable.medical_pot_pills);
         }
@@ -72,7 +79,7 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
     }
 
     static class ViewHolder {
-        ImageView ivItem;
+        CircleImageView ivItem;
         TextView txtNome;
         TextView txtDosagem;
     }

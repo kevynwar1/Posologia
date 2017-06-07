@@ -22,13 +22,14 @@ import br.com.android.posologia.dao.RepMedicamento;
 import br.com.android.posologia.model.Medicamento;
 import br.com.android.posologia.model.Posologia;
 import br.com.android.posologia.view.PosologiaNewActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by kevyn on 26/05/2017.
  */
 
 public class PosologiaHelper {
-    private ImageView ivPosologia;
+    private CircleImageView ivPosologia;
 
     private EditText edtDiasMedicamento;
     private EditText edtVezesDia;
@@ -49,7 +50,7 @@ public class PosologiaHelper {
 
 
     public PosologiaHelper(PosologiaNewActivity posologiaNew) {
-        ivPosologia = (ImageView) posologiaNew.findViewById(R.id.ivPosologia);
+        ivPosologia = (CircleImageView) posologiaNew.findViewById(R.id.ivPosologia);
 
         edtDiasMedicamento = (EditText) posologiaNew.findViewById(R.id.edtDiasMedicamento);
         edtVezesDia = (EditText) posologiaNew.findViewById(R.id.edtVezesDia);

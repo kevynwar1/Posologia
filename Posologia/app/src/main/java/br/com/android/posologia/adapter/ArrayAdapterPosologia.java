@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.model.Posologia;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Kevyn on 03/05/2017.
@@ -44,7 +45,7 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
 
             view = inflater.inflate(resource, parent, false);
 
-            viewHolder.ivPosologia = (ImageView) view.findViewById(R.id.ivPosologia);
+            viewHolder.ivPosologia = (CircleImageView) view.findViewById(R.id.ivPosologia);
             viewHolder.txtVezesDia = (TextView) view.findViewById(R.id.txtVezesDia);
             viewHolder.txtHorario = (TextView) view.findViewById(R.id.txtHorario);
             viewHolder.txtNomeMedicamento = (TextView) view.findViewById(R.id.txtNomeMedicamento);
@@ -63,10 +64,12 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
         viewHolder.txtVezesDia.setText(posologia.getVezesDia() + " " + context.getString(R.string.lbl_vezes_dia));
         viewHolder.txtHorario.setText(context.getString(R.string.lbl_de) + posologia.getHorario());
 
-        if (posologia.getFotoPosologia() != null) {
-            foto = BitmapFactory.decodeFile(posologia.getFotoPosologia());
-            //Bitmap imagemreduzida = Bitmap.createScaledBitmap(foto, 100, 100, true);
-            viewHolder.ivPosologia.setImageBitmap(foto);
+        String caminhoFoto = posologia.getFotoPosologia();
+
+        if (caminhoFoto != null) {
+            foto = BitmapFactory.decodeFile(caminhoFoto);
+            Bitmap imagemreduzida = Bitmap.createScaledBitmap(foto, 100, 100, true);
+            viewHolder.ivPosologia.setImageBitmap(imagemreduzida);
         } else {
             viewHolder.ivPosologia.setImageResource(R.drawable.medical_pot_pills);
         }
@@ -77,7 +80,7 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
 
 
     static class ViewHolder {
-        ImageView ivPosologia;
+        CircleImageView ivPosologia;
         TextView txtVezesDia;
         TextView txtHorario;
         TextView txtNomeMedicamento;

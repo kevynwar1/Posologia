@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import br.com.android.posologia.R;
 import br.com.android.posologia.model.Medicamento;
 import br.com.android.posologia.view.MedicamentoNewActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by kevyn on 26/05/2017.
@@ -21,7 +22,7 @@ public class MedicamentoHelper {
     private EditText edtMiligrama;
     private EditText edtObservacoes;
     private Spinner spMedicamento;
-    private ImageView ivMedicamento;
+    private CircleImageView ivMedicamento;
 
     private Medicamento medicamento;
     ArrayAdapter<String> adapter;
@@ -32,7 +33,7 @@ public class MedicamentoHelper {
         edtObservacoes = (EditText) medicamentoNew.findViewById(R.id.edtObservacoes);
 
         spMedicamento = (Spinner) medicamentoNew.findViewById(R.id.spTipo);
-        ivMedicamento = (ImageView) medicamentoNew.findViewById(R.id.ivMedicamento);
+        ivMedicamento = (CircleImageView) medicamentoNew.findViewById(R.id.ivMedicamento);
         medicamento = new Medicamento();
 
 

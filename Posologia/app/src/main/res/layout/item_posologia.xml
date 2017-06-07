@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivPosologia"
         style="@style/IconItemLista" />
 
