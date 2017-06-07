@@ -84,12 +84,17 @@
 
     <Button
         android:id="@+id/btSalvarPosologia"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="@string/salvar"
-        android:layout_below="@+id/spHora"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@drawable/button_entrar"
+        android:text="@string/salvar_medicamento"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textSize="16dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btExcluirPosologia"

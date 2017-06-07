@@ -31,7 +31,8 @@
         android:textColorHint="#FFF"
         android:textSize="16dp"
         android:layout_below="@+id/edtNome"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/edtNome"
+        android:layout_toEndOf="@+id/imageView5" />
 
     <EditText
         android:id="@+id/edtSenha"
@@ -47,7 +48,8 @@
         android:textColorHint="#FFF"
         android:textSize="16dp"
         android:layout_below="@+id/edtEmail"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/edtEmail"
+        android:layout_toEndOf="@+id/imageView6" />
 
     <Button
         android:id="@+id/btnCadastrar"
@@ -73,8 +75,9 @@
         android:textColorHint="#FFF"
         android:textSize="16dp"
         android:layout_below="@+id/logotipo"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:layout_alignEnd="@+id/btnCadastrar"
+        android:layout_toEndOf="@+id/imageView5" />
 
     <ImageView
         android:id="@+id/logotipo"
@@ -105,5 +108,32 @@
         app:srcCompat="@drawable/title_cadastro"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edtEmail"
+        android:layout_alignStart="@+id/btnCadastrar"
+        android:layout_alignTop="@+id/edtNome"
+        app:srcCompat="@drawable/user_whit" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edtSenha"
+        android:layout_alignStart="@+id/imageView5"
+        android:layout_below="@+id/edtNome"
+        app:srcCompat="@drawable/mail_whit" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edtSenha"
+        android:layout_alignStart="@+id/imageView6"
+        android:layout_below="@+id/edtEmail"
+        app:srcCompat="@drawable/pass_whit" />
 
 </RelativeLayout>

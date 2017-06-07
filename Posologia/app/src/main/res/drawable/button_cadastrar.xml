@@ -4,6 +4,14 @@
         android:radius="100dp" />
     <solid
         android:color="#FFF" />
+    <gradient
+        android:angle="180"
+        android:centerX="35%"
+        android:centerColor="#F5F5F5"
+        android:startColor="#FFFFFF"
+        android:endColor="#EAEAEA"
+        android:type="linear"
+        />
     <size
         android:width="100dp"
         android:height="40dp" />
