@@ -46,7 +46,7 @@
         android:layout_above="@+id/btnCadastrarLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="17dp"
-        android:background="@drawable/button_entrar"
+        android:background="@drawable/button_entrar_index"
         android:text="@string/btn_entrar"
         android:textAllCaps="false"
         android:textColor="#FFF"
