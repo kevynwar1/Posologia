@@ -1,7 +1,9 @@
 package br.com.android.posologia.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -44,85 +46,89 @@ public class LoginActivity extends AppCompatActivity {
         edtSenha = (EditText) findViewById(R.id.edtLSenha);
 
         btnEntrar = (Button) findViewById(R.id.btnEntrarLogin);
-        btnEntrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                usuario = new Usuario();
+            btnEntrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(connection()) {
+                        usuario = new Usuario();
 
-                usuario.setEmail(edtEmail.getText().toString());
-                usuario.setSenha(edtSenha.getText().toString());
+                        usuario.setEmail(edtEmail.getText().toString());
+                        usuario.setSenha(edtSenha.getText().toString());
 
-                new AsyncTask<Object, Object, Usuario>() {
-                    public ProgressDialog dialog;
+                        new AsyncTask<Object, Object, Usuario>() {
+                            public ProgressDialog dialog;
 
-                    @Override
-                    protected void onPreExecute() {
-                        dialog = ProgressDialog.show(LoginActivity.this, "Aguarde...", "Verificando conta.", true, true);
+                            @Override
+                            protected void onPreExecute() {
+                                dialog = ProgressDialog.show(LoginActivity.this, "Aguarde...", "Verificando conta.", true, true);
+                            }
+
+                            @Override
+                            protected Usuario doInBackground(Object... params) {
+                                try {
+                                    URL url = new URL("http://coopera.pe.hu/WebService/public/api/usuario/entrar");
+                                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                    conn.setReadTimeout(10000);
+                                    conn.setConnectTimeout(15000);
+                                    conn.setRequestMethod("POST");
+                                    conn.setDoInput(true);
+                                    conn.connect();
+
+                                    JSONObject jsonParam = new JSONObject();
+                                    jsonParam.put("email", usuario.getEmail());
+                                    jsonParam.put("senha", usuario.getSenha());
+
+                                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                                    os.writeBytes(jsonParam.toString());
+
+                                    int response = conn.getResponseCode();
+                                    is = conn.getInputStream();
+
+                                    result = readStream(is, 500);
+                                    String[] split = result.split(",");
+
+                                    user = new Usuario();
+                                    user.setId(Integer.parseInt(split[0]));
+                                    user.setNome(split[1]);
+                                    user.setEmail(split[2]);
+                                    user.setSenha(split[3]);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                return user;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Usuario usuario) {
+                                dialog.dismiss();
+                                if (usuario.getNome() != null) {
+                                    Toast.makeText(LoginActivity.this, "Olá, " + usuario.getNome() + ".", Toast.LENGTH_LONG).show();
+                                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(it);
+                                    edtEmail.setText("");
+                                    edtSenha.setText("");
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "E-mail e/ou Senha incorreta.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }.execute();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Verifique sua conexão com a Internet.", Toast.LENGTH_LONG).show();
                     }
+                }
+            });
 
-                    @Override
-                    protected Usuario doInBackground(Object... params) {
-                        try {
-                            URL url = new URL("http://coopera.pe.hu/WebService/public/api/usuario/entrar");
-                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                            conn.setReadTimeout(10000);
-                            conn.setConnectTimeout(15000);
-                            conn.setRequestMethod("POST");
-                            conn.setDoInput(true);
-                            conn.connect();
-
-                            JSONObject jsonParam = new JSONObject();
-                            jsonParam.put("email", usuario.getEmail());
-                            jsonParam.put("senha", usuario.getSenha());
-
-                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                            os.writeBytes(jsonParam.toString());
-
-                            int response = conn.getResponseCode();
-                            is = conn.getInputStream();
-
-                            result = readStream(is, 500);
-                            String[] split = result.split(",");
-
-                            user = new Usuario();
-                            user.setId(Integer.parseInt(split[0]));
-                            user.setNome(split[1]);
-                            user.setEmail(split[2]);
-                            user.setSenha(split[3]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        return user;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Usuario usuario) {
-                        dialog.dismiss();
-                        if (usuario.getNome() != null) {
-                            Toast.makeText(LoginActivity.this, "Olá, " + usuario.getNome() + ".", Toast.LENGTH_LONG).show();
-                            Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(it);
-                            edtEmail.setText("");
-                            edtSenha.setText("");
-                        } else {
-                            Toast.makeText(LoginActivity.this, "E-mail e/ou Senha incorreta.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }.execute();
-            }
-        });
-
-        btnCadastrar = (Button) findViewById(R.id.btnCadastrarLogin);
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(LoginActivity.this, CadastroActivity.class);
-                startActivity(it);
+            btnCadastrar = (Button) findViewById(R.id.btnCadastrarLogin);
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(LoginActivity.this, CadastroActivity.class);
+                    startActivity(it);
 
 
-            }
-        });
+                }
+            });
     }
 
     private String readStream(InputStream stream, int maxLength) throws IOException {
@@ -143,5 +149,16 @@ public class LoginActivity extends AppCompatActivity {
         return result;
     }
 
-
+    public boolean connection() {
+        boolean conectado;
+        ConnectivityManager conectivtyManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (conectivtyManager.getActiveNetworkInfo() != null
+                && conectivtyManager.getActiveNetworkInfo().isAvailable()
+                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
+            conectado = true;
+        } else {
+            conectado = false;
+        }
+        return conectado;
+    }
 }

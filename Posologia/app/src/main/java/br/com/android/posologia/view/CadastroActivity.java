@@ -1,7 +1,9 @@
 package br.com.android.posologia.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,65 +48,70 @@ public class CadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usuario = new Usuario();
-                if (validarCampos() == true) {
-                    usuario.setNome(edtNome.getText().toString());
-                    usuario.setEmail(edtEmail.getText().toString());
-                    usuario.setSenha(edtSenha.getText().toString());
+                if(connection()) {
+                    if (validarCampos() == true) {
+                        usuario = new Usuario();
 
-                    new AsyncTask<Object, Object, Usuario>() {
-                        public ProgressDialog dialog;
+                        usuario.setNome(edtNome.getText().toString());
+                        usuario.setEmail(edtEmail.getText().toString());
+                        usuario.setSenha(edtSenha.getText().toString());
 
-                        protected void onPreExecute() {
-                            dialog = ProgressDialog.show(CadastroActivity.this, "Aguarde...", "Cadastrando usuário.", true, true);
-                        }
+                        new AsyncTask<Object, Object, Usuario>() {
+                            public ProgressDialog dialog;
 
-                        @Override
-                        protected Usuario doInBackground(Object... params) {
-                            try {
-                                URL url = new URL("http://coopera.pe.hu/WebService/public/api/usuario/add");
-                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                                conn.setRequestMethod("POST");
-                                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                                conn.setRequestProperty("Accept", "application/json");
-                                conn.setDoOutput(true);
-                                conn.setDoInput(true);
+                            protected void onPreExecute() {
+                                dialog = ProgressDialog.show(CadastroActivity.this, "Aguarde...", "Cadastrando usuário.", true, true);
+                            }
 
-                                JSONObject jsonParam = new JSONObject();
-                                jsonParam.put("nome", usuario.getNome());
-                                jsonParam.put("email", usuario.getEmail());
-                                jsonParam.put("senha", usuario.getSenha());
-
-                                DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                                os.writeBytes(jsonParam.toString());
-
+                            @Override
+                            protected Usuario doInBackground(Object... params) {
                                 try {
-                                    BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-                                    StringBuilder sb = new StringBuilder();
-                                    String linha;
+                                    URL url = new URL("http://coopera.pe.hu/WebService/public/api/usuario/add");
+                                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                    conn.setRequestMethod("POST");
+                                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                                    conn.setRequestProperty("Accept", "application/json");
+                                    conn.setDoOutput(true);
+                                    conn.setDoInput(true);
 
-                                    while ((linha = br.readLine()) != null) {
-                                        sb.append(linha);
+                                    JSONObject jsonParam = new JSONObject();
+                                    jsonParam.put("nome", usuario.getNome());
+                                    jsonParam.put("email", usuario.getEmail());
+                                    jsonParam.put("senha", usuario.getSenha());
+
+                                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                                    os.writeBytes(jsonParam.toString());
+
+                                    try {
+                                        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+                                        StringBuilder sb = new StringBuilder();
+                                        String linha;
+
+                                        while ((linha = br.readLine()) != null) {
+                                            sb.append(linha);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
+                                    os.flush();
+                                    os.close();
+                                    conn.disconnect();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                                os.flush();
-                                os.close();
-                                conn.disconnect();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                return usuario;
                             }
-                            return usuario;
-                        }
 
-                        @Override
-                        protected void onPostExecute(Usuario params) {
-                            Toast.makeText(CadastroActivity.this, usuario.getNome() + ", cadastrado com Sucesso.", Toast.LENGTH_LONG).show();
-                            Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
-                            startActivity(it);
-                        }
-                    }.execute();
+                            @Override
+                            protected void onPostExecute(Usuario params) {
+                                Toast.makeText(CadastroActivity.this, usuario.getNome() + ", cadastrado com Sucesso.", Toast.LENGTH_LONG).show();
+                                Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
+                                startActivity(it);
+                            }
+                        }.execute();
+                    }
+                } else {
+                    Toast.makeText(CadastroActivity.this, "Verifique sua conexão com a Internet.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -164,5 +171,16 @@ public class CadastroActivity extends AppCompatActivity {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-
+    public boolean connection() {
+        boolean conectado;
+        ConnectivityManager conectivtyManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (conectivtyManager.getActiveNetworkInfo() != null
+                && conectivtyManager.getActiveNetworkInfo().isAvailable()
+                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
+            conectado = true;
+        } else {
+            conectado = false;
+        }
+        return conectado;
+    }
 }
