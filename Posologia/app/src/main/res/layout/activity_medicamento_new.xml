@@ -5,16 +5,16 @@
     android:id="@+id/activity_medicamento_new"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="#F7F7F8"
     tools:context="br.com.android.posologia.view.MedicamentoNewActivity">
 
     <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/bg_medicamento"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/bg_medicamento" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivMedicamento"
@@ -22,9 +22,10 @@
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_image"
         android:layout_marginTop="15dp"
-        android:src="@drawable/medical_pot_pills" />
+        android:background="@drawable/rounded_image"
+        android:src="@drawable/medical_pot_pills"
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/edtNomeMedicamento"
@@ -32,30 +33,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivMedicamento"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+
+        android:background="@drawable/textview_top"
         android:ems="10"
         android:hint="@string/nome_medicamento"
         android:inputType="textCapSentences"
-
-        android:background="@drawable/textview_top"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:textSize="17dp" />
 
     <EditText
         android:id="@+id/edtMiligrama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:hint="@string/miligrama"
-
-        android:background="@drawable/textview_middle"
-        android:layout_marginTop="1.5dp"
-        android:layout_marginRight="30dp"
-        android:textSize="17dp"
+        android:layout_alignStart="@+id/edtNomeMedicamento"
         android:layout_below="@+id/edtNomeMedicamento"
-        android:layout_alignStart="@+id/edtNomeMedicamento" />
+        android:layout_marginRight="30dp"
+
+        android:layout_marginTop="1.5dp"
+        android:background="@drawable/textview_middle"
+        android:ems="10"
+        android:hint="@string/miligrama"
+        android:inputType="number"
+        android:textSize="17dp" />
 
     <EditText
         android:id="@+id/edtObservacoes"
@@ -63,15 +64,15 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/edtMiligrama"
         android:layout_below="@+id/edtMiligrama"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="1.5dp"
+
+        android:background="@drawable/textview_bottom"
         android:ems="10"
         android:hint="@string/observacoes"
         android:inputType="textCapSentences"
-
-        android:background="@drawable/textview_bottom"
-        android:layout_marginTop="1.5dp"
-        android:layout_marginRight="30dp"
-        android:textSize="17dp"
-        android:layout_centerVertical="true"/>
+        android:textSize="17dp" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -86,9 +87,9 @@
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/point"
         android:layout_above="@+id/edtObservacoes"
-        android:layout_alignStart="@+id/imageView9" />
+        android:layout_alignStart="@+id/imageView9"
+        app:srcCompat="@drawable/point" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -104,22 +105,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/edtObservacoes"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/btSalvarMedicamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/spTipo"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_entrar_index"
+        android:text="@string/salvar_medicamento"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#FFF"
-        android:textSize="16dp"
-        android:text="@string/salvar_medicamento"
-        android:layout_marginBottom="14dp"
-        android:background="@drawable/button_entrar_index"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/spTipo" />
+        android:textSize="17dp"
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/btExcluirMedicamento"
@@ -132,6 +135,6 @@
         android:text="@string/excluir_medicamento"
         android:textAllCaps="false"
         android:textColor="#FFF"
-        android:textSize="16dp"
+        android:textSize="17dp"
         android:visibility="invisible" />
 </RelativeLayout>
