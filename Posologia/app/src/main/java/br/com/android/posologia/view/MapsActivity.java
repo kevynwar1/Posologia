@@ -17,6 +17,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -80,36 +82,75 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             pegarLocalAtual();
         }
     }
-
-
-
-
+    
 
     public void pegarLocalAtual() {
         gps = new ObterGPS(this);
 
-        if (pegarLocalizacao(this)) {
-            mMap.clear();
 
 
-            origem = new LatLng(gps.getLatitude(), gps.getLongitude());
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            mMap.getUiSettings().setZoomControlsEnabled(true);
-            mMap.addMarker(new MarkerOptions().position(origem).title("Mi Casa"));
-            CameraPosition atualizaLoc = new CameraPosition.Builder().target(origem).zoom(15).bearing(0).tilt(45).build();
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaLoc));
-            Toast.makeText(MapsActivity.this, "lat: " + gps.getLatitude() + " log: " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+        if(pegarLocalizacao(this) &&  gps.getLatitude() != 0.0 || gps.getLongitude() != 0.0){
 
+            atualizaMapa();
+            tentativas = 0;
+
+        }
+        else if (tentativas < 10){
+
+            tentativas++;
+
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    pegarLocalAtual();
+                }
+            }, 2000);
 
 
         }
         else{
 
-            exibirMensagem();
+            Toast.makeText(this, "Localização não encontrada, por favor tente novamente!",Toast.LENGTH_SHORT).show();
+
+
         }
 
 
     }
+
+    public void atualizaMapa(){
+
+        //BitmapDescriptor icone = BitmapDescriptorFactory.fromResource(R.drawable.icone_maps2);
+
+        mMap.clear();
+        origem = new LatLng(gps.getLatitude(), gps.getLongitude());
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.addMarker(new MarkerOptions().position(origem).icon(icone).title("Seu local"));
+        CameraPosition atualizaLoc = new CameraPosition.Builder().target(origem).zoom(15).bearing(0).tilt(45).build();
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaLoc));
+        Toast.makeText(MapsActivity.this, "lat: " + gps.getLatitude() + " log: " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+
+
+
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(permissao == true){
+
+            pegarLocalAtual();
+        }
+
+    }
+
+
+
+
 
     public boolean pegarLocalizacao(Context context){
         int REQUEST_PERMISSION_LOCALIZATION = 221;
