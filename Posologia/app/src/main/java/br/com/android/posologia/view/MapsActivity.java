@@ -82,7 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             pegarLocalAtual();
         }
     }
-    
+
 
     public void pegarLocalAtual() {
         gps = new ObterGPS(this);
@@ -120,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void atualizaMapa(){
 
-        //BitmapDescriptor icone = BitmapDescriptorFactory.fromResource(R.drawable.icone_maps2);
+        BitmapDescriptor icone = BitmapDescriptorFactory.fromResource(R.drawable.icone_maps2);
 
         mMap.clear();
         origem = new LatLng(gps.getLatitude(), gps.getLongitude());
@@ -187,6 +187,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 MapsActivity.this.startActivity(intent);
+                permissao = true;
             }
         });
 
