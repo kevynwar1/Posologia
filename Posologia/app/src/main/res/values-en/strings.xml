@@ -10,6 +10,9 @@
     <string name="app_title_pessoa">Login</string>
     <string name="app_title_pessoa_new">Register of User</string>
     <string name="app_title_posologia_new">Register of Dosage</string>
+    <string name="app_title_home">Posologia - Manage Your Medications</string>
+    <String name="app_title_tablet">Posology - Manage Your Medications - TABLET</String>
+    <string name="app_title_tablet_simples">Posology - TABLET</string>
 
     <string name="btn_cadastrar">Register</string>
     <string name="btn_entrar">Sign in</string>
@@ -80,4 +83,6 @@
     <string name="lbl_observacao">Comments</string>
     <string name="title_activity_maps">Maps</string>
 
+    <string name="adapter_medicamentos">MEDICINES</string>
+    <string name="adapter_horario">SCHEDULES</string>
 </resources>

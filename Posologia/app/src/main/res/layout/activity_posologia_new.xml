@@ -1,134 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="16dp">
+    android:background="#F7F7F8">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/bg_medicamento" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivPosologia"
         android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
-       android:src="@drawable/medical_pot_pills" />
-
-    <android.support.design.widget.TextInputLayout
-
-        android:id="@+id/LayoutTratamento"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spNomeMedicamento"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/edtDiasMedicamento"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/ivPosologia"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="@string/tempo_de_medicacao"
-            android:inputType="number" />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-
-        android:id="@+id/LayoutVezes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textInputLayout4"
-        android:layout_alignParentStart="true">
-
-        <EditText
-            android:id="@+id/edtVezesDia"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/LayoutTratamento"
-            android:ems="10"
-            android:hint="@string/vezes_ao_dia"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LayoutTratamento"
-        android:layout_alignParentStart="true">
-
-        <EditText
-            android:id="@+id/edtDosagem"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:hint="@string/dosagem"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/spHora"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LayoutVezes"
-        android:layout_alignParentEnd="true" />
-
-
-    <Button
-        android:id="@+id/btSalvarPosologia"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_entrar"
-        android:text="@string/salvar_medicamento"
-        android:textAllCaps="false"
-        android:textColor="#FFF"
-        android:textSize="16dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginBottom="15dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/btExcluirPosologia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/excluir"
-        android:visibility="invisible"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/btSalvarPosologia"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/spHora" />
-
-    <Spinner
-        android:id="@+id/spTempo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textInputLayout4"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="6dp"
-        android:layout_toEndOf="@+id/LayoutTratamento" />
-
-    <Spinner
-        android:id="@+id/spDosagem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/LayoutVezes"
-        android:layout_marginBottom="8dp"
-        android:layout_toEndOf="@+id/textInputLayout4" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_image"
+        android:src="@drawable/medical_pot_pills"
+        android:visibility="visible" />
 
     <Spinner
         android:id="@+id/spNomeMedicamento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivPosologia"
-        android:layout_alignEnd="@+id/spHora" />
+        android:layout_alignStart="@+id/edtDosagem"
+        android:layout_below="@+id/edtDosagem"
+        android:layout_marginRight="30dp"/>
 
+    <EditText
+        android:id="@+id/edtDiasMedicamento"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivPosologia"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/tempo_de_medicacao"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/textview_top"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/spTempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edtDiasMedicamento"
+        android:layout_toEndOf="@+id/edtVezesDia"
+        android:layout_above="@+id/edtVezesDia"
+        android:layout_marginRight="30dp"/>
+
+    <EditText
+        android:id="@+id/edtVezesDia"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edtDiasMedicamento"
+        android:ems="10"
+        android:hint="@string/vezes_ao_dia"
+
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/textview_middle"
+        android:inputType="number"
+        android:layout_alignEnd="@+id/edtDosagem" />
+
+    <Spinner
+        android:id="@+id/spHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtDiasMedicamento"
+        android:layout_toEndOf="@+id/edtVezesDia"
+        android:layout_marginRight="30dp"
+        android:layout_above="@+id/edtDosagem" />
+
+    <EditText
+        android:id="@+id/edtDosagem"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:hint="@string/dosagem"
+        android:layout_below="@+id/edtVezesDia"
+
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/textview_middle"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/spDosagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtVezesDia"
+        android:layout_toEndOf="@+id/edtVezesDia"
+        android:layout_alignBottom="@+id/edtDosagem"
+        android:layout_marginRight="30dp"/>
+
+    <Button
+        android:id="@+id/btSalvarPosologia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:background="@drawable/button_entrar_index"
+        android:text="@string/salvar_medicamento"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:layout_marginBottom="40dp"
+        android:textSize="17dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/spNomeMedicamento" />
+
+    <Button
+        android:id="@+id/btExcluirPosologia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/spNomeMedicamento"
+        android:layout_alignTop="@+id/btSalvarPosologia"
+        android:background="@drawable/button_excluir"
+        android:text="@string/excluir_medicamento"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textSize="17dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/ivIconMedicacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edtDiasMedicamento"
+        android:layout_alignTop="@+id/edtDiasMedicamento"
+        android:layout_marginStart="10dp"
+        app:srcCompat="@drawable/point" />
+
+    <ImageView
+        android:id="@+id/ivIconDia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ivIconMedicacao"
+        android:layout_below="@+id/edtDiasMedicamento"
+        app:srcCompat="@drawable/point" />
+
+    <ImageView
+        android:id="@+id/ivIconDosagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ivIconDia"
+        android:layout_below="@+id/edtVezesDia"
+        app:srcCompat="@drawable/point" />
 </RelativeLayout>

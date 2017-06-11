@@ -1,5 +1,6 @@
 package br.com.android.posologia.view;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -104,9 +105,11 @@ public class CadastroActivity extends AppCompatActivity {
 
                             @Override
                             protected void onPostExecute(Usuario params) {
+                                if(dialog != null) {
+                                    dialog.dismiss();
+                                }
                                 Toast.makeText(CadastroActivity.this, usuario.getNome() + ", cadastrado com Sucesso.", Toast.LENGTH_LONG).show();
-                                Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
-                                startActivity(it);
+                                finish();
                             }
                         }.execute();
                     }

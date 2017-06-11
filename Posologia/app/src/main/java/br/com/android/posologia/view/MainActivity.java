@@ -61,15 +61,15 @@ public class MainActivity extends AppCompatActivity {
         orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             //code for portrait mode
-            toolbar.setTitle("Posologia");
+            toolbar.setTitle(R.string.app_name);
             if (isTablet) {
-                toolbar.setTitle("Posologia - TABLET");
+                toolbar.setTitle(R.string.app_title_tablet_simples);
             }
         } else {
             //code for landscape mode
-            toolbar.setTitle("Posologia - Controle seus Medicamentos");
+            toolbar.setTitle(R.string.app_title_home);
             if (isTablet) {
-                toolbar.setTitle("Posologia - Controle seus Medicamentos - TABLET");
+                toolbar.setTitle(R.string.app_title_tablet);
             }
         }
     }
@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 
-        adapter.addFrag(new MedicamentoFragment(), "MEDICAMENTOS");
-        adapter.addFrag(new PosologiaFragment(), "HORÁRIOS");
+        adapter.addFrag(new MedicamentoFragment(), ""+R.string.adapter_medicamentos);
+        adapter.addFrag(new PosologiaFragment(), ""+R.string.adapter_horario);
 
         viewPager.setAdapter(adapter);
     }

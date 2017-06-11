@@ -11,6 +11,9 @@
     <string name="app_title_pessoa_new">Cadastro de Usuário</string>
     <string name="app_title_posologia_new">Cadastro de Posologia</string>
     <string name="app_title_mapas">Mapa Posologia</string>
+    <string name="app_title_home">Posologia - Controle seus Medicamentos</string>
+    <string name="app_title_tablet">Posologia - Controle seus Medicamentos - TABLET</string>
+    <string name="app_title_tablet_simples">Posologia - TABLET</string>
 
     <string name="btn_cadastrar">Cadastrar</string>
     <string name="btn_entrar">Entrar</string>
@@ -55,7 +58,7 @@
     <string name="lbl_analgesico">Analgésico</string>
     <string name="lbl_outros">Outros</string>
 
-    <string name="tempo_de_medicacao">Tempo de Medicação</string>
+    <string name="tempo_de_medicacao">Tempo Medicação</string>
     <string name="vezes_ao_dia">Vezes ao Dia</string>
     <string name="dosagem">Dosagem</string>
     <string name="salvar">Salvar</string>
@@ -83,4 +86,6 @@
     <string name="lbl_Observacao">Comentários</string>
     <string name="home_body">Este aplicativo irá ajudá-lo com os medicamentos e doses que você precisa administrar, e você pode criar vários perfis.</string>
 
+    <string name="adapter_medicamentos">MEDICAMENTOS</string>
+    <string name="adapter_horario">HORÁRIOS</string>
 </resources>

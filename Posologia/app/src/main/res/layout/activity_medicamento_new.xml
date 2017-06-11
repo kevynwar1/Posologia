@@ -75,7 +75,7 @@
         android:textSize="17dp" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/ivIconNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/edtNomeMedicamento"
@@ -84,18 +84,18 @@
         app:srcCompat="@drawable/point" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/ivIconMiligrama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/edtObservacoes"
-        android:layout_alignStart="@+id/imageView9"
+        android:layout_alignStart="@+id/ivIconNome"
         app:srcCompat="@drawable/point" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/ivIconObservacoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView10"
+        android:layout_alignStart="@+id/ivIconMiligrama"
         android:layout_below="@+id/edtMiligrama"
         app:srcCompat="@drawable/point" />
 

@@ -1,11 +1,8 @@
 package br.com.android.posologia.view;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -15,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.widget.Toast;
@@ -32,10 +28,7 @@ import br.com.android.posologia.model.Medicamento;
 import br.com.android.posologia.model.Posologia;
 import br.com.android.posologia.fragment.PosologiaFragment;
 
-import static br.com.android.posologia.R.id.ivPosologia;
-
 public class PosologiaNewActivity extends AppCompatActivity {
-
     private Button btSalvarPosologa;
     private Button btExcluirPosologia;
 
@@ -49,7 +42,6 @@ public class PosologiaNewActivity extends AppCompatActivity {
     PosologiaHelper posHelper;
     Posologia posologiaalter;
     String pathImg;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +67,6 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         receberDados();
-
     }
 
     private void receberDados() {
@@ -104,21 +95,21 @@ public class PosologiaNewActivity extends AppCompatActivity {
         btSalvarPosologa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    posologia = posHelper.getPosologia();
-                    posHelper.salvarImagem(pathImg);
-                    boolean valid = posHelper.validarCampos(PosologiaNewActivity.this);
+            try {
+                posologia = posHelper.getPosologia();
+                posHelper.salvarImagem(pathImg);
+                boolean valid = posHelper.validarCampos(PosologiaNewActivity.this);
 
-                    if (posologia.getIdPosologia() == 0 && valid == true) {
-                        repPosologia.inserirPosologia(posologia);
-                        finish();
-                    } else if (posologia.getIdPosologia() != 0 && valid == true) {
-                        repPosologia.alterarPosologia(posologia);
-                        finish();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(PosologiaNewActivity.this, getString(R.string.lbl_erro_salvar) + e, Toast.LENGTH_LONG).show();
+                if (posologia.getIdPosologia() == 0 && valid == true) {
+                    repPosologia.inserirPosologia(posologia);
+                    finish();
+                } else if (posologia.getIdPosologia() != 0 && valid == true) {
+                    repPosologia.alterarPosologia(posologia);
+                    finish();
                 }
+            } catch (Exception e) {
+                Toast.makeText(PosologiaNewActivity.this, getString(R.string.lbl_erro_salvar) + e, Toast.LENGTH_LONG).show();
+            }
             }
         });
     }
@@ -127,15 +118,14 @@ public class PosologiaNewActivity extends AppCompatActivity {
         btExcluirPosologia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    verificaExclusao();
-                } catch (Exception e) {
-                    Toast.makeText(PosologiaNewActivity.this, getString(R.string.lbl_erro_excluir) + e, Toast.LENGTH_LONG).show();
-                }
+            try {
+                verificaExclusao();
+            } catch (Exception e) {
+                Toast.makeText(PosologiaNewActivity.this, getString(R.string.lbl_erro_excluir) + e, Toast.LENGTH_LONG).show();
+            }
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,7 +154,6 @@ public class PosologiaNewActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Uri imageSelecionada = data.getData();
 
@@ -177,11 +166,9 @@ public class PosologiaNewActivity extends AppCompatActivity {
             posHelper.carregaImagem(pathImg);
             cursor.close();
         }
-
     }
 
     public void verificaExclusao() {
-
         AlertDialog.Builder mensagem = new AlertDialog.Builder(this);
         mensagem.setMessage(R.string.verifica_exclusao);
 
@@ -190,9 +177,9 @@ public class PosologiaNewActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 repPosologia.excluirPosologia(posologiaalter.getIdPosologia());
                 finish();
-
             }
         });
+
         mensagem.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -201,7 +188,4 @@ public class PosologiaNewActivity extends AppCompatActivity {
         });
         mensagem.create().show();
     }
-
-
 }
-

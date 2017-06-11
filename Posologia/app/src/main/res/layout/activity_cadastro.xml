@@ -135,5 +135,4 @@
         android:layout_alignStart="@+id/imageView6"
         android:layout_below="@+id/edtEmail"
         app:srcCompat="@drawable/pass_whit" />
-
 </RelativeLayout>
