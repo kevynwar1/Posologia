@@ -77,7 +77,7 @@ public class PosologiaFragment extends Fragment {
     public void onResume() {
         super.onResume();
         adapterPosologia = repPosologia.listarPosologias(getActivity());
-        filtraDadosPosologia.setArrayAdapter(adapterPosologia);
+        filtraDadosPosologia.setAdapter(adapterPosologia);
         lvPosologia.setAdapter(adapterPosologia);
 
     }

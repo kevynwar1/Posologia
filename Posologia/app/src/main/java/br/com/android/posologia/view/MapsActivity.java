@@ -168,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else{
 
-            Toast.makeText(this, "Localização não encontrada, por favor tente novamente!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.localizacao_erro,Toast.LENGTH_SHORT).show();
 
 
         }
@@ -185,11 +185,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // mMap.clear();
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.getUiSettings().setZoomControlsEnabled(true);
-            Toast.makeText(this, "Endereço encontrado com sucesso!",Toast.LENGTH_SHORT).show();
-            mMap.addMarker(new MarkerOptions().position(destino).icon(icone).title("Endereço encontrado"));
+            Toast.makeText(this, R.string.endereco_encontrado,Toast.LENGTH_SHORT).show();
+            mMap.addMarker(new MarkerOptions().position(destino).icon(icone).title(getString(R.string.endereco)));
             CameraPosition atualizaDestino = new CameraPosition.Builder().target(destino).zoom(15).bearing(0).tilt(45).build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaDestino));
-            Toast.makeText(MapsActivity.this, "lat: " + destino.latitude + " long: " + destino.longitude, Toast.LENGTH_LONG).show();
+            Toast.makeText(MapsActivity.this, getString(R.string.latitude) + destino.latitude + getString(R.string.longitude) + destino.longitude, Toast.LENGTH_LONG).show();
 
         }
         else
@@ -199,10 +199,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             origem = new LatLng(gps.getLatitude(), gps.getLongitude());
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.getUiSettings().setZoomControlsEnabled(true);
-            mMap.addMarker(new MarkerOptions().position(origem).icon(icone).title("Seu local"));
+            mMap.addMarker(new MarkerOptions().position(origem).icon(icone).title(getString(R.string.seu_local)));
             CameraPosition atualizaLoc = new CameraPosition.Builder().target(origem).zoom(15).bearing(0).tilt(45).build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaLoc));
-            Toast.makeText(MapsActivity.this, "lat: " + gps.getLatitude() + " long: " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+            Toast.makeText(MapsActivity.this,  getString(R.string.latitude) + gps.getLatitude() + getString(R.string.longitude) + gps.getLongitude(), Toast.LENGTH_LONG).show();
 
         }
 
@@ -251,13 +251,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(MapsActivity.this);
 
         // Titulo do dialogo
-        alertDialog.setTitle("GPS");
+        alertDialog.setTitle(R.string.gps);
 
         // Mensagem do dialogo
-        alertDialog.setMessage("GPS não está habilitado. Deseja configurar?");
+        alertDialog.setMessage(R.string.gps_configurar);
 
         // On pressing Settings button
-        alertDialog.setPositiveButton("Configurar", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(R.string.configurar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 MapsActivity.this.startActivity(intent);
@@ -266,7 +266,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
@@ -313,7 +313,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
         else{
-            Toast.makeText(this, "Não foi possivel localizar seu endereço, tente novamente!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.endereco_erro,Toast.LENGTH_SHORT).show();
         }
 
 

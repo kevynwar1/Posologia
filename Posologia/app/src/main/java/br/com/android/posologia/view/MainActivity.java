@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 
-        adapter.addFrag(new MedicamentoFragment(), ""+R.string.adapter_medicamentos);
-        adapter.addFrag(new PosologiaFragment(), ""+R.string.adapter_horario);
+        adapter.addFrag(new MedicamentoFragment(), getString(R.string.adapter_medicamentos));
+        adapter.addFrag(new PosologiaFragment(), getString(R.string.adapter_horario));
 
         viewPager.setAdapter(adapter);
     }

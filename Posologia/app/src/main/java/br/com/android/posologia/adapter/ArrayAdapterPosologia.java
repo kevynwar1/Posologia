@@ -52,7 +52,6 @@ public class ArrayAdapterPosologia extends ArrayAdapter<Posologia> {
 
             view.setTag(viewHolder);
 
-            // convertView = view;
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
             view = convertView;

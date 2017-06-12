@@ -15,7 +15,7 @@ public class FiltraDados implements TextWatcher {
         this.arrayAdapter = arrayAdapter;
     }
 
-    public void setArrayAdapter(ArrayAdapter<String> arrayAdapter) {
+    public void setAdapter(ArrayAdapter<String> arrayAdapter) {
         this.arrayAdapter = arrayAdapter;
     }
 

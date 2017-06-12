@@ -63,9 +63,8 @@ public class RepPosologia {
         conn = dataBase.getReadableDatabase();
         ArrayAdapterPosologia adpPosologia = new ArrayAdapterPosologia(context, R.layout.item_posologia);
 
-        //Cursor cursor = conn.query(PosologiaTable.TABELA, null, null, null, null, null, null);
-          Cursor cursor = conn.rawQuery("SELECT _idPosologia, MedicamentoID, Nome, FotoPosologia, DiasTratamento, VezesDia, Dosagem, Horario," +
-          "Tempo, Posologia.Tipo FROM Posologia INNER JOIN Medicamento ON (MedicamentoID = _id)", null);
+        Cursor cursor = conn.rawQuery("SELECT _idPosologia, MedicamentoID, Nome, FotoPosologia, DiasTratamento, VezesDia, Dosagem, Horario," +
+                "Tempo, Posologia.Tipo FROM Posologia INNER JOIN Medicamento ON (MedicamentoID = _id)", null);
 
 
         if (cursor.getCount() > 0) {
@@ -93,11 +92,10 @@ public class RepPosologia {
         return adpPosologia;
     }
 
-    public ArrayList<Posologia> listaArrayPosologia() {
+/*    public ArrayList<Posologia> listaArrayPosologia() {
         conn = dataBase.getReadableDatabase();
         ArrayList<Posologia> lista = new ArrayList<>();
 
-        // Cursor cursor = conn.query(BPosologia.TABELA, null, null, null, null, null, null);
         Cursor cursor = conn.rawQuery("SELECT Horario, MedicamentoID FROM Posologia", null);
 
         if (cursor != null & cursor.getCount() > 0) {
@@ -114,5 +112,5 @@ public class RepPosologia {
 
         return lista;
 
-    }
+    }*/
 }
