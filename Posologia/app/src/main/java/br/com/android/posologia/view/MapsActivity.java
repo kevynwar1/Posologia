@@ -1,4 +1,4 @@
-﻿package br.com.android.posologia.view;
+package br.com.android.posologia.view;
 
 import android.app.Activity;
 import android.content.Context;
