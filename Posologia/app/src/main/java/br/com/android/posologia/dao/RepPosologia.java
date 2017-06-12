@@ -92,7 +92,7 @@ public class RepPosologia {
         return adpPosologia;
     }
 
-/*    public ArrayList<Posologia> listaArrayPosologia() {
+    public ArrayList<Posologia> listaArrayPosologia() {
         conn = dataBase.getReadableDatabase();
         ArrayList<Posologia> lista = new ArrayList<>();
 
@@ -112,5 +112,5 @@ public class RepPosologia {
 
         return lista;
 
-    }*/
+    }
 }
