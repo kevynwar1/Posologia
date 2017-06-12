@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Handler;
@@ -13,6 +14,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -27,6 +31,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 import br.com.android.posologia.R;
 import br.com.android.posologia.util.ObterGPS;
@@ -63,6 +69,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        editLocal = (EditText)findViewById(R.id.edtLocal);
+        botaoBuscar = (ImageButton)findViewById(R.id.imgBtnBuscar);
+        botaoLocalizar = (ImageButton)findViewById(R.id.imgBtnLocal);
+
+        botaoBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                botaoBuscar.setEnabled(false);
+                buscarEndereco();
+            }
+        });
+        loaderManager = getSupportLoaderManager();
+        TxtProgresso =(TextView)findViewById(R.id.txtProgresso);
+        LayoutProgresso = (LinearLayout)findViewById(R.id.llProgresso);
+
+        botaoLocalizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(origem != null){
+
+
+                    CameraPosition atualizaLoc = new CameraPosition.Builder().target(origem).zoom(15).bearing(0).tilt(45).build();
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaLoc));
+
+
+                }
+
+            }
+        });
+
+
+
+
+
+
     }
 
 
@@ -133,22 +175,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void atualizaMapa(){
+    public boolean atualizaMapa(){
 
         BitmapDescriptor icone = BitmapDescriptorFactory.fromResource(R.drawable.icone_maps2);
 
-        mMap.clear();
-        origem = new LatLng(gps.getLatitude(), gps.getLongitude());
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.addMarker(new MarkerOptions().position(origem).icon(icone).title("Seu local"));
-        CameraPosition atualizaLoc = new CameraPosition.Builder().target(origem).zoom(15).bearing(0).tilt(45).build();
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaLoc));
-        Toast.makeText(MapsActivity.this, "lat: " + gps.getLatitude() + " log: " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+        if(destino != null){
+
+            // mMap.clear();
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+            Toast.makeText(this, "Endereço encontrado com sucesso!",Toast.LENGTH_SHORT).show();
+            mMap.addMarker(new MarkerOptions().position(destino).icon(icone).title("Endereço encontrado"));
+            CameraPosition atualizaDestino = new CameraPosition.Builder().target(destino).zoom(15).bearing(0).tilt(45).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaDestino));
+            Toast.makeText(MapsActivity.this, "lat: " + destino.latitude + " long: " + destino.longitude, Toast.LENGTH_LONG).show();
+
+        }
+        else
+        {
+
+            mMap.clear();
+            origem = new LatLng(gps.getLatitude(), gps.getLongitude());
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.addMarker(new MarkerOptions().position(origem).icon(icone).title("Seu local"));
+            CameraPosition atualizaLoc = new CameraPosition.Builder().target(origem).zoom(15).bearing(0).tilt(45).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaLoc));
+            Toast.makeText(MapsActivity.this, "lat: " + gps.getLatitude() + " long: " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+
+        }
 
 
-
-
+        return  true;
     }
 
 
@@ -216,6 +274,75 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // visualizacao do dialogo
         alertDialog.show();
     }
+
+
+    private void buscarEndereco() {
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editLocal.getWindowToken(), 0);
+        loaderManager.restartLoader(LOADER_ENDERECO, null, BuscaLocalCallback);
+        exibirProgresso(getString(R.string.msg_buscar));
+    }
+    private void exibirProgresso(String texto) {
+        TxtProgresso.setText(texto);
+        LayoutProgresso.setVisibility(View.VISIBLE);
+    }
+    private void ocultarProgresso() {
+        LayoutProgresso.setVisibility(View.GONE);
+    }
+
+
+    private void localizarEndereco(final List<Address> listaEnderecos) {
+        ocultarProgresso();
+        botaoBuscar.setEnabled(true);
+        if (listaEnderecos != null && listaEnderecos.size() > 0) {
+            for (int i = 0; i < listaEnderecos.size(); i++) {
+
+                if (!listaEnderecos.get(0).equals("")) {
+                    destino = new LatLng
+                            (listaEnderecos.get(0).getLatitude(),
+                                    listaEnderecos.get(0).getLongitude());
+
+                    atualizaMapa();
+                }
+
+
+
+            }
+
+
+        }
+        else{
+            Toast.makeText(this, "Não foi possivel localizar seu endereço, tente novamente!",Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
+
+
+    LoaderManager.LoaderCallbacks<List<Address>> BuscaLocalCallback =
+            new LoaderManager.LoaderCallbacks<List<Address>>() {
+                @Override
+                public Loader<List<Address>> onCreateLoader(int i, Bundle bundle) {
+                    return new BuscarLocalTask(MapsActivity.this,
+                            editLocal.getText().toString());
+                }
+                @Override
+                public void onLoadFinished(Loader<List<Address>> listLoader,
+                                           final List<Address> addresses) {
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            localizarEndereco(addresses);
+                        }
+                    });
+                }
+                @Override
+                public void onLoaderReset(Loader<List<Address>> listLoader) {
+                }
+            };
+
+
 
 
 }
