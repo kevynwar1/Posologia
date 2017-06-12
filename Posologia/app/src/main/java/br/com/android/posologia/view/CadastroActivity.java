@@ -61,7 +61,7 @@ public class CadastroActivity extends AppCompatActivity {
                             public ProgressDialog dialog;
 
                             protected void onPreExecute() {
-                                dialog = ProgressDialog.show(CadastroActivity.this, "Aguarde...", "Cadastrando usuário.", true, true);
+                                dialog = ProgressDialog.show(CadastroActivity.this, getString(R.string.aguarde), getString(R.string.cadastro_usuario), true, true);
                             }
 
                             @Override
@@ -108,13 +108,13 @@ public class CadastroActivity extends AppCompatActivity {
                                 if(dialog != null) {
                                     dialog.dismiss();
                                 }
-                                Toast.makeText(CadastroActivity.this, usuario.getNome() + ", cadastrado com Sucesso.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CadastroActivity.this, usuario.getNome() + getString(R.string.cadastro_sucesso), Toast.LENGTH_LONG).show();
                                 finish();
                             }
                         }.execute();
                     }
                 } else {
-                    Toast.makeText(CadastroActivity.this, "Verifique sua conexão com a Internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CadastroActivity.this, R.string.verifica_conexao, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -136,32 +136,32 @@ public class CadastroActivity extends AppCompatActivity {
 
     public boolean validarCampos() {
         if (edtNome.getText().toString().isEmpty()) {
-            edtNome.setError("Informe o Nome");
+            edtNome.setError(getString(R.string.lbl_nome_requerido));
             edtNome.setFocusable(true);
             edtNome.requestFocus();
             return false;
         } else if (edtNome.getText().toString().length() < 3) {
-            edtNome.setError("Informe um nome com mais de 3 letras");
+            edtNome.setError(getString(R.string.nome_usuario_maior));
             edtNome.setFocusable(true);
             edtNome.requestFocus();
             return false;
         } else if (edtSenha.getText().toString().isEmpty()) {
-            edtSenha.setError("Informe uma senha");
+            edtSenha.setError(getString(R.string.senha_usuario));
             edtSenha.setFocusable(true);
             edtSenha.requestFocus();
             return false;
         } else if (edtSenha.getText().toString().length() <= 3) {
-            edtSenha.setError("Informe uma senha com mais de 3 digitos");
+            edtSenha.setError(getString(R.string.senha_usuario_maior));
             edtSenha.setFocusable(true);
             edtSenha.requestFocus();
             return false;
         } else if (edtEmail.getText().toString().isEmpty()) {
-            edtEmail.setError("Informe um e-mail");
+            edtEmail.setError(getString(R.string.email_usuario));
             edtEmail.setFocusable(true);
             edtEmail.requestFocus();
             return false;
         } else if (!isValidEmail(edtEmail.getText().toString())) {
-            edtEmail.setError("Informe um e-mail valido");
+            edtEmail.setError(getString(R.string.email_usuario_invalido));
             edtEmail.setFocusable(true);
             edtEmail.requestFocus();
             return false;

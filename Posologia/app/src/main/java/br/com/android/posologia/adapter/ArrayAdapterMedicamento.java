@@ -20,7 +20,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
     int resource;
-
     private LayoutInflater inflater;
     private Context context;
     private Bitmap foto;
@@ -50,7 +49,6 @@ public class ArrayAdapterMedicamento extends ArrayAdapter<Medicamento> {
 
             view.setTag(viewHolder);
 
-            // convertView = view;
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
             view = convertView;

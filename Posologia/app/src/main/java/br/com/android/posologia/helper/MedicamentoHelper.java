@@ -55,7 +55,6 @@ public class MedicamentoHelper {
     public void spinnerTipoMedicamento(MedicamentoNewActivity medicamentoNew) {
 
         adapter = new ArrayAdapter<String>(medicamentoNew, android.R.layout.simple_spinner_dropdown_item);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMedicamento.setAdapter(adapter);
         adapter.add(medicamentoNew.getString(R.string.lbl_antibioticos));
         adapter.add(medicamentoNew.getString(R.string.lbl_antiinflamatorio));
@@ -76,7 +75,6 @@ public class MedicamentoHelper {
     public void carregaImagem(String caminhoArquivo) {
         if (caminhoArquivo != null) {
             Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
-            // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
             ivMedicamento.setImageBitmap(imagem);
         } else {
             ivMedicamento.setImageResource(R.drawable.medical_pot_pills);

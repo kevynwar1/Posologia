@@ -25,9 +25,6 @@ public class RepMedicamento {
         dataBase = new DataBase(ctx);
     }
 
-    public RepMedicamento() {
-    }
-
     private ContentValues preencheContentValues(Medicamento medicamento) {
         ContentValues values = new ContentValues();
 
@@ -88,7 +85,6 @@ public class RepMedicamento {
         conn = dataBase.getReadableDatabase();
         ArrayList<Medicamento> lista = new ArrayList<>();
 
-        // Cursor cursor = conn.query(BPosologia.TABELA, null, null, null, null, null, null);
         Cursor cursor = conn.rawQuery("SELECT _id, Nome FROM Medicamento ORDER BY _id", null);
 
         if (cursor != null & cursor.getCount() > 0) {

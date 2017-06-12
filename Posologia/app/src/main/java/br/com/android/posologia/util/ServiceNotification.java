@@ -27,6 +27,7 @@ import br.com.android.posologia.dao.RepMedicamento;
 import br.com.android.posologia.dao.RepPosologia;
 import br.com.android.posologia.model.Medicamento;
 import br.com.android.posologia.model.Posologia;
+import br.com.android.posologia.view.MainActivity;
 
 public class ServiceNotification extends Service {
 
@@ -52,8 +53,7 @@ public class ServiceNotification extends Service {
             public void run() {
                 //Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
 
-
-                /*try {
+                try {
 
                     RepMedicamento repMedicamento = new RepMedicamento(context);
                     ArrayList<Medicamento> lstMedicamentos = repMedicamento.listaNomeMedicamento();
@@ -71,17 +71,15 @@ public class ServiceNotification extends Service {
 
 
                                     //Toast.makeText(context, "Medicamento: " + medicamento.getNome() + "Horario: "+ posologia.getHorario(), Toast.LENGTH_LONG).show();
-                                        gerarNotificacao(context,
-                                                         mIntent,
-                                                         "Tomar Medicamento",
-                                                         "Posologia", "Medicamento: " + medicamento.getNome() + "Horario: "+ posologia.getHorario(),
-                                                         medicamento.getId());
+                                    gerarNotificacao(context,
+                                            mIntent,
+                                            "Tomar Medicamento",
+                                            "Posologia", "Medicamento: " + medicamento.getNome() + "Horario: " + posologia.getHorario(),
+                                            medicamento.getId());
                                 }
 
                             }
                         }
-                    } else {
-                        Toast.makeText(context, "Não existe medicamentos configurados", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (Exception e) {
@@ -102,18 +100,11 @@ public class ServiceNotification extends Service {
 
     }
 
- /*   //Metodo para Notificação
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    //Metodo para Notificação
     public void gerarNotificacao(Context context, Intent intent, CharSequence ticker,
                                  CharSequence titulo, CharSequence descricao, Long idNotification) {
-        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        StatusBarNotification[] notifications = nm.getActiveNotifications();
-        for (StatusBarNotification notification : notifications) {
-            if (notification.getId() == idNotification) {
-                return;
-            }
-        }
+        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent p = PendingIntent.getActivity(context, 0, intent, 0);
 
@@ -126,18 +117,10 @@ public class ServiceNotification extends Service {
         builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.medicamentos));
         builder.setContentIntent(p);
 
-        /*Descrição da Notificação
-        NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
-        String[] descricao = new String[]{"Descricao1", "Descricao2"};
-        for (int i = 0; i < descricao.length; i++){
-            style.addLine((descricao[i]));
-        }
-        builder.setStyle(style);
-
         //Vibração para Notificação
         Notification n = builder.build();
         n.vibrate = new long[]{150, 300, 150, 600};
-        n.flags = Notification.FLAG_AUTO_CANCEL;
+        n.flags = Notification.FLAG_AUTO_CANCEL | Notification.FLAG_ONLY_ALERT_ONCE;
         nm.notify(Integer.valueOf(idNotification.toString()), n);
 
         //Toque para Notificação
@@ -148,13 +131,7 @@ public class ServiceNotification extends Service {
         } catch (Exception e) {
 
         }
-    }*/
-
-            }
-
-        };
     }
 }
-
 
 

@@ -62,27 +62,27 @@ public class PosologiaHelper {
     public void spinnerHorario(PosologiaNewActivity posologiaNew) {
         adapterHorario = new ArrayAdapter<String>(posologiaNew, android.R.layout.simple_spinner_dropdown_item);
         spHora.setAdapter(adapterHorario);
-        adapterHorario.add("02 em 02 Horas");
-        adapterHorario.add("04 em 04 Horas");
-        adapterHorario.add("06 em 06 Horas");
-        adapterHorario.add("08 em 08 Horas");
-        adapterHorario.add("12 em 12 Horas");
+        adapterHorario.add(posologiaNew.getString(R.string.hora_02));
+        adapterHorario.add(posologiaNew.getString(R.string.hora_04));
+        adapterHorario.add(posologiaNew.getString(R.string.hora_06));
+        adapterHorario.add(posologiaNew.getString(R.string.hora_08));
+        adapterHorario.add(posologiaNew.getString(R.string.hora_12));
     }
 
     public void spinnerTempo(PosologiaNewActivity posologiaNew) {
         adapterTempo = new ArrayAdapter<String>(posologiaNew, android.R.layout.simple_spinner_dropdown_item);
         spTempo.setAdapter(adapterTempo);
-        adapterTempo.add("Dias");
-        adapterTempo.add("Meses");
-        adapterTempo.add("Anos");
+        adapterTempo.add(posologiaNew.getString(R.string.dias));
+        adapterTempo.add(posologiaNew.getString(R.string.meses));
+        adapterTempo.add(posologiaNew.getString(R.string.anos));
     }
 
     public void spinnerDosagem(PosologiaNewActivity posologiaNew) {
         adapterTipo = new ArrayAdapter<String>(posologiaNew, android.R.layout.simple_spinner_dropdown_item);
         spTipo.setAdapter(adapterTipo);
-        adapterTipo.add("Gotas");
-        adapterTipo.add("Comprimidos");
-        adapterTipo.add("ML");
+        adapterTipo.add(posologiaNew.getString(R.string.gotas));
+        adapterTipo.add(posologiaNew.getString(R.string.comprimidos));
+        adapterTipo.add(posologiaNew.getString(R.string.ml));
     }
 
     public void spinnerNomeMedicamento(PosologiaNewActivity posologiaNew, ArrayList<String> list) {
@@ -120,14 +120,12 @@ public class PosologiaHelper {
         posologia.setTempo(spTempo.getSelectedItem().toString());
         posologia.setTipo(spTipo.getSelectedItem().toString());
         listMedicamento2(posologia);
-//        posologia.getMedicamentoID().setId(spNomeMedicamento.getSelectedItemId());
         return posologia;
     }
 
     public void carregaImagem(String caminhoArquivo) {
         if (caminhoArquivo != null) {
             Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
-            // Bitmap imagemreduzida = Bitmap.createScaledBitmap(imagem, 100, 100, true);
             ivPosologia.setImageBitmap(imagem);
         } else {
             ivPosologia.setImageResource(R.drawable.medical_pot_pills);
@@ -138,9 +136,6 @@ public class PosologiaHelper {
     public void salvarImagem(String caminho) {
         if (caminho != null) {
             posologia.setFotoPosologia(caminho);
-
-            Bitmap imagem = BitmapFactory.decodeFile(caminho);
-            ivPosologia.setImageBitmap(imagem);
         } else {
             ivPosologia.setImageResource(R.drawable.medical_pot_pills);
         }
@@ -151,17 +146,17 @@ public class PosologiaHelper {
 
 
         if (edtDiasMedicamento.getText().toString().isEmpty()) {
-            edtDiasMedicamento.setError("Informe o Tempo de Medicação");
+            edtDiasMedicamento.setError(pos.getString(R.string.nome_medicacao_erro));
             edtDiasMedicamento.setFocusable(true);
             edtDiasMedicamento.requestFocus();
             return false;
         } else if (edtDosagem.getText().toString().isEmpty()) {
-            edtDosagem.setError("Informe a Dosagem do Medicamento");
+            edtDosagem.setError(pos.getString(R.string.nome_dosagem_erro));
             edtDosagem.setFocusable(true);
             edtDosagem.requestFocus();
             return false;
         } else if (edtVezesDia.getText().toString().isEmpty()) {
-            edtVezesDia.setError("Informe Quantidade vezes ao dia");
+            edtVezesDia.setError(pos.getString(R.string.nome_quantidade_erro));
             edtVezesDia.setFocusable(true);
             edtVezesDia.requestFocus();
             return false;

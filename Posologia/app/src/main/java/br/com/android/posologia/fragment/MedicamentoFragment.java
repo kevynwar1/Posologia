@@ -75,7 +75,7 @@ public class MedicamentoFragment extends Fragment {
     public void onResume() {
         super.onResume();
         adapter = repMedicamento.listarMedicamentos(getActivity());
-        filtraDados.setArrayAdapter(adapter);
+        filtraDados.setAdapter(adapter);
         lvMedicamento.setAdapter(adapter);
 
 
