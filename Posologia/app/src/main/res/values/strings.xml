@@ -73,6 +73,10 @@
     <string name="erro_lista_medicamento">Error no click da lista Medicamento</string>
     <string name="erro_lista_posologia">Error no click da Lista Posologia</string>
 
+    <string name="titulo_lista_endereco">Selecione o destino</string>
+    <string name="msg_buscar">Buscando endereço...</string>
+    <string name="erro_gps">É necessário habilitar a configuração de localização para utilizar o aplicativo.</string>
+
     <string name="nome_medicamento_erro">Informe o Nome do Medicamento</string>
     <string name="nome_miligrama_erro">Informe o Miligrama</string>
     <string name="nome_medicamento_maior">Informe um Nome maior que 3 letras</string>
