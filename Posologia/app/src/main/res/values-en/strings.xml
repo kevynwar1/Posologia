@@ -11,7 +11,7 @@
     <string name="app_title_pessoa_new">Register of User</string>
     <string name="app_title_posologia_new">Register of Dosage</string>
     <string name="app_title_home">Posologia - Manage Your Medications</string>
-    <String name="app_title_tablet">Posology - Manage Your Medications - TABLET</String>
+    <string name="app_title_tablet">Posology - Manage Your Medications - TABLET</string>
     <string name="app_title_tablet_simples">Posology - TABLET</string>
 
     <string name="btn_cadastrar">Register</string>

@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -91,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if(origem != null){
 
-
+                    //retorna a posição local do gps
                     CameraPosition atualizaLoc = new CameraPosition.Builder().target(origem).zoom(15).bearing(0).tilt(45).build();
                     mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaLoc));
 
@@ -108,8 +109,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
-
+    /* Verica se o gps estava ativo atraves da classe LocationManager por meio de Contexto
+     * A patir disso, verifica se o gps da parelho esta ativo, caso contrario, e exibido Alert para o usuario
+     */
     public void verificaGPS() {
 
         LocationManager local = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
@@ -135,6 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         verificaGPS();
 
+            // verifica se o gps esta ativo busca a localização atual
         if(gpsLigado == true){
 
             pegarLocalAtual();
@@ -143,12 +146,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void pegarLocalAtual() {
+        // obtem uma nova instância de gps na busca da localização do aparelho
         gps = new ObterGPS(this);
 
 
 
         if(pegarLocalizacao(this) &&  gps.getLatitude() != 0.0 || gps.getLongitude() != 0.0){
 
+            //atualiza o mapa conforme as coordenadas encontradas
             atualizaMapa();
             tentativas = 0;
 
@@ -157,6 +162,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             tentativas++;
 
+            /* Se utiliza a classe Handle como um manipulador, neste caso o objeto busca
+             *  enfileirar novas tentativas para obter o resultado de um mesmo conteudo
+             * a cada 2 segundos
+             */
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -180,21 +189,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         BitmapDescriptor icone = BitmapDescriptorFactory.fromResource(R.drawable.icone_maps2);
 
+        //adicionar uma localização ao mapa caso seja solicitado um endereço de busca
         if(destino != null){
 
             // mMap.clear();
+
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.getUiSettings().setZoomControlsEnabled(true);
             Toast.makeText(this, "Endereço encontrado com sucesso!",Toast.LENGTH_SHORT).show();
             mMap.addMarker(new MarkerOptions().position(destino).icon(icone).title("Endereço encontrado"));
             CameraPosition atualizaDestino = new CameraPosition.Builder().target(destino).zoom(15).bearing(0).tilt(45).build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(atualizaDestino));
-            Toast.makeText(MapsActivity.this, "lat: " + destino.latitude + " long: " + destino.longitude, Toast.LENGTH_LONG).show();
+            editLocal.getText().clear();
 
         }
         else
         {
 
+            //havendo a lat e long do local atual, e adicionado uma localizaçao ao mapa referente as posições encontradas
             mMap.clear();
             origem = new LatLng(gps.getLatitude(), gps.getLongitude());
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -215,6 +227,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onResume() {
         super.onResume();
 
+        /*Resume a activity maps caso seja solicitado para  o gps ser habilitado
+        com o mesmo habilitado, realiza um nova busca pela localização atual*/
         if(permissao == true){
 
             pegarLocalAtual();
@@ -223,9 +237,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
-
+    ///Solicita uma permissão para buscar uma localização mais proxima do gps
     public boolean pegarLocalizacao(Context context){
         int REQUEST_PERMISSION_LOCALIZATION = 221;
         this.res = true;
@@ -276,13 +288,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         alertDialog.show();
     }
 
-
+    // realiza a busca pelo o endereço prentendido
     private void buscarEndereco() {
         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editLocal.getWindowToken(), 0);
+        //inicia a busca pelo endereço
         loaderManager.restartLoader(LOADER_ENDERECO, null, BuscaLocalCallback);
         exibirProgresso(getString(R.string.msg_buscar));
     }
+    // exibir Layout de buscar
     private void exibirProgresso(String texto) {
         TxtProgresso.setText(texto);
         LayoutProgresso.setVisibility(View.VISIBLE);
@@ -291,7 +305,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LayoutProgresso.setVisibility(View.GONE);
     }
 
-
+     /* realiza d tratamento do endereço localizado
+     * o metodo utiliza uma lista do tipo Address
+     * havendo um endereço mesmo pega as referencias de lat. e long. e as retorna para o mapa
+     * */
     private void localizarEndereco(final List<Address> listaEnderecos) {
         ocultarProgresso();
         botaoBuscar.setEnabled(true);
@@ -319,8 +336,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
-
-
+    /* Carrega a lista de endereços a partir da busca efetuada
+    * A partir da busca do objeto BuscarLocalTask, o metodo onLoadFinished
+    * eh chamado e cria um lista de endereços com resultados da busca
+    * */
     LoaderManager.LoaderCallbacks<List<Address>> BuscaLocalCallback =
             new LoaderManager.LoaderCallbacks<List<Address>>() {
                 @Override

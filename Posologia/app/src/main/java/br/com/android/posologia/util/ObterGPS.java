@@ -46,10 +46,13 @@ public class ObterGPS extends Service implements LocationListener {
 
     }
 
+    /* Gerencia a busca do localizaçao atual a atraves do objeto locationManager
 
+     */
     public Location getLocalizacao() {
         try {
             locationManager = (LocationManager) contexto.getSystemService(LOCATION_SERVICE);
+           //verifica se tanto o gps e provedor de internet esta ativo
             gpsAtivo = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             internet = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
@@ -62,7 +65,7 @@ public class ObterGPS extends Service implements LocationListener {
                 this.localizacao = true;
 
                 if (internet) {
-
+                        //solicita permissão de acesso para as versões superiores ao android 6.0
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (ActivityCompat.checkSelfPermission(contexto, android.Manifest.permission.ACCESS_FINE_LOCATION)  != PackageManager.PERMISSION_GRANTED){ // && ActivityCompat.checkSelfPermission(contexto, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -70,6 +73,10 @@ public class ObterGPS extends Service implements LocationListener {
                             return null;
                         }
                     }
+                    /*Realiza a busca da ultima localização do aparelho
+                       atraves de redes de antenas disponiblizadas pelas operadoras
+                       tal busca é definida por meio de uma distancia e tempo minimo de atualização
+                     */
                     locationManager.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
                             MINIMO_DE_ATT_POR_MILISEGUNDOS,
@@ -88,6 +95,10 @@ public class ObterGPS extends Service implements LocationListener {
 
                 }
                 // if GPS Enabled get lat/long using GPS Services
+                   /*O gps do aparelho realiza a busca da ultima localização
+                       atraves de satelites, tal busca é
+                       definidas  por meio de uma distancia e tempo minimo de atualização
+                     */
                 if (gpsAtivo) {
                     if (location == null) {
                         locationManager.requestLocationUpdates(
@@ -111,6 +122,7 @@ public class ObterGPS extends Service implements LocationListener {
             e.printStackTrace();
         }
 
+        //retorna a latitude e longitude da localização encontrada
         return location;
     }
 

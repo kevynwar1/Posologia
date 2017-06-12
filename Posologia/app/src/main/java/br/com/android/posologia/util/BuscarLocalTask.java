@@ -10,6 +10,8 @@ import java.util.Locale;
 
 /**
  * Created by Karlinhos on 12/06/2017.
+ * Realiza a busca por locais invocando metodos da classe Geocoder
+ *
  */
 
 public class BuscarLocalTask extends AsyncTaskLoader<List<Address>> {
@@ -25,7 +27,7 @@ public class BuscarLocalTask extends AsyncTaskLoader<List<Address>> {
         this.local = local;
 
     }
-
+    //trata a lista de endereços encontrados
     @Override
     protected void onStartLoading(){
         if (enderecos == null){
@@ -39,7 +41,9 @@ public class BuscarLocalTask extends AsyncTaskLoader<List<Address>> {
 
 
     }
-
+    /*preenche a lsita de endereços atraves do geocoder
+      buscando o nome do local e sua quantidade maxima
+     */
     @Override
     public List<Address> loadInBackground() {
         Geocoder geocoder = new Geocoder(contexto, Locale.getDefault());
