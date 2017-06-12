@@ -12,6 +12,11 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,6 +41,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     boolean gpsLigado = false;
     Handler mHandler;
     int tentativas;
+
+    private static final int LOADER_ENDERECO = 1;
+    EditText editLocal;
+    TextView TxtProgresso;
+    LinearLayout LayoutProgresso;
+    LoaderManager loaderManager;
+    private LatLng destino;
+    ImageButton botaoBuscar;
+    ImageButton botaoLocalizar;
+
 
 
     @Override
