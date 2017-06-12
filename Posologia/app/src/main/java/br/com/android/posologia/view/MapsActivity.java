@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import br.com.android.posologia.R;
+import br.com.android.posologia.util.BuscarLocalTask;
 import br.com.android.posologia.util.ObterGPS;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
